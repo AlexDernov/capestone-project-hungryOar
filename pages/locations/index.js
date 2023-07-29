@@ -1,6 +1,6 @@
 import LocationsList from "../../components/LocationsList";
-export default function LocationsListePage() {
+export default function LocationsListePage({data}) {
     return (
-        <LocationsList/>
+        <LocationsList data={data}/>
     )
 }

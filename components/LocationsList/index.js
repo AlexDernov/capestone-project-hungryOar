@@ -1,14 +1,23 @@
-import useSWR from "swr"
+import Image from "next/image";
+import styled from "styled-components";
 
-export default function LocationsList() {
-    const {data, isLoading} = useSWR("api/locations");
-
-    if(isLoading) {
-        return <h1>Loading...</h1>;
-    }
-    if (!data) {
-        return <h1>Data cannot be loaded.</h1>
-    }
+export default function LocationsList({data}) {
+    console.log("LocData", data)
+   
+    const StyledImage = styled(Image)`
+    max-width: 100% 
+    height: auto
+    mode: thumb
+padding: o;
+margin: 0;
+display: flex;
+position:relativ;
+align-content: center;
+justify-content:center;
+`;
+const StyledImgDiv =styled.div`
+max-width: 100%
+height: 62px`;
     return (
         <>
         <ul>
@@ -16,9 +25,9 @@ export default function LocationsList() {
                 <li key={location._id}>
                     <h1>{location.name}</h1> 
                     <h2>{location.location}</h2>
-                    <h3><strong>Öffnungszeiten: </strong>  <i>{location.zeit}</i></h3>
-                    <h3><strong>Was gibt's? </strong><i>{location.art}</i></h3>
-                    <h3><strong>Verleih: </strong><i>{location.verleih}</i></h3>
+                    <StyledImgDiv>
+                    <StyledImage src={location.bild.img} width={location.bild.width} height={location.bild.height} alt="Bild"/>
+                    </StyledImgDiv>
                 </li>))}
                 </ul>
                 </>

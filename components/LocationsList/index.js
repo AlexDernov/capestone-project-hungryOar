@@ -1,35 +1,107 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function LocationsList({data}) {
-    console.log("LocData", data)
-   
-    const StyledImage = styled(Image)`
-    max-width: 100% 
-    height: auto
-    mode: thumb
-padding: o;
+const StyledImage = styled(Image)`
+max-width: 100% 
+height: auto
+mode: thumb
+padding: 0;
 margin: 0;
-display: flex;
-position:relativ;
-align-content: center;
 justify-content:center;
 `;
 const StyledImgDiv =styled.div`
 max-width: 100%
-height: 62px`;
+margin: 10px;
+padding: 0;
+display: grid;
+align-self: center;
+height: 62px
+`;
+
+const StyledUl =styled.ul`
+padding: 1px;
+margin: 5px;
+display: grid;
+grid-template-columns: 438px;
+gap: 1rem;
+list-style-type: none;
+background-color: blau`;
+
+const StyledListItem = styled.li`
+background-color: rgba(255, 255, 255, 0.60);
+display: flex;
+flex-direction: column
+`;
+/* const StyledListItemCont = styled.div`
+position: relativ`; */
+
+const StyledDiv = styled.div`
+display: flex;
+flex-direction: row;
+align-content: space-between;
+justify-content: space-between;
+margin:5px;
+padding: 5px`;
+
+const StyledName = styled.h1`
+color: #373636;
+text-align: left;
+text-shadow: 2px 2px 4px 0px #FFF;
+font-family: Roboto Slab;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin: 0;
+padding: 0;
+`;
+const StyledAddresse = styled.h2`
+margin: 0;
+padding: 10px;
+color: #040404;
+text-align: right 10px;
+text-shadow: 1px 1px 2px 0px #FFF;
+/* h3 */
+font-family: Roboto Slab;
+font-size: 11px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 2.2px;
+position: relativ;
+right: 0;
+top: 10px`;
+
+const StyledH2Div = styled.div`
+margin: 0;
+width = 30%;
+align-self: flex-end;
+align: right`;
+
+
+
+export default function LocationsList({data}) {
+    console.log("LocData", data)
+   
+   
+
     return (
         <>
-        <ul>
+        <StyledUl>
             {data.map((location) => (
-                <li key={location._id}>
-                    <h1>{location.name}</h1> 
-                    <h2>{location.location}</h2>
+                <StyledListItem key={location._id}>
+                    <StyledDiv>
+                    <StyledName>{location.name}</StyledName> 
+                    <StyledH2Div>
+                    <StyledAddresse>{location.location}</StyledAddresse>
+                    </StyledH2Div>
+                    </StyledDiv>
                     <StyledImgDiv>
                     <StyledImage src={location.bild.img} width={location.bild.width} height={location.bild.height} alt="Bild"/>
                     </StyledImgDiv>
-                </li>))}
-                </ul>
+                    <div><p></p></div>
+                </StyledListItem>))}
+                </StyledUl>
                 </>
     )
 }

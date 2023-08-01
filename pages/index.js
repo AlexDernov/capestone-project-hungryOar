@@ -11,10 +11,6 @@ border-color: black;
 align: center;
 &: hover {
   font-size: 1.2em;}
-
-&: target {
-  color: red;
-  font-size: 1.2em;
 }`;
 
 export default function Home() {
@@ -29,7 +25,7 @@ export default function Home() {
       <main className={inter.className}>
         <Heading>🐧Penguin Capstone Template🐧</Heading>
       </main>
-      <NavLink id="Locations List" href="/locations">Zu der List von Locations</NavLink>
+      <NavLink href="/locations">Zu der Liste von Locations</NavLink>
     </>
   );
 }

@@ -19,22 +19,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: var(--font-roboto);
-    background-color: blau;
+    background-color: blue;
   }
 `;
 
-
-/* 
-  
-
-  body {
-    margin: 0;
-    padding:0;
-    font-family: system-ui;
-    padding: 2rem;
-    color: var(--primary-color);
-    background-color: var(--primary-color-back);
-  
-  }
-  
-`; */

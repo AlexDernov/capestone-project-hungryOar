@@ -5,9 +5,7 @@ export default async function handler(request,response) {
     await dbConnect();
     if (request.method === "GET") {
         const locations = await Location.find();
-        console.log(locations);
         const data = response.status(200).json(locations);
-        console.log(data);
         return data
     }
 }

@@ -25,11 +25,3 @@ test("renders Locations bild, name and addresse", () => {
   expect(addresse).toBeInTheDocument();
    expect(bild).toBeInTheDocument();
 });
-
-/* 
-bild: {
-  img: "https://res.cloudinary.com/demaz2nqa/image/upload/c_thumb,h_62,w_350/v1690563536/cafe-on-the-water-vessela-kolibarova_clqmbu.webp",
-  height: 62,
-  width:350,
-  }
- */

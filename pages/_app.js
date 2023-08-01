@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }) {
     return response.json();
   };
   const { data, isLoading, error} = useSWR("api/locations", fetcher);
-  /* const {data, isLoading} = useSWR("api/locations"); */
+  
 
   if(isLoading) {
       return <h1>Loading...</h1>;
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }) {
   if (!data) {
       return <h1>Data cannot be loaded.</h1>
   }
-  console.log(data)
+  
   return (
     <>
       <GlobalStyle />

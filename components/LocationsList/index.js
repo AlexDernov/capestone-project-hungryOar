@@ -20,7 +20,6 @@ export default function LocationsList({ data }) {
         {data?.map((location) => (
           <LocationPreviewCard
           key={location._id}
-            id={location._id}
             name={location.name}
             addresse={location.location}
             bild={location.bild}

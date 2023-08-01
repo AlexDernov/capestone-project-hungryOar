@@ -72,8 +72,8 @@ align-self: flex-end;
 align: right`;
 
 
-export default function LocationPreviewCard({id, name, addresse, bild}){ 
-    console.log(id);
+export default function LocationPreviewCard({name, addresse, bild}){ 
+   
     return (<>
 <StyledListItem>
                     <StyledDiv>

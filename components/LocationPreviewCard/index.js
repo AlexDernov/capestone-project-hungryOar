@@ -75,7 +75,7 @@ align: right`;
 export default function LocationPreviewCard({id, name, addresse, bild}){ 
     console.log(id);
     return (<>
-<StyledListItem key={id}>
+<StyledListItem>
                     <StyledDiv>
                     <StyledName>{name}</StyledName> 
                     <StyledH2Div>

@@ -19,24 +19,13 @@ export default function LocationsList({ data }) {
       <StyledUl>
         {data?.map((location) => (
           <LocationPreviewCard
+          key={location._id}
             id={location._id}
             name={location.name}
             addresse={location.location}
             bild={location.bild}
 
           />
-          /* <StyledListItem key={location._id}>
-                    <StyledDiv>
-                    <StyledName>{location.name}</StyledName> 
-                    <StyledH2Div>
-                    <StyledAddresse>{location.location}</StyledAddresse>
-                    </StyledH2Div>
-                    </StyledDiv>
-                    <StyledImgDiv>
-                    <StyledImage src={location.bild.img} width={location.bild.width} height={location.bild.height} alt="Bild"/>
-                    </StyledImgDiv>
-                    <div><p></p></div>
-                </StyledListItem> */
         ))}
       </StyledUl>
     </>

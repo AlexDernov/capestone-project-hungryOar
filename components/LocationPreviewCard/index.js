@@ -45,7 +45,7 @@ const StyledName = styled.h2`
   margin: 0;
   padding: 0;
 `;
-const StyledAddresse = styled.h3`
+const StyledAddresse = styled.p`
   margin: 0;
   padding: 10px;
   color: #040404;
@@ -62,7 +62,7 @@ const StyledAddresse = styled.h3`
   top: 10px;
 `;
 
-const StyledH2Div = styled.div`
+const StyledPDiv = styled.div`
 margin: 0;
 width = 30%;
 align-self: flex-end;
@@ -74,9 +74,9 @@ export default function LocationPreviewCard({ name, addresse, bild }) {
       <StyledListItem>
         <StyledDiv>
           <StyledName>{name}</StyledName>
-          <StyledH2Div>
+          <StyledPDiv>
             <StyledAddresse>{addresse}</StyledAddresse>
-          </StyledH2Div>
+          </StyledPDiv>
         </StyledDiv>
         <StyledImgDiv>
           <StyledImage
@@ -86,9 +86,6 @@ export default function LocationPreviewCard({ name, addresse, bild }) {
             alt={name}
           />
         </StyledImgDiv>
-        <div>
-          <p></p>
-        </div>
       </StyledListItem>
     </>
   );

@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import { Roboto_Slab } from "next/font/google";
+
+const robotoSlab = Roboto_Slab({ weight: "400", subsets: ["latin"] });
 
 export default createGlobalStyle`
   *,
@@ -6,8 +9,16 @@ export default createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
+  :root{
+    --primary-color: white;
+    --primary-color-back: black;
+  
+    --font-roboto: ${robotoSlab.style.fontFamily}; 
+  }
   body {
     margin: 0;
-    font-family: system-ui;
+    padding: 0;
+    font-family: var(--font-roboto);
+    background-color: blue;
   }
 `;

@@ -20,22 +20,22 @@ const StyledTitle = styled.h1`
   font-weight: 400;
   line-height: normal;
   margin: 0;
-  padding: 0`;
+  padding: 0;
+`;
 
 export default function LocationsList({ data }) {
   console.log("LocData", data);
 
   return (
     <>
-    <StyledTitle>Locations</StyledTitle>
+      <StyledTitle>Locations</StyledTitle>
       <StyledUl>
         {data?.map((location) => (
           <LocationPreviewCard
-          key={location._id}
+            key={location._id}
             name={location.name}
             addresse={location.location}
             bild={location.bild}
-
           />
         ))}
       </StyledUl>

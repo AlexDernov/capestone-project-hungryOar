@@ -22,4 +22,3 @@ export default createGlobalStyle`
     background-color: blue;
   }
 `;
-

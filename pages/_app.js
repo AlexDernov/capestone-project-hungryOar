@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 import useSWR from "swr";
 import styled from "styled-components";
 
-const StyledDiv = styled.section`
+/* const StyledDiv = styled.section`
   width: 450px;
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ const StyledDiv = styled.section`
   align-self: center;
   justify-content: center;
   flex-direction: column;
-`;
+`; */
 
 export default function App({ Component, pageProps }) {
   const fetcher = async (url) => {
@@ -39,14 +39,14 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <StyledDiv>
+      {/* <StyledDiv> */}
         <Head>
           <title>Capstone Project</title>
         </Head>
         <SWRConfig value={{ fetcher }}>
           <Component {...pageProps} data={data} />
         </SWRConfig>
-      </StyledDiv>
+      {/* </StyledDiv> */}
     </>
   );
 }

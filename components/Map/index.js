@@ -1,15 +1,15 @@
-import Image from "next/image";
 import styled from "styled-components";
 
-const StyledMap = styled(Image)`
-  margin: 3.9px;
-`;
+
+const StyledMap = styled.div`
+margin-top: 15px;
+min-height: 100vh;
+background-image: url(/images/Map_Hamburg.png);
+background-repeat: no-repeat;
+background-size:  cover, contain`;
+
 export default function Map(){
     return(
-<StyledMap
-src="/images/Map_Hamburg.png"
-height={512}
-width={369}
-alt="Map of Hamburg"
-/>)
+<StyledMap/>)
 }
+

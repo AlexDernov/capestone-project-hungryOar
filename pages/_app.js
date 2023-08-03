@@ -3,6 +3,7 @@ import Head from "next/head";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import styled from "styled-components";
+import Layout from "../components/Layout";
 
 
 export default function App({ Component, pageProps }) {
@@ -34,7 +35,9 @@ export default function App({ Component, pageProps }) {
           <title>Capstone Project</title>
         </Head>
         <SWRConfig value={{ fetcher }}>
+          <Layout>
           <Component {...pageProps} data={data} />
+          </Layout>
         </SWRConfig>
   
     </>

@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import LocationPreviewCard from "@/components/LocationPreviewCard";
+import Heading from "@/components/Heading";
+import Divider from "../Divider";
+import NavBar from "../NavigationsBar";
 
 const StyledUl = styled.ul`
-  padding: 1px;
-  margin: 5px;
+  padding: 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: 438px;
+  grid-template-columns: 375px;
   gap: 1rem;
   list-style-type: none;
-  background-color: var(--primary-color-back);
 `;
 const StyledTitle = styled.h1`
   color: white;
@@ -28,7 +30,9 @@ export default function LocationsList({ data }) {
 
   return (
     <>
-      <StyledTitle>Locations</StyledTitle>
+      <Heading>Locations</Heading>
+      <Divider/>
+      <NavBar/>
       <StyledUl>
         {data?.map((location) => (
           <LocationPreviewCard

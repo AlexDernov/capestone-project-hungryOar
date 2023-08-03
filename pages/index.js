@@ -3,28 +3,35 @@ import styled from "styled-components";
 import Link from "next/link";
 import Heading from "../components/Heading";
 import Map from "../components/Map";
+import NavBar from "../components/NavigationsBar";
+import Divider from "../components/Divider";
 
 const StyledP =styled.p`
+margin:0;
+padding:0;
 color: var(--primary-color);
-height: auto;
-width: 369px;
+background-size: cover,contain;
+text-shadow: 3px 3px 6px black;
 text-align:center`;
 
-const NavLink = styled(Link)`
+/* const NavLink = styled(Link)`
 margin-left: 90px;
 text-decoration: none;
 color: rgb(251, 172, 252);
 border-color: black;
-height: 200px;
-
-
-
+height: 2px;
 &: hover {
   font-size: 1.2em;
   margin-left: 70px;
 }
-}`;
+}`; */
 
+const StyledMain =styled.main`
+display: flex;
+flex-direction:column`;
+
+const StyledSecrion = styled.section`
+`;
 export default function Home() {
   return (
     <>
@@ -34,10 +41,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      <main>
+      <StyledMain>
+        <StyledSecrion>
         <Heading>Hungry Oar</Heading>
-      </main>
-      <NavLink href="/locations">Zu der Liste von Locations</NavLink>
+        <Divider/>
+        <NavBar/>
+        </StyledSecrion>
+      {/* <NavLink href="/locations">Zu der Liste von Locations</NavLink> */}
       <StyledP>
         In this application you will find places in Hamburg where you can eat
         and drink without leaving (or almost without leaving) a boat, kayak,
@@ -46,6 +56,7 @@ export default function Home() {
       <Link href="/locations">
        <Map/>
       </Link>
+      </StyledMain>
     </>
   );
 }

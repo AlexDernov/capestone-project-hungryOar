@@ -1,16 +1,28 @@
 import Head from "next/head";
 import styled from "styled-components";
-import { Inter } from "next/font/google";
 import Link from "next/link";
+import Heading from "../components/Heading";
+import Map from "../components/Map";
 
-const inter = Inter({ subsets: ["latin"] });
+const StyledP =styled.p`
+color: var(--primary-color);
+height: auto;
+width: 369px;
+text-align:center`;
+
 const NavLink = styled(Link)`
+margin-left: 90px;
 text-decoration: none;
-color: white;
+color: rgb(251, 172, 252);
 border-color: black;
-align: center;
+height: 200px;
+
+
+
 &: hover {
-  font-size: 1.2em;}
+  font-size: 1.2em;
+  margin-left: 70px;
+}
 }`;
 
 export default function Home() {
@@ -18,18 +30,23 @@ export default function Home() {
     <>
       <Head>
         <title>Capstone Project</title>
-        <meta name="description" content="Penguin Capstone Project" />
+        <meta name="description" content="HungryOarApp" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      <main className={inter.className}>
-        <Heading>🐧Penguin Capstone Template🐧</Heading>
+      <main>
+        <Heading>Hungry Oar</Heading>
       </main>
       <NavLink href="/locations">Zu der Liste von Locations</NavLink>
+      <StyledP>
+        In this application you will find places in Hamburg where you can eat
+        and drink without leaving (or almost without leaving) a boat, kayak,
+        sap, etc. and get all the information you need about them.
+      </StyledP>
+      <Link href="/locations">
+       <Map/>
+      </Link>
     </>
   );
 }
 
-const Heading = styled.h1`
-  text-align: center;
-`;

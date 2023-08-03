@@ -11,7 +11,8 @@ export default createGlobalStyle`
   }
   :root{
     --primary-color: white;
-    --primary-color-back: black;
+    --primary-color-shadow: black;
+    --primary-color-back:rgb(22, 122, 217);
   
     --font-roboto: ${robotoSlab.style.fontFamily}; 
   }
@@ -19,6 +20,6 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: var(--font-roboto);
-    background-color: blue;
+    background-color: var(--primary-color-back);
   }
 `;

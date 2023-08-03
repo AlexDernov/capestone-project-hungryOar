@@ -8,7 +8,7 @@ const StyledUl = styled.ul`
   grid-template-columns: 438px;
   gap: 1rem;
   list-style-type: none;
-  background-color: blau;
+  background-color: var(--primary-color-back);
 `;
 const StyledTitle = styled.h1`
   color: white;

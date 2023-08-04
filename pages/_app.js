@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SWRConfig value={{ fetcher }}>
         <Layout>
-          <Component {...pageProps} data={data} /* home={home} */ />
+          <Component {...pageProps} data={data} />
         </Layout>
       </SWRConfig>
     </>

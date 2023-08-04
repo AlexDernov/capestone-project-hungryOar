@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 const TitleSection = styled.section`
-  border-bottom-style: solid;
-  border-bottom-color: var(--primary-color);
-  border-bottom-width: 2px;
+  border-bottom: 2px, solid, var(--primary-color);
   position: fixed;
   top: 0;
   background-color: var(--primary-color-back);

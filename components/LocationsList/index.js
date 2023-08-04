@@ -7,6 +7,7 @@ import NavBar from "../NavigationsBar";
 const StyledUl = styled.ul`
   padding: 0;
   margin-top: 80px;
+  margin-bottom: 105px;
   display: grid;
   grid-template-columns: 375px;
   gap: 1rem;

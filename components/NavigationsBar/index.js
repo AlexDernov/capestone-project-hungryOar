@@ -23,7 +23,7 @@ const StyledNav = styled.nav`
   bottom: 0;
 `;
 
-const StyledH4 = styled.h4`
+const StyledH4 = styled.p`
   font-size: 10px;
   text-shadow: 1px 1px 1px black;
   color: var(--primary-color);

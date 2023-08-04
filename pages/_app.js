@@ -2,9 +2,7 @@ import GlobalStyle from "@/styles";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
-import styled from "styled-components";
 import Layout from "../components/Layout";
-
 
 export default function App({ Component, pageProps }) {
   const fetcher = async (url) => {
@@ -30,16 +28,15 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-     
-        <Head>
-          <title>Capstone Project</title>
-        </Head>
-        <SWRConfig value={{ fetcher }}>
-          <Layout>
-          <Component {...pageProps} data={data} />
-          </Layout>
-        </SWRConfig>
-  
+
+      <Head>
+        <title>Capstone Project</title>
+      </Head>
+      <SWRConfig value={{ fetcher }}>
+        <Layout>
+          <Component {...pageProps} data={data} /* home={home} */ />
+        </Layout>
+      </SWRConfig>
     </>
   );
 }

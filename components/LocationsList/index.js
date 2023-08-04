@@ -12,18 +12,6 @@ const StyledUl = styled.ul`
   gap: 1rem;
   list-style-type: none;
 `;
-const StyledTitle = styled.h1`
-  color: white;
-  text-align: left;
-  text-shadow: 2px 2px 4px 0px #fff;
-  font-family: Roboto Slab;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin: 0;
-  padding: 0;
-`;
 
 export default function LocationsList({ data }) {
   console.log("LocData", data);
@@ -31,8 +19,8 @@ export default function LocationsList({ data }) {
   return (
     <>
       <Heading>Locations</Heading>
-      <Divider/>
-      <NavBar/>
+      <Divider />
+      <NavBar />
       <StyledUl>
         {data?.map((location) => (
           <LocationPreviewCard

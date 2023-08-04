@@ -4,15 +4,17 @@ import Link from "next/link";
 import Heading from "../components/Heading";
 import Map from "../components/Map";
 import NavBar from "../components/NavigationsBar";
-import Divider from "../components/Divider";
+import TitleSection from "../components/TitleSection";
 
 const StyledP = styled.p`
-  margin: 0;
-  padding: 0;
+  margin-top: 80px;
+  padding: 10px;
+  padding-top: 25px;
   color: var(--primary-color);
   background-size: cover, contain;
   text-shadow: 3px 3px 6px black;
   text-align: center;
+  font-size: 18px;
 `;
 
 const StyledMain = styled.main`
@@ -20,7 +22,6 @@ const StyledMain = styled.main`
   flex-direction: column;
 `;
 
-const StyledSecrion = styled.section``;
 export default function Home() {
   return (
     <>
@@ -31,11 +32,10 @@ export default function Home() {
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
       <StyledMain>
-        <StyledSecrion>
+        <TitleSection>
           <Heading>Hungry Oar</Heading>
-          <Divider />
-          <NavBar />
-        </StyledSecrion>
+        </TitleSection>
+        <NavBar />
         <StyledP>
           In this application you will find places in Hamburg where you can eat
           and drink without leaving (or almost without leaving) a boat, kayak,

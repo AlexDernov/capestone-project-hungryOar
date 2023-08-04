@@ -13,10 +13,14 @@ const NavLink = styled(Link)`
   }
 `;
 const StyledNav = styled.nav`
-  height: 93px;
+  background-color: var(--primary-color-back);
+  width: 100%;
+  height: 89px;
   margin-right: 10px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
 `;
 
 const StyledH4 = styled.h4`

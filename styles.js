@@ -12,7 +12,8 @@ export default createGlobalStyle`
   :root{
     --primary-color: white;
     --primary-color-shadow: black;
-    --primary-color-back:rgb(22, 122, 217);
+    --primary-color-back:rgb(131, 159, 209);
+      );
   
     --font-roboto: ${robotoSlab.style.fontFamily}; 
   }

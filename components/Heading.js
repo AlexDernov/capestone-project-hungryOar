@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const Heading = styled.h1`
-  margin: 8px;
+  margin: 0;
+  padding: 8px;
   text-align: left;
   color: var(--primary-color);
   text-shadow: 4px 4px 4px black;

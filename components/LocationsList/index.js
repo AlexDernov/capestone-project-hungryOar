@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import LocationPreviewCard from "@/components/LocationPreviewCard";
 import Heading from "@/components/Heading";
-import Divider from "../Divider";
+import TitleSection from "@/components/TitleSection";
 import NavBar from "../NavigationsBar";
 
 const StyledUl = styled.ul`
   padding: 0;
-  margin: 0;
+  margin-top: 80px;
   display: grid;
   grid-template-columns: 375px;
   gap: 1rem;
@@ -18,8 +18,9 @@ export default function LocationsList({ data }) {
 
   return (
     <>
-      <Heading>Locations</Heading>
-      <Divider />
+      <TitleSection>
+        <Heading>Locations</Heading>
+      </TitleSection>
       <NavBar />
       <StyledUl>
         {data?.map((location) => (

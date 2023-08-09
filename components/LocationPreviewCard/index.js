@@ -18,13 +18,11 @@ display: grid;
 align-self: center;
 height: 62px
 `;
-
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
 `;
-
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,7 +31,6 @@ const StyledDiv = styled.div`
   margin: 5px;
   padding: 5px;
 `;
-
 const StyledName = styled.h2`
   color: #373636;
   text-align: left;
@@ -62,7 +59,6 @@ const StyledAddresse = styled.p`
   right: 0;
   top: 10px;
 `;
-
 const StyledPDiv = styled.div`
 margin: 0;
 width = 30%;

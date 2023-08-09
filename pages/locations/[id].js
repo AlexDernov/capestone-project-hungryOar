@@ -1,20 +1,16 @@
 import LocationDetails from "@/components/LocationDetails";
 import Head from "next/head";
-
 import { useRouter } from "next/router";
 import useSWR from "swr";
-
-/* const fetcher = (url) => fetch(url).then((response) => response.json()); */
-/* const fetcher = (...args) => fetch(...args).then(res => res.json()) */
 
 export default function LocationDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, isLoading, error} = useSWR(`/api/locations/${id}`);
-  if (error) <p>Error!</p>
-  if (!isLoading) <p>Loading...</p>
-  console.log("Data for each:", data);
+  const { data, isLoading, error } = useSWR(`/api/locations/${id}`);
+  if (error) <p>Error!</p>;
+  if (!isLoading) <p>Loading...</p>;
+ 
   return (
     <>
       <Head>

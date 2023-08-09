@@ -15,7 +15,7 @@ const NavLink = styled(Link)`
 const StyledNav = styled.nav`
   background-color: var(--primary-color-back);
   width: 100%;
-  height: 89px;
+  height: 70px;
   margin-right: 10px;
   display: flex;
   justify-content: space-around;

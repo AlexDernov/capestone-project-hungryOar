@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledImage = styled(Image)`
 max-width: 100% 
@@ -68,24 +69,26 @@ width = 30%;
 align-self: flex-end;
 align: right`;
 
-export default function LocationPreviewCard({ name, addresse, bild }) {
+export default function LocationPreviewCard({ name, addresse, bild, id }) {
   return (
     <>
       <StyledListItem>
-        <StyledDiv>
-          <StyledName>{name}</StyledName>
-          <StyledPDiv>
-            <StyledAddresse>{addresse}</StyledAddresse>
-          </StyledPDiv>
-        </StyledDiv>
-        <StyledImgDiv>
-          <StyledImage
-            src={bild.img}
-            width={bild.width}
-            height={bild.height}
-            alt={name}
-          />
-        </StyledImgDiv>
+        <Link href={`/locations/${id}`}>
+          <StyledDiv>
+            <StyledName>{name}</StyledName>
+            <StyledPDiv>
+              <StyledAddresse>{addresse}</StyledAddresse>
+            </StyledPDiv>
+          </StyledDiv>
+          <StyledImgDiv>
+            <StyledImage
+              src={bild.img}
+              width={bild.width}
+              height={bild.height}
+              alt={name}
+            />
+          </StyledImgDiv>
+        </Link>
       </StyledListItem>
     </>
   );

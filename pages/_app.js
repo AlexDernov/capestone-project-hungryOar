@@ -5,7 +5,8 @@ import useSWR from "swr";
 import Layout from "../components/Layout";
 
 export default function App({ Component, pageProps }) {
-  const fetcher = async (url) => {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  /* const fetcher = async (url) => {
     const response = await fetch(url);
     if (!response.ok) {
       const error = new Error("An error occurred while fetching the data.");
@@ -14,7 +15,7 @@ export default function App({ Component, pageProps }) {
       throw error;
     }
     return response.json();
-  };
+  }; */
   const { data, isLoading, error } = useSWR("api/locations", fetcher);
 
   if (isLoading) {

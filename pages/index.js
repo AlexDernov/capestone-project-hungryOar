@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Link from "next/link";
 import Heading from "../components/Heading";
 import Map from "../components/Map";
-import NavBar from "../components/NavigationsBar";
 import TitleSection from "../components/TitleSection";
 
 const StyledP = styled.p`
@@ -35,7 +34,6 @@ export default function Home() {
         <TitleSection>
           <Heading>Hungry Oar</Heading>
         </TitleSection>
-        <NavBar />
         <StyledP>
           In this application you will find places in Hamburg where you can eat
           and drink without leaving (or almost without leaving) a boat, kayak,

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import LocationPreviewCard from "@/components/LocationPreviewCard";
 import Heading from "@/components/Heading";
 import TitleSection from "@/components/TitleSection";
-import NavBar from "../NavigationsBar";
 
 const StyledUl = styled.ul`
   padding: 0;
@@ -15,18 +14,16 @@ const StyledUl = styled.ul`
 `;
 
 export default function LocationsList({ data }) {
-  console.log("LocData", data);
-
   return (
     <>
       <TitleSection>
         <Heading>Locations</Heading>
       </TitleSection>
-      <NavBar />
       <StyledUl>
         {data?.map((location) => (
           <LocationPreviewCard
             key={location._id}
+            id={location._id}
             name={location.name}
             addresse={location.location}
             bild={location.bild}

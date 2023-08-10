@@ -14,7 +14,7 @@ const locationSchema = new Schema({
   location: { type: String, required: true },
   zeit: { type: String, required: true },
   zeitURL: { type: String, required: false },
-  art: { type: String, required: true },
+  art: { type: Array, required: true },
   verleih: { type: String, required: true },
   liked: { type: Boolean, required: false },
   notes: { type: Array, required: false },

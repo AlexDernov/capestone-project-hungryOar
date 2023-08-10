@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import Link from "next/link";
 
 const StyledImage = styled(Image)`
 max-width: 100% 
@@ -17,13 +18,11 @@ display: grid;
 align-self: center;
 height: 62px
 `;
-
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
 `;
-
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -32,7 +31,6 @@ const StyledDiv = styled.div`
   margin: 5px;
   padding: 5px;
 `;
-
 const StyledName = styled.h2`
   color: #373636;
   text-align: left;
@@ -61,31 +59,32 @@ const StyledAddresse = styled.p`
   right: 0;
   top: 10px;
 `;
-
 const StyledPDiv = styled.div`
 margin: 0;
 width = 30%;
 align-self: flex-end;
 align: right`;
 
-export default function LocationPreviewCard({ name, addresse, bild }) {
+export default function LocationPreviewCard({ name, addresse, bild, id }) {
   return (
     <>
       <StyledListItem>
-        <StyledDiv>
-          <StyledName>{name}</StyledName>
-          <StyledPDiv>
-            <StyledAddresse>{addresse}</StyledAddresse>
-          </StyledPDiv>
-        </StyledDiv>
-        <StyledImgDiv>
-          <StyledImage
-            src={bild.img}
-            width={bild.width}
-            height={bild.height}
-            alt={name}
-          />
-        </StyledImgDiv>
+        <Link href={`/locations/${id}`}>
+          <StyledDiv>
+            <StyledName>{name}</StyledName>
+            <StyledPDiv>
+              <StyledAddresse>{addresse}</StyledAddresse>
+            </StyledPDiv>
+          </StyledDiv>
+          <StyledImgDiv>
+            <StyledImage
+              src={bild.img}
+              width={bild.width}
+              height={bild.height}
+              alt={name}
+            />
+          </StyledImgDiv>
+        </Link>
       </StyledListItem>
     </>
   );

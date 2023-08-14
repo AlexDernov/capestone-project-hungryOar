@@ -10,7 +10,7 @@ export default function LocationDetailsPage() {
   const { data, isLoading, error } = useSWR(`/api/locations/${id}`);
   if (error) <p>Error!</p>;
   if (!isLoading) <p>Loading...</p>;
- 
+  console.log("All data", data);
   return (
     <>
       <Head>
@@ -20,12 +20,15 @@ export default function LocationDetailsPage() {
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
       <LocationDetails
-        name={data?.name}
+      data={data}
+      /*   name={data?.name}
         addresse={data?.location}
         zeit={data?.zeit}
         art={data?.art}
         verleih={data?.verleih}
         bild={data?.bild.img}
+        notes={data?.notes}
+        id={data?._id} */
       />
     </>
   );

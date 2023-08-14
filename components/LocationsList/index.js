@@ -2,11 +2,13 @@ import styled from "styled-components";
 import LocationPreviewCard from "@/components/LocationPreviewCard";
 import Heading from "@/components/Heading";
 import TitleSection from "@/components/TitleSection";
+import Head from "next/head";
 
 const StyledUl = styled.ul`
   padding: 0;
   margin-top: 80px;
   margin-bottom: 105px;
+  margin-left:10px;
   display: grid;
   grid-template-columns: 375px;
   gap: 1rem;
@@ -16,6 +18,12 @@ const StyledUl = styled.ul`
 export default function LocationsList({ data }) {
   return (
     <>
+    <Head>
+        <title>Locations</title>
+        <meta name="description" content="HungryOarApp" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/caffe-oar-icon.ico" />
+      </Head>
       <TitleSection>
         <Heading>Locations</Heading>
       </TitleSection>

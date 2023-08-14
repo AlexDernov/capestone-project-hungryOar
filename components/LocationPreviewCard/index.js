@@ -6,14 +6,14 @@ const StyledImage = styled(Image)`
 max-width: 100% 
 height: auto
 mode: thumb
-padding: 0;
+padding: 10px;
 margin: 0;
-justify-content:center;
+justify-content: center;
 `;
 const StyledImgDiv = styled.div`
 max-width: 100%
 margin: 10px;
-padding: 0;
+padding-left: 13px;
 display: grid;
 align-self: center;
 height: 62px
@@ -22,6 +22,7 @@ const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
+  align-content: center
 `;
 const StyledDiv = styled.div`
   display: flex;
@@ -64,12 +65,17 @@ margin: 0;
 width = 30%;
 align-self: flex-end;
 align: right`;
-
+const NavLink = styled(Link)`
+  text-decoration: none;
+  &: hover {
+    font-size: 1.2em;
+  }
+`;
 export default function LocationPreviewCard({ name, addresse, bild, id }) {
   return (
     <>
       <StyledListItem>
-        <Link href={`/locations/${id}`}>
+        <NavLink href={`/locations/${id}`}>
           <StyledDiv>
             <StyledName>{name}</StyledName>
             <StyledPDiv>
@@ -84,7 +90,7 @@ export default function LocationPreviewCard({ name, addresse, bild, id }) {
               alt={name}
             />
           </StyledImgDiv>
-        </Link>
+        </NavLink>
       </StyledListItem>
     </>
   );

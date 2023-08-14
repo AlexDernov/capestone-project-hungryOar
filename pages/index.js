@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Capstone Project</title>
+        <title>Hungry Oar</title>
         <meta name="description" content="HungryOarApp" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />

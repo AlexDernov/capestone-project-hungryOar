@@ -3,8 +3,7 @@ import Link from "next/link";
 import Heading from "../Heading";
 import Image from "next/image";
 import TitleSection from "../TitleSection";
-
-
+import NotesForm from "../NotesForm";
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
@@ -39,46 +38,97 @@ const StyledDiv = styled.div`
   text-align: center;
 `;
 
-export default function LocationDetails({
+export default function LocationDetails({data
+ /*  id,
   name,
   addresse,
   zeit,
   art,
   verleih,
   bild,
-}) {
+  notes, */
+}) 
+
+{
   return (
     <>
       <TitleSection>
-        <Heading>{name}</Heading>
+        <Heading>{data?.name}</Heading>
       </TitleSection>
       <StyledArticle>
         <NavLink href="/locations"> ← Back</NavLink>
         <StyledDiv>
-          <p>{addresse}</p>
-          <p>{zeit}</p>
+          <p>{/* addresse */data?.location}</p>
+          <p>{data?.zeit}</p>
           <StyledArtSection>
-            {art?.map((artStück) =>
+            {data?.art?.map((artStück) =>
               artStück === "Cafe" ? (
-                <Image key={1} src="/images/CafeIcon.svg" width={71} height={45} alt="Cafe icon"/>
+                <Image
+                  key={1}
+                  src="/images/CafeIcon.svg"
+                  width={71}
+                  height={45}
+                  alt="Cafe icon"
+                />
               ) : artStück === "Restaurant" ? (
-                <Image key={2} src="/images/RestaurantIcon.svg" width={71} height={44} alt="Restaurant-icon"/>
+                <Image
+                  key={2}
+                  src="/images/RestaurantIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Restaurant-icon"
+                />
               ) : artStück === "Bar" ? (
-                <Image key={3} src="/images/BarIcon.svg" width={57} height={44} alt="Bar-icon"/>
+                <Image
+                  key={3}
+                  src="/images/BarIcon.svg"
+                  width={57}
+                  height={44}
+                  alt="Bar-icon"
+                />
               ) : artStück === "Kuchen" ? (
-                <Image key={4} src="/images/KuchenIcon.svg" width={71} height={44} alt="Kuchen-icon"/>
+                <Image
+                  key={4}
+                  src="/images/KuchenIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Kuchen-icon"
+                />
               ) : artStück === "Eis" ? (
-                <Image key={5} src="/images/EisIcon.svg" width={57} height={45} alt="Eis-icon"/>
+                <Image
+                  key={5}
+                  src="/images/EisIcon.svg"
+                  width={57}
+                  height={45}
+                  alt="Eis-icon"
+                />
               ) : artStück === "Snacks" ? (
-                <Image key={6} src="/images/SnacksIcon.svg" width={71} height={44} alt="Snacks-icon"/>
+                <Image
+                  key={6}
+                  src="/images/SnacksIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Snacks-icon"
+                />
               ) : (
                 []
               )
             )}
           </StyledArtSection>
-          <p>{verleih}</p>
-          <Image src={bild} height={62} width={350} alt={name} />
+          <p>{data?.verleih}</p>
+          <Image src={data?.bild.img} height={62} width={350} alt={name} />
+         
         </StyledDiv>
+        <NotesForm locData={data} id={data?.id} />
+          <ul>
+            <p>Your notes:</p>
+            {data?.notes?.map((note) => (
+              <li key={note._id}>
+                <p>{note.title}</p>
+                <p>{note.text}</p>
+              </li>
+            ))}
+          </ul>
       </StyledArticle>
     </>
   );

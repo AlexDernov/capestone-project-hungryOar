@@ -13,7 +13,7 @@ export default async function handler(request, response) {
     response.status(200).json(location);
   }
   if (request.method === "PUT") {
-    await Location.findByIdAndUpdate(id, request.body );
+    await Location.findByIdAndUpdate(id, { $set: request.body });
     response.status(200).json({ message: "Update is successful!" });
     console.log(request.body);
   }

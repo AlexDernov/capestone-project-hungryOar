@@ -4,6 +4,7 @@ import Heading from "../Heading";
 import Image from "next/image";
 import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
+import {uid} from "uid";
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
@@ -49,7 +50,8 @@ export default function LocationDetails({data
   notes, */
 }) 
 
-{
+
+{ console.log("DataNotes", data?.notes);
   return (
     <>
       <TitleSection>
@@ -116,10 +118,10 @@ export default function LocationDetails({data
             )}
           </StyledArtSection>
           <p>{data?.verleih}</p>
-          <Image src={data?.bild.img} height={62} width={350} alt={name} />
+         <Image src={data?.bild.img} height={62} width={350} alt={data?.name} /> 
          
         </StyledDiv>
-        <NotesForm locData={data} id={data?.id} />
+        <NotesForm locData={data} />
           <ul>
             <p>Your notes:</p>
             {data?.notes?.map((note) => (

@@ -5,15 +5,29 @@ export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
   if (request.method === "GET") {
-    const location = await Location.findById(id);
+    const location = await Location.findById(id).populate("notes");
 
     if (!location) {
       return response.status(404).json({ status: "Not found" });
     }
     response.status(200).json(location);
   }
-  if (request.method === "PUT") {
-    await Location.findByIdAndUpdate(id, { $set: request.body });
+
+/* if (request.method === "GET") {
+  const location = await Location.findById(id).populate("notes").then(foundLocation => {
+  console.log("FoundLocation", foundLocation)
+})
+.catch(err => {
+  console.error(err);
+});
+
+  if (!location) {
+    return response.status(404).json({ status: "Not found" });
+  }
+  response.status(200).json(location); 
+}*/
+  if (request.method === "PATCH") {
+    await Location.findByIdAndUpdate(id, request.body);
     response.status(200).json({ message: "Update is successful!" });
     console.log(request.body);
   }

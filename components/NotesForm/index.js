@@ -32,11 +32,11 @@ export default function NotesForm({ locData}) {
       const data = await responseNote.json();
       console.log("Undif", data);
       const responseLocation = await fetch(`/api/locations/${locData?._id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({...locData,
+        body: JSON.stringify({
           notes: [...locData?.notes, data.data._id],
         }),
       });

@@ -12,20 +12,6 @@ export default async function handler(request, response) {
     }
     response.status(200).json(location);
   }
-
-/* if (request.method === "GET") {
-  const location = await Location.findById(id).populate("notes").then(foundLocation => {
-  console.log("FoundLocation", foundLocation)
-})
-.catch(err => {
-  console.error(err);
-});
-
-  if (!location) {
-    return response.status(404).json({ status: "Not found" });
-  }
-  response.status(200).json(location); 
-}*/
   if (request.method === "PATCH") {
     await Location.findByIdAndUpdate(id, request.body);
     response.status(200).json({ message: "Update is successful!" });

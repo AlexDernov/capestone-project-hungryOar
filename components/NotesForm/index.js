@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import styled from "styled-components";
 
+
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
@@ -11,15 +12,14 @@ const Input = styled.input`
   border: 1px solid grey;
   border-radius: 0.5rem;
 `;
-export default function NotesForm({ locData}) {
+export default function NotesForm({ locData, onSubmit, text, title, isEditMode}) {
   const { mutate } = useSWR(`/api/locations/${locData?._id}`);
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const noteData = Object.fromEntries(formData);
-
+   
     const responseNote = await fetch("/api/notes", {
       method: "POST",
       headers: {
@@ -46,14 +46,14 @@ export default function NotesForm({ locData}) {
     }
   }
   return (
+    
     <FormContainer onSubmit={handleSubmit}>
-      <p>Add a Note:</p>
+      <p>{isEditMode ? "Edit the Note:" : "Add a Note"} </p>
       <label htmlFor="title"> Title:</label>
-        <Input type="text" id="title" name="title" defaultValue=" " />
+        <Input type="text" id="title" name="title" defaultValue={title} />
       <label htmlFor="note"> Note: </label>
-        <Input type="text" id="text" name="text" defaultValue=" " />
-     
-      <button type="submit">Save</button>
+        <Input type="text" id="text" name="text" defaultValue={text} />
+        <button type="submit">Save</button> 
     </FormContainer>
   );
 }

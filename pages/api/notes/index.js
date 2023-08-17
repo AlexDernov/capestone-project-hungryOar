@@ -15,5 +15,13 @@ export default async function handler(request, response) {
       console.log(error);
       response.status(400).json({ error: error.message });
     }
+  } else if (request.method === "PUT") {
+    await Note.findByIdAndUpdate(id, {
+      $set: request.body,
+    });
+    response.status(200).json({ message: "Update is successful!" });
+  } else if (request.method === "DELETE") {
+    await Note.findByIdAndDelete(id);
+    response.status(200).json({ message: "Note successfully deleted!" });
   }
 }

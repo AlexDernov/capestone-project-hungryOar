@@ -4,7 +4,8 @@ import Heading from "../Heading";
 import Image from "next/image";
 import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
-import {uid} from "uid";
+import Note from "../Note";
+
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
@@ -39,19 +40,19 @@ const StyledDiv = styled.div`
   text-align: center;
 `;
 
+const StyledUl = styled.ul`
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left:5px;
+  display: grid;
+  grid-template-columns: 375px;
+  gap: 1rem;
+  list-style-type: none;
+`;
 export default function LocationDetails({data
- /*  id,
-  name,
-  addresse,
-  zeit,
-  art,
-  verleih,
-  bild,
-  notes, */
-}) 
+}) {
 
-
-{ console.log("DataNotes", data?.notes);
   return (
     <>
       <TitleSection>
@@ -60,7 +61,7 @@ export default function LocationDetails({data
       <StyledArticle>
         <NavLink href="/locations"> ← Back</NavLink>
         <StyledDiv>
-          <p>{/* addresse */data?.location}</p>
+          <p>{data?.location}</p>
           <p>{data?.zeit}</p>
           <StyledArtSection>
             {data?.art?.map((artStück) =>
@@ -122,16 +123,14 @@ export default function LocationDetails({data
          
         </StyledDiv>
         <NotesForm locData={data} />
-          <ul>
+          <StyledUl>
             <p>Your notes:</p>
             {data?.notes?.map((note) => (
-              <li key={note._id}>
-                <p>{note.title}</p>
-                <p>{note.text}</p>
-              </li>
+              <Note key={note._id} note={note}/>
+              
             ))}
-          </ul>
+          </StyledUl>
       </StyledArticle>
     </>
   );
-}
+            }

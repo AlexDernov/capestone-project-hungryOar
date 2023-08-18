@@ -2,6 +2,8 @@ import styled from "styled-components";
 import useSWR from "swr";
 import { useState } from "react";
 import NotesForm from "../NotesForm";
+import { useRouter } from "next/router";
+
 
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
@@ -11,8 +13,9 @@ const StyledListItem = styled.li`
   align-content: center;
 `;
 
-export default function Note({ note }) {
-  const { mutate } = useSWR(`/api/notes/${note?._id}`);
+export default function Note({ note, locId }) {
+    const router = useRouter();
+  const { mutate } = useSWR(`/api/locations/${locId}`);
   const [isEditMode, setIsEditMode] = useState(false);
 
   async function handleEditNote(event) {
@@ -29,7 +32,20 @@ export default function Note({ note }) {
     });
     if (response.ok) {
       mutate();
+      /* router.push(`/locations/${locId}`); */
+      setIsEditMode(false);
     }
+  }
+  async function handleDeleteNote() {
+    const response = await fetch(`/api/notes/${note?._id}`, { method: "DELETE" });
+    if (response.ok) {
+        mutate();
+    if (!response.ok) {
+      console.log(response.status);
+      return <h1>Something gone wrong!</h1>;
+    }
+   /*  router.push("/"); */
+  }
   }
   return (
     <StyledListItem>
@@ -62,9 +78,14 @@ export default function Note({ note }) {
           }}
         >
           Cancel
-        </button>
+        </button> /* &&
+         <button
+         type="button"
+         onClick={handleEditNote}>
+         Save
+       </button> */
       )}
-      <button>Delete</button>
+      {!isEditMode ? (<button type="button" onClick={handleDeleteNote} >Delete</button>): null}
     </StyledListItem>
   );
 }

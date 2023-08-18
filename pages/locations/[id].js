@@ -21,14 +21,6 @@ export default function LocationDetailsPage() {
       </Head>
       <LocationDetails
       data={data}
-      /*   name={data?.name}
-        addresse={data?.location}
-        zeit={data?.zeit}
-        art={data?.art}
-        verleih={data?.verleih}
-        bild={data?.bild.img}
-        notes={data?.notes}
-        id={data?._id} */
       />
     </>
   );

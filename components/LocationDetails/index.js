@@ -5,6 +5,7 @@ import Image from "next/image";
 import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
 import Note from "../Note";
+import useSWR from "swr";
 
 
 const StyledArticle = styled.article`
@@ -52,6 +53,39 @@ const StyledUl = styled.ul`
 `;
 export default function LocationDetails({data
 }) {
+  const { mutate } = useSWR(`/api/locations/${data?._id}`);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const noteData = Object.fromEntries(formData);
+   
+    const responseNote = await fetch("/api/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(noteData),
+    });
+
+    if (responseNote.ok) {
+      const locData = await responseNote.json();
+      const responseLocation = await fetch(`/api/locations/${data?._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          notes: [locData.data._id, ...data?.notes] ,
+        }),
+      });
+      if (responseLocation.ok) {
+        mutate();
+        event.target.reset();
+    
+      }
+    }
+  }
 
   return (
     <>
@@ -122,11 +156,11 @@ export default function LocationDetails({data
          <Image src={data?.bild.img} height={62} width={350} alt={data?.name} /> 
          
         </StyledDiv>
-        <NotesForm locData={data} />
+        <NotesForm locData={data} onSubmit={handleSubmit}/>
           <StyledUl>
             <p>Your notes:</p>
             {data?.notes?.map((note) => (
-              <Note key={note._id} note={note}/>
+              <Note key={note._id} note={note} locId={data?._id}/>
               
             ))}
           </StyledUl>

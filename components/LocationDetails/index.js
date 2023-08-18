@@ -160,7 +160,7 @@ export default function LocationDetails({data
           <StyledUl>
             <p>Your notes:</p>
             {data?.notes?.map((note) => (
-              <Note key={note._id} note={note} locId={data?._id}/>
+              <Note key={note._id} note={note} locatData={data}/>
               
             ))}
           </StyledUl>

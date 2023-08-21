@@ -10,7 +10,6 @@ export default function LocationDetailsPage() {
   const { data, isLoading, error } = useSWR(`/api/locations/${id}`);
   if (error) <p>Error!</p>;
   if (!isLoading) <p>Loading...</p>;
-  console.log("All data", data);
   return (
     <>
       <Head>

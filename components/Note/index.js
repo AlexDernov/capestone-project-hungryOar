@@ -35,15 +35,12 @@ export default function Note({ note, locatData }) {
     }
   }
   async function handleDeleteNote() {
-    console.log("dataNotes", locatData.notes);
     const responseNote = await fetch(`/api/notes/${note?._id}`, {
       method: "DELETE",
     });
     if (!responseNote.ok) {
-      console.log(response.status);
       return <h1>Something gone wrong!</h1>;
     }
-    console.log("ResponseNote", responseNote);
 
     if (responseNote.ok) {
       const responseLocation = await fetch(`/api/locations/${locatData?._id}`, {
@@ -53,14 +50,10 @@ export default function Note({ note, locatData }) {
         },
         body: JSON.stringify({
           notes: locatData?.notes.filter((oneNote) => {
-            console.log("oneNote", oneNote);
-            console.log("note._id", note._id);
             return oneNote._id == note._id ? false : true;
           }),
         }),
       });
-
-      console.log("ResponseLocation", responseLocation);
       if (responseLocation.ok) {
         mutate();
         router.push(`/locations/${locatData?._id}`);

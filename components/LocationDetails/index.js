@@ -7,7 +7,6 @@ import NotesForm from "../NotesForm";
 import Note from "../Note";
 import useSWR from "swr";
 
-
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
   margin-top: 80px;
@@ -45,21 +44,20 @@ const StyledUl = styled.ul`
   padding: 0;
   margin-top: 20px;
   margin-bottom: 5px;
-  margin-left:5px;
+  margin-left: 5px;
   display: grid;
   grid-template-columns: 375px;
   gap: 1rem;
   list-style-type: none;
 `;
-export default function LocationDetails({data
-}) {
+export default function LocationDetails({ data }) {
   const { mutate } = useSWR(`/api/locations/${data?._id}`);
 
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const noteData = Object.fromEntries(formData);
-   
+
     const responseNote = await fetch("/api/notes", {
       method: "POST",
       headers: {
@@ -76,13 +74,12 @@ export default function LocationDetails({data
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          notes: [locData.data._id, ...data?.notes] ,
+          notes: [locData.data._id, ...data?.notes],
         }),
       });
       if (responseLocation.ok) {
         mutate();
         event.target.reset();
-    
       }
     }
   }
@@ -153,18 +150,21 @@ export default function LocationDetails({data
             )}
           </StyledArtSection>
           <p>{data?.verleih}</p>
-         <Image src={data?.bild.img} height={62} width={350} alt={data?.name} /> 
-         
+          <Image
+            src={data?.bild.img}
+            height={62}
+            width={350}
+            alt={data?.name}
+          />
         </StyledDiv>
-        <NotesForm locData={data} onSubmit={handleSubmit}/>
-          <StyledUl>
-            <p>Your notes:</p>
-            {data?.notes?.map((note) => (
-              <Note key={note._id} note={note} locatData={data}/>
-              
-            ))}
-          </StyledUl>
+        <NotesForm locData={data} onSubmit={handleSubmit} />
+        <StyledUl>
+          <p>Your notes:</p>
+          {data?.notes?.map((note) => (
+            <Note key={note._id} note={note} locatData={data} />
+          ))}
+        </StyledUl>
       </StyledArticle>
     </>
   );
-            }
+}

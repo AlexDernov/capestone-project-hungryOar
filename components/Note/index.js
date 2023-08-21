@@ -42,7 +42,8 @@ export default function Note({ note, locatData }) {
     if (!responseNote.ok) {
       console.log(response.status);
       return <h1>Something gone wrong!</h1>;
-    }console.log("ResponseNote", responseNote);
+    }
+    console.log("ResponseNote", responseNote);
 
     if (responseNote.ok) {
       const responseLocation = await fetch(`/api/locations/${locatData?._id}`, {
@@ -51,20 +52,18 @@ export default function Note({ note, locatData }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          notes: [
-            locatData?.notes.filter((oneNote/*  => oneNote != null */) => {
+          notes: locatData?.notes.filter((oneNote) => {
             console.log("oneNote", oneNote);
             console.log("note._id", note._id);
-             return oneNote._id == note._id ? false : true}
-            ),
-          ],
+            return oneNote._id == note._id ? false : true;
+          }),
         }),
       });
-      
-      console.log("ResponseLocation", responseLocation); /*is not ok*/
+
+      console.log("ResponseLocation", responseLocation);
       if (responseLocation.ok) {
         mutate();
-         router.push(`/locations/${locatData?._id}`);
+        router.push(`/locations/${locatData?._id}`);
       }
     }
   }
@@ -101,12 +100,7 @@ export default function Note({ note, locatData }) {
           }}
         >
           Cancel
-        </button> /* &&
-         <button
-         type="button"
-         onClick={handleEditNote}>
-         Save
-       </button> */
+        </button>
       )}
       {!isEditMode ? (
         <button type="button" onClick={handleDeleteNote}>

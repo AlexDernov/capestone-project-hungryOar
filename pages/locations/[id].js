@@ -19,9 +19,7 @@ export default function LocationDetailsPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      <LocationDetails
-      data={data}
-      />
+      <LocationDetails data={data} />
     </>
   );
 }

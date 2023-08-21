@@ -16,7 +16,7 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
       <label htmlFor="title"> Title:</label>
       <Input type="text" id="title" name="title" defaultValue={title} />
       <label htmlFor="note"> Note: </label>
-      <Input type="text" id="text" name="text" defaultValue={text} />
+      <Input type="text" id="note" name="text" defaultValue={text} />
       <button type="submit">Save</button>
     </FormContainer>
   );

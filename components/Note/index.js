@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useSWR from "swr";
 import { useState } from "react";
 import NotesForm from "../NotesForm";
 import { useRouter } from "next/router";
@@ -12,9 +11,9 @@ const StyledListItem = styled.li`
   align-content: center;
 `;
 
-export default function Note({ note, locatData }) {
+export default function Note({ note, locatData, mutate }) {
   const router = useRouter();
-  const { mutate } = useSWR(`/api/locations/${locatData?._id}`);
+
   const [isEditMode, setIsEditMode] = useState(false);
 
   async function handleEditNote(event) {
@@ -85,6 +84,11 @@ export default function Note({ note, locatData }) {
         >
           Edit
         </button>
+      ) : null}
+      {!isEditMode ? (
+        <button type="button" onClick={handleDeleteNote}>
+          Delete
+        </button>
       ) : (
         <button
           type="button"
@@ -95,11 +99,6 @@ export default function Note({ note, locatData }) {
           Cancel
         </button>
       )}
-      {!isEditMode ? (
-        <button type="button" onClick={handleDeleteNote}>
-          Delete
-        </button>
-      ) : null}
     </StyledListItem>
   );
 }

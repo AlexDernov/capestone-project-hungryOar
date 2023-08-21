@@ -5,7 +5,7 @@ import Image from "next/image";
 import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
 import Note from "../Note";
-import useSWR from "swr";
+
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
@@ -50,9 +50,7 @@ const StyledUl = styled.ul`
   gap: 1rem;
   list-style-type: none;
 `;
-export default function LocationDetails({ data }) {
-  const { mutate } = useSWR(`/api/locations/${data?._id}`);
-
+export default function LocationDetails({ data, mutate }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -161,7 +159,7 @@ export default function LocationDetails({ data }) {
         <StyledUl>
           <p>Your notes:</p>
           {data?.notes?.map((note) => (
-            <Note key={note._id} note={note} locatData={data} />
+            <Note key={note._id} note={note} locatData={data} mutate={mutate} />
           ))}
         </StyledUl>
       </StyledArticle>

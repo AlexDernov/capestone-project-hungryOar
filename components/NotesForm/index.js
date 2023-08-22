@@ -14,9 +14,9 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
     <FormContainer onSubmit={onSubmit}>
       <p>{isEditMode ? "Edit the Note:" : "Add a Note"} </p>
       <label htmlFor="title"> Title:</label>
-      <Input type="text" id="title" name="title" defaultValue={title} />
+      <Input type="text" id="title" name="title" defaultValue={title} required pattern="[A-Za-zА-Яа-яЁё]+$"/>
       <label htmlFor="note"> Note: </label>
-      <Input type="text" id="note" name="text" defaultValue={text} />
+      <Input type="text" id="note" name="text" defaultValue={text} required/>
       <button type="submit">Save</button>
     </FormContainer>
   );

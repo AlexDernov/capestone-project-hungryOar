@@ -158,7 +158,7 @@ export default function LocationDetails({ data, mutate }) {
         <NotesForm locData={data} onSubmit={handleSubmit} />
         <StyledUl>
           <p>Your notes:</p>
-          {data?.notes?.map((note) => (
+          {data?.notes.length > 0 && data?.notes?.map((note) => (
             <Note key={note._id} note={note} locatData={data} mutate={mutate} />
           ))}
         </StyledUl>

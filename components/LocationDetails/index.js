@@ -3,7 +3,8 @@ import Link from "next/link";
 import Heading from "../Heading";
 import Image from "next/image";
 import TitleSection from "../TitleSection";
-
+import NotesForm from "../NotesForm";
+import Note from "../Note";
 
 
 const StyledArticle = styled.article`
@@ -39,46 +40,128 @@ const StyledDiv = styled.div`
   text-align: center;
 `;
 
-export default function LocationDetails({
-  name,
-  addresse,
-  zeit,
-  art,
-  verleih,
-  bild,
-}) {
+const StyledUl = styled.ul`
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  display: grid;
+  grid-template-columns: 375px;
+  gap: 1rem;
+  list-style-type: none;
+`;
+export default function LocationDetails({ data, mutate }) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const noteData = Object.fromEntries(formData);
+
+    const responseNote = await fetch("/api/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(noteData),
+    });
+
+    if (responseNote.ok) {
+      const locData = await responseNote.json();
+      const responseLocation = await fetch(`/api/locations/${data?._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          notes: [locData.data._id, ...data?.notes],
+        }),
+      });
+      if (responseLocation.ok) {
+        mutate();
+        event.target.reset();
+      }
+    }
+  }
+
   return (
     <>
       <TitleSection>
-        <Heading>{name}</Heading>
+        <Heading>{data?.name}</Heading>
       </TitleSection>
       <StyledArticle>
         <NavLink href="/locations"> ← Back</NavLink>
         <StyledDiv>
-          <p>{addresse}</p>
-          <p>{zeit}</p>
+          <p>{data?.location}</p>
+          <p>{data?.zeit}</p>
           <StyledArtSection>
-            {art?.map((artStück) =>
+            {data?.art?.map((artStück) =>
               artStück === "Cafe" ? (
-                <Image key={1} src="/images/CafeIcon.svg" width={71} height={45} alt="Cafe icon"/>
+                <Image
+                  key={1}
+                  src="/images/CafeIcon.svg"
+                  width={71}
+                  height={45}
+                  alt="Cafe icon"
+                />
               ) : artStück === "Restaurant" ? (
-                <Image key={2} src="/images/RestaurantIcon.svg" width={71} height={44} alt="Restaurant-icon"/>
+                <Image
+                  key={2}
+                  src="/images/RestaurantIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Restaurant-icon"
+                />
               ) : artStück === "Bar" ? (
-                <Image key={3} src="/images/BarIcon.svg" width={57} height={44} alt="Bar-icon"/>
+                <Image
+                  key={3}
+                  src="/images/BarIcon.svg"
+                  width={57}
+                  height={44}
+                  alt="Bar-icon"
+                />
               ) : artStück === "Kuchen" ? (
-                <Image key={4} src="/images/KuchenIcon.svg" width={71} height={44} alt="Kuchen-icon"/>
+                <Image
+                  key={4}
+                  src="/images/KuchenIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Kuchen-icon"
+                />
               ) : artStück === "Eis" ? (
-                <Image key={5} src="/images/EisIcon.svg" width={57} height={45} alt="Eis-icon"/>
+                <Image
+                  key={5}
+                  src="/images/EisIcon.svg"
+                  width={57}
+                  height={45}
+                  alt="Eis-icon"
+                />
               ) : artStück === "Snacks" ? (
-                <Image key={6} src="/images/SnacksIcon.svg" width={71} height={44} alt="Snacks-icon"/>
+                <Image
+                  key={6}
+                  src="/images/SnacksIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Snacks-icon"
+                />
               ) : (
                 []
               )
             )}
           </StyledArtSection>
-          <p>{verleih}</p>
-          <Image src={bild} height={62} width={350} alt={name} />
+          <p>{data?.verleih}</p>
+          <Image
+            src={data?.bild.img}
+            height={62}
+            width={350}
+            alt={data?.name}
+          />
         </StyledDiv>
+        <NotesForm locData={data} onSubmit={handleSubmit} />
+        <StyledUl>
+          <p>Your notes:</p>
+          {data?.notes.length > 0 && data?.notes?.map((note) => (
+            <Note key={note._id} note={note} locatData={data} mutate={mutate} />
+          ))}
+        </StyledUl>
       </StyledArticle>
     </>
   );

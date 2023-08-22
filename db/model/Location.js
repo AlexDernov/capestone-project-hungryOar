@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import "./Note";
 
 const { Schema } = mongoose;
 
@@ -17,7 +18,7 @@ const locationSchema = new Schema({
   art: { type: Array, required: true },
   verleih: { type: String, required: true },
   liked: { type: Boolean, required: false },
-  notes: { type: Array, required: false },
+  notes: { type: [Schema.Types.ObjectId], ref: "Note"},
 });
 const Location =
   mongoose.models.Location ||

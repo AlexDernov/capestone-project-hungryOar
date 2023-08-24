@@ -19,6 +19,7 @@ const locationSchema = new Schema({
   verleih: { type: String, required: true },
   liked: { type: Boolean, required: false },
   notes: { type: [Schema.Types.ObjectId], ref: "Note"},
+  coords: {type: String, required: true},
 });
 const Location =
   mongoose.models.Location ||

@@ -1,13 +1,7 @@
-import styled from "styled-components";
+import dynamic from "next/dynamic";
 
-const StyledMap = styled.div`
-  margin-top: 15px;
-  min-height: 100vh;
-  background-image: url(/images/Map_Hamburg.png);
-  background-repeat: no-repeat;
-  background-size: cover, contain;
-`;
+const Map = dynamic(()=> import("./Map"), {
+    ssr: false
+} );
 
-export default function Map() {
-  return <StyledMap />;
-}
+export default Map

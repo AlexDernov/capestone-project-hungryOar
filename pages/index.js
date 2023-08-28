@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styled from "styled-components";
-/* import Link from "next/link"; */
 import Heading from "../components/Heading";
 import Map from "../components/Map";
 import TitleSection from "../components/TitleSection";
@@ -21,7 +20,7 @@ const StyledMain = styled.main`
   flex-direction: column;
 `;
 
-export default function Home({data}) {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -29,8 +28,6 @@ export default function Home({data}) {
         <meta name="description" content="HungryOarApp" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
-        {/* <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" /> */}
-
       </Head>
       <StyledMain>
         <TitleSection>
@@ -41,7 +38,7 @@ export default function Home({data}) {
           and drink without leaving (or almost without leaving) a boat, kayak,
           sap, etc. and get all the information you need about them.
         </StyledP>
-          <Map data={data}/>
+        <Map data={data} />
       </StyledMain>
     </>
   );

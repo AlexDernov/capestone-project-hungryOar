@@ -23,4 +23,8 @@ export default createGlobalStyle`
     font-family: var(--font-roboto);
     background-color: var(--primary-color-back);
   }
+  .map {
+    width: auto;
+    height: 52vh;
+  }
 `;

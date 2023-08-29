@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styled from "styled-components";
-import Link from "next/link";
 import Heading from "../components/Heading";
 import Map from "../components/Map";
 import TitleSection from "../components/TitleSection";
@@ -13,7 +12,7 @@ const StyledP = styled.p`
   background-size: cover, contain;
   text-shadow: 3px 3px 6px black;
   text-align: center;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 const StyledMain = styled.main`
@@ -39,9 +38,7 @@ export default function Home() {
           and drink without leaving (or almost without leaving) a boat, kayak,
           sap, etc. and get all the information you need about them.
         </StyledP>
-        <Link href="/locations">
-          <Map />
-        </Link>
+        <Map />
       </StyledMain>
     </>
   );

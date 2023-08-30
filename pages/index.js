@@ -20,7 +20,7 @@ const StyledMain = styled.main`
   flex-direction: column;
 `;
 
-export default function Home({onToggleLiked, locationsInfo}) {
+export default function Home({locationsInfo}) {
   return (
     <>
       <Head>
@@ -38,7 +38,7 @@ export default function Home({onToggleLiked, locationsInfo}) {
           and drink without leaving (or almost without leaving) a boat, kayak,
           sap, etc. and get all the information you need about them.
         </StyledP>
-        <Map />
+        <Map locationsInfo={locationsInfo}/>
       </StyledMain>
     </>
   );

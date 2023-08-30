@@ -27,7 +27,7 @@ const PopLink = styled.p`
   text-align: center;
 `;
 
-export default function Map() {
+export default function Map({locationsInfo}) {
   const { data, isLoading, error } = useSWR("/api/locations");
 
   if (isLoading) {
@@ -37,6 +37,7 @@ export default function Map() {
   if (!data) {
     return <h1>Data cannot be loaded.</h1>;
   }
+  
   const locationOnIcon = L.divIcon({
     html: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.66675 24.9999C6.66675 24.9999 8.33341 23.3333 13.3334 23.3333C18.3334 23.3333 21.6667 26.6666 26.6667 26.6666C31.6667 26.6666 33.3334 24.9999 33.3334 24.9999V4.99992C33.3334 4.99992 31.6667 6.66659 26.6667 6.66659C21.6667 6.66659 18.3334 3.33325 13.3334 3.33325C8.33341 3.33325 6.66675 4.99992 6.66675 4.99992V24.9999Z" fill="url(#paint0_linear_115_19)" stroke="#3D874D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -46,6 +47,22 @@ export default function Map() {
     <stop offset="0.00286713" stop-color="#EAFB2C"/>
     <stop offset="0.49767" stop-color="#14C2F9"/>
     <stop offset="0.987264" stop-color="#02B109"/>
+    </linearGradient>
+    </defs>
+    </svg>`,
+    className: "",
+    iconSize: [25, 25],
+    iconAnchor: [0, 25],
+  });
+  const locationOnIconFav = L.divIcon({
+    html: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6.66675 24.9999C6.66675 24.9999 8.33341 23.3333 13.3334 23.3333C18.3334 23.3333 21.6667 26.6666 26.6667 26.6666C31.6667 26.6666 33.3334 24.9999 33.3334 24.9999V4.99992C33.3334 4.99992 31.6667 6.66659 26.6667 6.66659C21.6667 6.66659 18.3334 3.33325 13.3334 3.33325C8.33341 3.33325 6.66675 4.99992 6.66675 4.99992V24.9999Z" fill="url(#paint0_linear_115_22)" stroke="#3D874D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6.66675 36.6667V25" stroke="#3D874D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <defs>
+    <linearGradient id="paint0_linear_115_22" x1="9" y1="7.5" x2="33" y2="24.5" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FBC332"/>
+    <stop offset="0.421574" stop-color="#FB326E"/>
+    <stop offset="1" stop-color="#7821CF" stop-opacity="0.85"/>
     </linearGradient>
     </defs>
     </svg>`,
@@ -68,11 +85,12 @@ export default function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {data.map((location) => {
+            const isLiked=locationsInfo.find((locI)=>locI.id===location._id)?.isLiked
             return (
               <Marker
                 key={location._id}
                 position={location.coords}
-                icon={locationOnIcon}
+                icon={!isLiked ? locationOnIcon : locationOnIconFav}
               >
                 <NavLink href={`/locations/${location._id}`}>
                   {" "}

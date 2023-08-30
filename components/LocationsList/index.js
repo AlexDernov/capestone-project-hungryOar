@@ -8,17 +8,17 @@ const StyledUl = styled.ul`
   padding: 0;
   margin-top: 80px;
   margin-bottom: 105px;
-  margin-left:10px;
+  margin-left: 10px;
   display: grid;
   grid-template-columns: 375px;
   gap: 1rem;
   list-style-type: none;
 `;
 
-export default function LocationsList({ data }) {
+export default function LocationsList({ data, onToggleLiked, locationsInfo }) {
   return (
     <>
-    <Head>
+      <Head>
         <title>Locations</title>
         <meta name="description" content="HungryOarApp" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,7 +35,8 @@ export default function LocationsList({ data }) {
             name={location.name}
             addresse={location.location}
             bild={location.bild}
-          />
+            onToggleLiked={()=> onToggleLiked(location?._id)}
+            isLiked={locationsInfo.find((locI)=>locI.id===location._id)?.isLiked} />
         ))}
       </StyledUl>
     </>

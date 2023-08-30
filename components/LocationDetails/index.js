@@ -5,6 +5,7 @@ import Image from "next/image";
 import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
 import Note from "../Note";
+import FavoriteButton from "../FavoriteButton";
 
 
 const StyledArticle = styled.article`
@@ -50,7 +51,8 @@ const StyledUl = styled.ul`
   gap: 1rem;
   list-style-type: none;
 `;
-export default function LocationDetails({ data, mutate }) {
+export default function LocationDetails({ data, mutate, onToggleLiked, isLiked }) {
+  
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -85,7 +87,7 @@ export default function LocationDetails({ data, mutate }) {
   return (
     <>
       <TitleSection>
-        <Heading>{data?.name}</Heading>
+        <Heading>{data?.name}<FavoriteButton onToggleLiked={onToggleLiked} isLiked={isLiked} id={data?._id}/></Heading>
       </TitleSection>
       <StyledArticle>
         <NavLink href="/locations"> ← Back</NavLink>

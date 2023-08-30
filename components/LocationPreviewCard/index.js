@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
+import FavoriteButton from "../FavoriteButton";
 
 const StyledImage = styled(Image)`
 max-width: 100% 
@@ -27,8 +28,8 @@ const StyledListItem = styled.li`
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-content: space-between;
-  justify-content: space-between;
+  align-content: space-around;
+  justify-content: space-around;
   margin: 5px;
   padding: 5px;
 `;
@@ -71,7 +72,7 @@ const NavLink = styled(Link)`
     font-size: 1.2em;
   }
 `;
-export default function LocationPreviewCard({ name, addresse, bild, id }) {
+export default function LocationPreviewCard({ name, addresse, bild, id, onToggleLiked, isLiked }) {
   return (
     <>
       <StyledListItem>
@@ -81,6 +82,7 @@ export default function LocationPreviewCard({ name, addresse, bild, id }) {
             <StyledPDiv>
               <StyledAddresse>{addresse}</StyledAddresse>
             </StyledPDiv>
+            <FavoriteButton onToggleLiked={onToggleLiked} isLiked={isLiked} id={id}/>
           </StyledDiv>
           <StyledImgDiv>
             <StyledImage

@@ -20,7 +20,7 @@ const StyledMain = styled.main`
   flex-direction: column;
 `;
 
-export default function Home() {
+export default function Home({onToggleLiked, locationsInfo}) {
   return (
     <>
       <Head>

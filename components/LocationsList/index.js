@@ -47,7 +47,7 @@ const StyledUl = styled.ul`
 `;
 const Div =styled.div`
 height: 90vh;
-width: 100%;
-padding-top: 10%;
+width: auto;
+padding-top: 30px;
 padding-left: 10px;
 color: grey`;

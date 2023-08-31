@@ -45,7 +45,7 @@ const StyledUl = styled.ul`
   gap: 1rem;
   list-style-type: none;
 `;
-const Div =styled.div`
+const Div =styled.p`
 height: 90vh;
 width: auto;
 padding-top: 30px;

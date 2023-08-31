@@ -3,14 +3,6 @@ import { useState } from "react";
 import NotesForm from "../NotesForm";
 import { useRouter } from "next/router";
 
-const StyledListItem = styled.li`
-  background-color: rgba(255, 255, 255, 0.6);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-`;
-
 export default function Note({ note, locatData, mutate }) {
   const router = useRouter();
 
@@ -102,3 +94,10 @@ export default function Note({ note, locatData, mutate }) {
     </StyledListItem>
   );
 }
+const StyledListItem = styled.li`
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+`;

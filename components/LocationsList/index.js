@@ -4,17 +4,6 @@ import Heading from "@/components/Heading";
 import TitleSection from "@/components/TitleSection";
 import Head from "next/head";
 
-const StyledUl = styled.ul`
-  padding: 0;
-  margin-top: 80px;
-  margin-bottom: 105px;
-  margin-left: 10px;
-  display: grid;
-  grid-template-columns: 375px;
-  gap: 1rem;
-  list-style-type: none;
-`;
-
 export default function LocationsList({ data, onToggleLiked, locationsInfo }) {
   return (
     <>
@@ -35,10 +24,23 @@ export default function LocationsList({ data, onToggleLiked, locationsInfo }) {
             name={location.name}
             addresse={location.location}
             bild={location.bild}
-            onToggleLiked={()=> onToggleLiked(location?._id)}
-            isLiked={locationsInfo.find((locI)=>locI.id===location._id)?.isLiked} />
+            onToggleLiked={() => onToggleLiked(location?._id)}
+            isLiked={
+              locationsInfo.find((locI) => locI.id === location._id)?.isLiked
+            }
+          />
         ))}
       </StyledUl>
     </>
   );
 }
+const StyledUl = styled.ul`
+  padding: 0;
+  margin-top: 80px;
+  margin-bottom: 105px;
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: 375px;
+  gap: 1rem;
+  list-style-type: none;
+`;

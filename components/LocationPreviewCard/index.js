@@ -3,6 +3,47 @@ import styled from "styled-components";
 import Link from "next/link";
 import FavoriteButton from "../FavoriteButton";
 
+export default function LocationPreviewCard({
+  name,
+  addresse,
+  bild,
+  id,
+  onToggleLiked,
+  isLiked,
+}) {
+  return (
+    <>
+      <StyledListItem>
+        <Div>
+          <NavLink href={`/locations/${id}`}>
+            <StyledDiv>
+              <StyledName>{name}</StyledName>
+              <StyledPDiv>
+                <StyledAddresse>{addresse}</StyledAddresse>
+              </StyledPDiv>
+            </StyledDiv>
+          </NavLink>
+          <FavoriteButton
+            onToggleLiked={onToggleLiked}
+            isLiked={isLiked}
+            id={id}
+          />
+        </Div>
+        <NavLink href={`/locations/${id}`}>
+          <StyledImgDiv>
+            <StyledImage
+              src={bild.img}
+              width={bild.width}
+              height={bild.height}
+              alt={name}
+            />
+          </StyledImgDiv>
+        </NavLink>
+      </StyledListItem>
+    </>
+  );
+}
+
 const StyledImage = styled(Image)`
 max-width: 100% 
 height: auto
@@ -23,9 +64,18 @@ const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-direction: column;
-  align-content: center
+  align-content: center;
 `;
 const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  justify-content: space-around;
+  margin: 5px;
+  padding: 5px;
+`;
+const Div = styled.div`
+  position: relativ;
   display: flex;
   flex-direction: row;
   align-content: space-around;
@@ -72,28 +122,3 @@ const NavLink = styled(Link)`
     font-size: 1.2em;
   }
 `;
-export default function LocationPreviewCard({ name, addresse, bild, id, onToggleLiked, isLiked }) {
-  return (
-    <>
-      <StyledListItem>
-        <NavLink href={`/locations/${id}`}>
-          <StyledDiv>
-            <StyledName>{name}</StyledName>
-            <StyledPDiv>
-              <StyledAddresse>{addresse}</StyledAddresse>
-            </StyledPDiv>
-            <FavoriteButton onToggleLiked={onToggleLiked} isLiked={isLiked} id={id}/>
-          </StyledDiv>
-          <StyledImgDiv>
-            <StyledImage
-              src={bild.img}
-              width={bild.width}
-              height={bild.height}
-              alt={name}
-            />
-          </StyledImgDiv>
-        </NavLink>
-      </StyledListItem>
-    </>
-  );
-}

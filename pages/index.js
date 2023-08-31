@@ -4,23 +4,7 @@ import Heading from "../components/Heading";
 import Map from "../components/Map";
 import TitleSection from "../components/TitleSection";
 
-const StyledP = styled.p`
-  margin-top: 80px;
-  padding: 10px;
-  padding-top: 25px;
-  color: var(--primary-color);
-  background-size: cover, contain;
-  text-shadow: 3px 3px 6px black;
-  text-align: center;
-  font-size: 14px;
-`;
-
-const StyledMain = styled.main`
-  display: flex;
-  flex-direction: column;
-`;
-
-export default function Home({locationsInfo}) {
+export default function Home({ locationsInfo }) {
   return (
     <>
       <Head>
@@ -38,8 +22,24 @@ export default function Home({locationsInfo}) {
           and drink without leaving (or almost without leaving) a boat, kayak,
           sap, etc. and get all the information you need about them.
         </StyledP>
-        <Map locationsInfo={locationsInfo}/>
+        <Map locationsInfo={locationsInfo} />
       </StyledMain>
     </>
   );
 }
+
+const StyledP = styled.p`
+  margin-top: 80px;
+  padding: 10px;
+  padding-top: 25px;
+  color: var(--primary-color);
+  background-size: cover, contain;
+  text-shadow: 3px 3px 6px black;
+  text-align: center;
+  font-size: 14px;
+`;
+
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
+`;

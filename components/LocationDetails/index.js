@@ -7,52 +7,12 @@ import NotesForm from "../NotesForm";
 import Note from "../Note";
 import FavoriteButton from "../FavoriteButton";
 
-
-const StyledArticle = styled.article`
-  background-color: rgba(255, 255, 255, 0.6);
-  margin-top: 80px;
-  margin-bottom: 90px;
-  height: 100%;
-  line-height: 120%;
-  padding: 10px;
-`;
-const NavLink = styled(Link)`
-  margin-bottom: 20px;
-  margin-left: 0;
-  text-decoration: none;
-  color: var(--primary-color);
-  text-shadow: 4px 4px 4px black;
-  height: 4px;
-  &: hover {
-    font-size: 1.2em;
-  }
-`;
-const StyledArtSection = styled.section`
-  margin: 10px;
-  padding-left: 27px;
-  padding-right: 27px;
-  display: grid;
-  grid-template-columns: 71px 71px 71px 71px;
-  row-gap: 20px;
-  column-gap: 0;
-  position: center;
-`;
-const StyledDiv = styled.div`
-  text-align: center;
-`;
-
-const StyledUl = styled.ul`
-  padding: 0;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  display: grid;
-  grid-template-columns: 375px;
-  gap: 1rem;
-  list-style-type: none;
-`;
-export default function LocationDetails({ data, mutate, onToggleLiked, isLiked }) {
-  
+export default function LocationDetails({
+  data,
+  mutate,
+  onToggleLiked,
+  isLiked,
+}) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -87,7 +47,14 @@ export default function LocationDetails({ data, mutate, onToggleLiked, isLiked }
   return (
     <>
       <TitleSection>
-        <Heading>{data?.name}<FavoriteButton onToggleLiked={onToggleLiked} isLiked={isLiked} id={data?._id}/></Heading>
+        <Heading>
+          {data?.name}
+          <FavoriteButton
+            onToggleLiked={onToggleLiked}
+            isLiked={isLiked}
+            id={data?._id}
+          />
+        </Heading>
       </TitleSection>
       <StyledArticle>
         <NavLink href="/locations"> ← Back</NavLink>
@@ -160,11 +127,61 @@ export default function LocationDetails({ data, mutate, onToggleLiked, isLiked }
         <NotesForm locData={data} onSubmit={handleSubmit} />
         <StyledUl>
           <p>Your notes:</p>
-          {data?.notes.length > 0 && data?.notes?.map((note) => (
-            <Note key={note._id} note={note} locatData={data} mutate={mutate} />
-          ))}
+          {data?.notes.length > 0 &&
+            data?.notes?.map((note) => (
+              <Note
+                key={note._id}
+                note={note}
+                locatData={data}
+                mutate={mutate}
+              />
+            ))}
         </StyledUl>
       </StyledArticle>
     </>
   );
 }
+
+const StyledArticle = styled.article`
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-top: 80px;
+  margin-bottom: 90px;
+  height: 100%;
+  line-height: 120%;
+  padding: 10px;
+`;
+const NavLink = styled(Link)`
+  margin-bottom: 20px;
+  margin-left: 0;
+  text-decoration: none;
+  color: var(--primary-color);
+  text-shadow: 4px 4px 4px black;
+  height: 4px;
+  &: hover {
+    font-size: 1.2em;
+  }
+`;
+const StyledArtSection = styled.section`
+  margin: 10px;
+  padding-left: 27px;
+  padding-right: 27px;
+  display: grid;
+  grid-template-columns: 71px 71px 71px 71px;
+  row-gap: 20px;
+  column-gap: 0;
+  position: center;
+`;
+const StyledDiv = styled.div`
+  text-align: center;
+`;
+
+const StyledUl = styled.ul`
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  display: grid;
+  grid-template-columns: 375px;
+  gap: 1rem;
+  list-style-type: none;
+`;

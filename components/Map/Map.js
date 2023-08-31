@@ -5,29 +5,7 @@ import useSWR from "swr";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
 
-const NavLink = styled(Link)`
-  text-decoration: none;
-  &: hover {
-    font-size: 1.2em;
-  }
-`;
-const PopHead = styled.p`
-  padding: 0;
-  margin: 0;
-  font-size: 0.875em;
-  text-align: center;
-`;
-
-const PopLink = styled.p`
-  color: purple;
-  padding: 0;
-  margin: 0;
-  letter-spacing: 1.5px;
-  font-size: 0.775em;
-  text-align: center;
-`;
-
-export default function Map({locationsInfo}) {
+export default function Map({ locationsInfo }) {
   const { data, isLoading, error } = useSWR("/api/locations");
 
   if (isLoading) {
@@ -37,7 +15,7 @@ export default function Map({locationsInfo}) {
   if (!data) {
     return <h1>Data cannot be loaded.</h1>;
   }
-  
+
   const locationOnIcon = L.divIcon({
     html: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.66675 24.9999C6.66675 24.9999 8.33341 23.3333 13.3334 23.3333C18.3334 23.3333 21.6667 26.6666 26.6667 26.6666C31.6667 26.6666 33.3334 24.9999 33.3334 24.9999V4.99992C33.3334 4.99992 31.6667 6.66659 26.6667 6.66659C21.6667 6.66659 18.3334 3.33325 13.3334 3.33325C8.33341 3.33325 6.66675 4.99992 6.66675 4.99992V24.9999Z" fill="url(#paint0_linear_115_19)" stroke="#3D874D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -85,7 +63,9 @@ export default function Map({locationsInfo}) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {data.map((location) => {
-            const isLiked=locationsInfo.find((locI)=>locI.id===location._id)?.isLiked
+            const isLiked = locationsInfo.find(
+              (locI) => locI.id === location._id
+            )?.isLiked;
             return (
               <Marker
                 key={location._id}
@@ -109,3 +89,25 @@ export default function Map({locationsInfo}) {
     </>
   );
 }
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  &: hover {
+    font-size: 1.2em;
+  }
+`;
+const PopHead = styled.p`
+  padding: 0;
+  margin: 0;
+  font-size: 0.875em;
+  text-align: center;
+`;
+
+const PopLink = styled.p`
+  color: purple;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 1.5px;
+  font-size: 0.775em;
+  text-align: center;
+`;

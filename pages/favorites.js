@@ -1,12 +1,15 @@
 import LocationsList from "../components/LocationsList";
 import Head from "next/head.js";
 import useSWR from "swr";
+import { useState } from "react";
+
 
 export default function FavoriteLocationsPage({
   locationsInfo,
   onToggleLiked,
 }) {
   const { data, isLoading, error } = useSWR("/api/locations");
+  const [favoritePage, setFavoritePage] = useState(true);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -29,7 +32,8 @@ export default function FavoriteLocationsPage({
       <LocationsList
         data={favorites}
         onToggleLiked={onToggleLiked}
-        locationsInfo={locationsInfo}
+        locationsInfo={locationsInfo} 
+        favoritePage={favoritePage}
       />
     </div>
   );

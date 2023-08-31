@@ -17,7 +17,7 @@ export default function LocationsList({ data, onToggleLiked, locationsInfo, favo
         <Heading>Locations</Heading>}
       </TitleSection>
       <StyledUl>
-      {data.length == 0 ? <Div>You don't have any favorite locations yet</Div> :
+      {data.length == 0 ? <Par>You don&apos;t have any favorite locations yet</Par> :
         data?.map((location) => (
           <LocationPreviewCard
             key={location._id}
@@ -45,7 +45,7 @@ const StyledUl = styled.ul`
   gap: 1rem;
   list-style-type: none;
 `;
-const Div =styled.p`
+const Par =styled.p`
 height: 90vh;
 width: auto;
 padding-top: 30px;

@@ -1,46 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-const NavLink = styled(Link)`
-  margin: 10px;
-  widht: 100%;
-  text-decoration: none;
-  color: var(--primary-color);
-  text-shadow: 1px 1px 1px black;
-  border-color: black;
-  &: hover {
-    font-size: 1.1em;
-  }
-`;
-const StyledNav = styled.nav`
-  background-color: var(--primary-color-back);
-  width: 100%;
-  height: 70px;
-  margin-right: 10px;
-  display: flex;
-  justify-content: space-around;
-  position: fixed;
-  bottom: 0;
-`;
-
-const StyledH4 = styled.p`
-  font-size: 10px;
-  text-shadow: 1px 1px 1px black;
-  color: var(--primary-color);
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  width: 41px;
-  height: auto;
-`;
-
-const StyledSvg = styled.svg`
-  &: hover {
-    width: 45px;
-    height: 45px;
-  }
-`;
-
 export default function NavBar() {
   return (
     <StyledNav name="NavBar">
@@ -76,6 +36,22 @@ export default function NavBar() {
           />
         </StyledSvg>
         <StyledH4>Map </StyledH4>
+      </NavLink>
+      <NavLink href="/favorites">
+        {" "}
+        <StyledSvg
+          width="41"
+          height="41"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="m12 21.35-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"
+            fill="white"
+            stroke="white"
+          />
+        </StyledSvg>
+        <StyledH4>Favorites </StyledH4>
       </NavLink>
       <NavLink href="/locations">
         {" "}
@@ -134,3 +110,43 @@ export default function NavBar() {
     </StyledNav>
   );
 }
+
+const NavLink = styled(Link)`
+  margin: 10px;
+  widht: 100%;
+  text-decoration: none;
+  color: var(--primary-color);
+  text-shadow: 1px 1px 1px black;
+  border-color: black;
+  &: hover {
+    font-size: 1.1em;
+  }
+`;
+const StyledNav = styled.nav`
+  background-color: var(--primary-color-back);
+  width: 100%;
+  height: 70px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+`;
+
+const StyledH4 = styled.p`
+  font-size: 10px;
+  text-shadow: 1px 1px 1px black;
+  color: var(--primary-color);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 41px;
+  height: auto;
+`;
+
+const StyledSvg = styled.svg`
+  &: hover {
+    width: 45px;
+    height: 45px;
+  }
+`;

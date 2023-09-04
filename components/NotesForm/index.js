@@ -1,22 +1,5 @@
 import styled from "styled-components";
-const FormContainer = styled.form`
-  display: grid;
-  gap: 0.5rem;
-`;
-const Input = styled.input`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid grey;
-  border-radius: 0.5rem;
-  overflow: scroll;
-`;
-const TextArea = styled.textarea`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid grey;
-  border-radius: 0.5rem;
-  overflow: scroll;
-`;
+
 export default function NotesForm({ text, onSubmit, title, isEditMode }) {
   return (
     <FormContainer onSubmit={onSubmit}>
@@ -48,3 +31,21 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
     </FormContainer>
   );
 }
+const FormContainer = styled.form`
+  display: grid;
+  gap: 0.5rem;
+`;
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  overflow: scroll;
+`;
+const TextArea = styled.textarea`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  overflow: scroll;
+`;

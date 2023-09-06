@@ -1,21 +1,48 @@
 import styled from "styled-components";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import useSWR from "swr";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
+import { useState } from "react";
+import Filter from "../Filter";
 
-export default function Map({ locationsInfo }) {
-  const { data, isLoading, error } = useSWR("/api/locations");
+export default function Map({ locationsInfo, data }) {
+  const [menuArten, setMenuArten] = useState([
+    { art: "Cafe", id: "Cafe", checked: false },
+    { art: "Bar", id: "Bar", checked: false },
+    { art: "Restaurant", id: "Restaurant", checked: false },
+    { art: "Kuchen", id: "Kuchen", checked: false },
+    { art: "Eis", id: "Eis", checked: false },
+    { art: "Snacks", id: "Snacks", checked: false },
+  ]);
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
+  const [verleih, setVerleih] = useState("egal");
+  const menuCheck = menuArten
+    .filter((artM) => artM.checked)
+    .map((art) => art.art);
+
+  const filterdData1 = data.filter((loc) =>
+    verleih === "ja"
+      ? loc.verleihOpt === true
+      : verleih === "nein"
+      ? loc.verleihOpt === false
+      : true
+  );
+  const filterdData = filterdData1.filter((loc) =>
+    menuCheck.every((menu) => loc.art.includes(menu))
+  );
+
+  function handleFilter(id) {
+    setMenuArten(
+      menuArten.map((artM) =>
+        artM.id === id ? { ...artM, checked: !artM.checked } : artM
+      )
+    );
   }
-  if (error) return <div>failed to load</div>;
-  if (!data) {
-    return <h1>Data cannot be loaded.</h1>;
-  }
 
+  function onOptionChange(event) {
+    setVerleih(event.target.value);
+  }
   const locationOnIcon = L.divIcon({
     html: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.66675 24.9999C6.66675 24.9999 8.33341 23.3333 13.3334 23.3333C18.3334 23.3333 21.6667 26.6666 26.6667 26.6666C31.6667 26.6666 33.3334 24.9999 33.3334 24.9999V4.99992C33.3334 4.99992 31.6667 6.66659 26.6667 6.66659C21.6667 6.66659 18.3334 3.33325 13.3334 3.33325C8.33341 3.33325 6.66675 4.99992 6.66675 4.99992V24.9999Z" fill="url(#paint0_linear_115_19)" stroke="#3D874D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -51,6 +78,14 @@ export default function Map({ locationsInfo }) {
   return (
     <>
       <div id="map">
+        {" "}
+        <Filter
+          menuArten={menuArten}
+          verleih={verleih}
+          setVerleih={setVerleih}
+          onOptionChange={onOptionChange}
+          handleFilter={handleFilter}
+        />
         <MapContainer
           className={"map"}
           center={[53.567067, 10.007241]}
@@ -62,7 +97,8 @@ export default function Map({ locationsInfo }) {
           </a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {data.map((location) => {
+
+          {filterdData.map((location) => {
             const isLiked = locationsInfo.find(
               (locI) => locI.id === location._id
             )?.isLiked;

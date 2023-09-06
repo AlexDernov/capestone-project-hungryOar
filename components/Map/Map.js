@@ -75,20 +75,20 @@ export default function Map({ locationsInfo, data }) {
     iconSize: [25, 25],
     iconAnchor: [0, 25],
   });
+
   return (
     <>
+      <Filter
+        menuArten={menuArten}
+        verleih={verleih}
+        setVerleih={setVerleih}
+        onOptionChange={onOptionChange}
+        handleFilter={handleFilter}
+      />
       <div id="map">
-        {" "}
-        <Filter
-          menuArten={menuArten}
-          verleih={verleih}
-          setVerleih={setVerleih}
-          onOptionChange={onOptionChange}
-          handleFilter={handleFilter}
-        />
-        <MapContainer
+        <StyledMapContainer
           className={"map"}
-          center={[53.567067, 10.007241]}
+          center={[53.577067, 10.007241]}
           zoom={12}
           scrollWheelZoom={true}
         >
@@ -120,11 +120,16 @@ export default function Map({ locationsInfo, data }) {
               </Marker>
             );
           })}
-        </MapContainer>
+        </StyledMapContainer>
       </div>
     </>
   );
 }
+
+const StyledMapContainer = styled(MapContainer)`
+  position: relativ;
+  z-index: 1;
+`;
 
 const NavLink = styled(Link)`
   text-decoration: none;

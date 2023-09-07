@@ -2,17 +2,14 @@ import styled from "styled-components";
 import { useState } from "react";
 
 export default function Filter({
-  verleih,
+  rental,
   onOptionChange,
   handleFilter,
-  menuArten,
+  menuTypes,
+  hidden,
+  handleOnClick
 }) {
-  let [hidden, setHidden] = useState(true);
-
-  function handleOnClick() {
-    setHidden(!hidden);
-  }
-
+  
   return (
     <Div>
       <StyledFilter hidden={hidden}>
@@ -24,7 +21,7 @@ export default function Filter({
             name="verleih"
             value="ja"
             id="ja"
-            checked={verleih === "ja"}
+            checked={rental === "ja"}
             onChange={onOptionChange}
           />
           <label for="ja">ja</label>
@@ -33,7 +30,7 @@ export default function Filter({
             name="verleih"
             value="nein"
             id="nein"
-            checked={verleih === "nein"}
+            checked={rental === "nein"}
             onChange={onOptionChange}
           />
           <label for="nein">nein</label>
@@ -42,26 +39,25 @@ export default function Filter({
             name="verleih"
             value="egal"
             id="egal"
-            checked={verleih === "egal"}
+            checked={rental === "egal"}
             onChange={onOptionChange}
           />
           <label for="egal">egal</label>
         </fieldset>
         <div>
           <legend>Was gibt`s:</legend>
-          {menuArten.map(
-            (artMenu) => (
-              console.log("artMenu", artMenu),
+          {menuTypes.map(
+            (type) => (
               (
-                <label for={artMenu.art} key={artMenu.id}>
-                  {artMenu.art}
+                <label for={type.type} key={type.id}>
+                  {type.type}
                   <input
                     type="checkbox"
-                    name="MenuArt"
-                    value={artMenu.art}
-                    id={artMenu.id}
-                    onChange={() => handleFilter(artMenu.id)}
-                    checked={artMenu.checked}
+                    name="MenuType"
+                    value={type.type}
+                    id={type.id}
+                    onChange={() => handleFilter(type.id)}
+                    checked={type.checked}
                   />
                 </label>
               )

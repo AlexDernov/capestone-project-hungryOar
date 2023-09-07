@@ -7,41 +7,50 @@ import { useState } from "react";
 import Filter from "../Filter";
 
 export default function Map({ locationsInfo, data }) {
-  const [menuArten, setMenuArten] = useState([
-    { art: "Cafe", id: "Cafe", checked: false },
-    { art: "Bar", id: "Bar", checked: false },
-    { art: "Restaurant", id: "Restaurant", checked: false },
-    { art: "Kuchen", id: "Kuchen", checked: false },
-    { art: "Eis", id: "Eis", checked: false },
-    { art: "Snacks", id: "Snacks", checked: false },
+  const [menuTypes, setMenuTypes] = useState([
+    { type: "Cafe", id: "Cafe", checked: false },
+    { type: "Bar", id: "Bar", checked: false },
+    { type: "Restaurant", id: "Restaurant", checked: false },
+    { type: "Kuchen", id: "Kuchen", checked: false },
+    { type: "Eis", id: "Eis", checked: false },
+    { type: "Snacks", id: "Snacks", checked: false },
   ]);
 
-  const [verleih, setVerleih] = useState("egal");
-  const menuCheck = menuArten
-    .filter((artM) => artM.checked)
-    .map((art) => art.art);
+  const [rental, setRental] = useState("egal");
+  let [hidden, setHidden] = useState(true);
 
-  const filterdData1 = data.filter((loc) =>
-    verleih === "ja"
+ function hiddenOn(){
+  setHidden(true)
+ }
+ function handleOnClick() {
+  setHidden(!hidden);
+}
+
+  const menuCheck = menuTypes
+    .filter((menuType) => menuType.checked)
+    .map((menuTypeChecked) => menuTypeChecked.type);
+
+  const filterOfRental = data.filter((loc) =>
+    rental === "ja"
       ? loc.verleihOpt === true
-      : verleih === "nein"
+      : rental === "nein"
       ? loc.verleihOpt === false
       : true
   );
-  const filterdData = filterdData1.filter((loc) =>
-    menuCheck.every((menu) => loc.art.includes(menu))
+  const filterdData = filterOfRental.filter((location) =>
+    menuCheck.every((menu) => location.art.includes(menu))
   );
 
   function handleFilter(id) {
-    setMenuArten(
-      menuArten.map((artM) =>
-        artM.id === id ? { ...artM, checked: !artM.checked } : artM
+    setMenuTypes(
+      menuTypes.map((menuType) =>
+        menuType.id === id ? { ...menuType, checked: !menuType.checked } : menuType
       )
     );
   }
 
   function onOptionChange(event) {
-    setVerleih(event.target.value);
+    setRental(event.target.value);
   }
   const locationOnIcon = L.divIcon({
     html: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,20 +88,25 @@ export default function Map({ locationsInfo, data }) {
   return (
     <>
       <Filter
-        menuArten={menuArten}
-        verleih={verleih}
-        setVerleih={setVerleih}
         onOptionChange={onOptionChange}
         handleFilter={handleFilter}
+        hidden={hidden}
+        setHidden={setHidden}
+        handleOnClick={handleOnClick}
+        menuTypes={menuTypes}
+        rental={rental}
+        setRental={setRental}
       />
       <div id="map">
         <StyledMapContainer
+        
           className={"map"}
           center={[53.577067, 10.007241]}
           zoom={12}
           scrollWheelZoom={true}
         >
           <TileLayer
+          onClick={hiddenOn}
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright"> OpenStreetMap
           </a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

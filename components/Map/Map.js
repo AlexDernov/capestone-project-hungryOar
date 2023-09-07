@@ -1,21 +1,57 @@
 import styled from "styled-components";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import useSWR from "swr";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
+import { useState } from "react";
+import Filter from "../Filter";
 
-export default function Map({ locationsInfo }) {
-  const { data, isLoading, error } = useSWR("/api/locations");
+export default function Map({ locationsInfo, data }) {
+  const [menuTypes, setMenuTypes] = useState([
+    { type: "Cafe", id: "Cafe", checked: false },
+    { type: "Bar", id: "Bar", checked: false },
+    { type: "Restaurant", id: "Restaurant", checked: false },
+    { type: "Kuchen", id: "Kuchen", checked: false },
+    { type: "Eis", id: "Eis", checked: false },
+    { type: "Snacks", id: "Snacks", checked: false },
+  ]);
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
+  const [rental, setRental] = useState("egal");
+  let [hidden, setHidden] = useState(true);
+
+ function hiddenOn(){
+  setHidden(true)
+ }
+ function handleOnClick() {
+  setHidden(!hidden);
+}
+
+  const menuCheck = menuTypes
+    .filter((menuType) => menuType.checked)
+    .map((menuTypeChecked) => menuTypeChecked.type);
+
+  const filterOfRental = data.filter((loc) =>
+    rental === "ja"
+      ? loc.verleihOpt === true
+      : rental === "nein"
+      ? loc.verleihOpt === false
+      : true
+  );
+  const filterdData = filterOfRental.filter((location) =>
+    menuCheck.every((menu) => location.art.includes(menu))
+  );
+
+  function handleFilter(id) {
+    setMenuTypes(
+      menuTypes.map((menuType) =>
+        menuType.id === id ? { ...menuType, checked: !menuType.checked } : menuType
+      )
+    );
   }
-  if (error) return <div>failed to load</div>;
-  if (!data) {
-    return <h1>Data cannot be loaded.</h1>;
-  }
 
+  function onOptionChange(event) {
+    setRental(event.target.value);
+  }
   const locationOnIcon = L.divIcon({
     html: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.66675 24.9999C6.66675 24.9999 8.33341 23.3333 13.3334 23.3333C18.3334 23.3333 21.6667 26.6666 26.6667 26.6666C31.6667 26.6666 33.3334 24.9999 33.3334 24.9999V4.99992C33.3334 4.99992 31.6667 6.66659 26.6667 6.66659C21.6667 6.66659 18.3334 3.33325 13.3334 3.33325C8.33341 3.33325 6.66675 4.99992 6.66675 4.99992V24.9999Z" fill="url(#paint0_linear_115_19)" stroke="#3D874D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -48,21 +84,35 @@ export default function Map({ locationsInfo }) {
     iconSize: [25, 25],
     iconAnchor: [0, 25],
   });
+
   return (
     <>
+      <Filter
+        onOptionChange={onOptionChange}
+        handleFilter={handleFilter}
+        hidden={hidden}
+        setHidden={setHidden}
+        handleOnClick={handleOnClick}
+        menuTypes={menuTypes}
+        rental={rental}
+        setRental={setRental}
+      />
       <div id="map">
-        <MapContainer
+        <StyledMapContainer
+        
           className={"map"}
-          center={[53.567067, 10.007241]}
+          center={[53.577067, 10.007241]}
           zoom={12}
           scrollWheelZoom={true}
         >
           <TileLayer
+          onClick={hiddenOn}
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright"> OpenStreetMap
           </a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {data.map((location) => {
+
+          {filterdData.map((location) => {
             const isLiked = locationsInfo.find(
               (locI) => locI.id === location._id
             )?.isLiked;
@@ -84,11 +134,16 @@ export default function Map({ locationsInfo }) {
               </Marker>
             );
           })}
-        </MapContainer>
+        </StyledMapContainer>
       </div>
     </>
   );
 }
+
+const StyledMapContainer = styled(MapContainer)`
+  position: relativ;
+  z-index: 1;
+`;
 
 const NavLink = styled(Link)`
   text-decoration: none;

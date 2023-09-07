@@ -3,8 +3,18 @@ import styled from "styled-components";
 import Heading from "../components/Heading";
 import Map from "../components/Map";
 import TitleSection from "../components/TitleSection";
+import useSWR from "swr";
 
 export default function Home({ locationsInfo }) {
+  const { data, isLoading, error } = useSWR("/api/locations");
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (error) return <div>failed to load</div>;
+  if (!data) {
+    return <h1>Data cannot be loaded.</h1>;
+  }
   return (
     <>
       <Head>
@@ -22,7 +32,7 @@ export default function Home({ locationsInfo }) {
           and drink without leaving (or almost without leaving) a boat, kayak,
           sap, etc. and get all the information you need about them.
         </StyledP>
-        <Map locationsInfo={locationsInfo} />
+        <Map locationsInfo={locationsInfo} data={data}/>
       </StyledMain>
     </>
   );

@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 
 
+
 export default function FavoriteLocationsPage({
   locationsInfo,
   onToggleLiked,

@@ -4,8 +4,12 @@ import Heading from "../components/Heading";
 import Map from "../components/Map";
 import TitleSection from "../components/TitleSection";
 import useSWR from "swr";
+import LogInOutButton from "../components/LogInOutButton";
+import {useSession } from "next-auth/react";
 
-export default function Home({ locationsInfo }) {
+
+export default function Home({ locationsInfo}) {
+  const { data: session2 } = useSession()
   const { data, isLoading, error } = useSWR("/api/locations");
 
   if (isLoading) {
@@ -26,6 +30,7 @@ export default function Home({ locationsInfo }) {
       <StyledMain>
         <TitleSection>
           <Heading>Hungry Oar</Heading>
+          <LogInOutButton session={session2}/>
         </TitleSection>
         <StyledP>
           In this application you will find places in Hamburg where you can eat

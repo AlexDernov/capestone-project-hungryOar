@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import NavBar from "../NavigationsBar";
 
+
 const StyledLayout = styled.div`
   margin: 0;
   background-image: url(/images/background-HungryOar.webp);
@@ -14,9 +15,10 @@ const StyledLayout = styled.div`
 `;
 
 export default function Layout({ children }) {
+
   return (
     <StyledLayout>
-      {children}
+      {children} 
       <NavBar />
     </StyledLayout>
   );

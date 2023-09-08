@@ -7,7 +7,7 @@ export default function LogInOutButton({session}) {
   if (session) {
     return (
       <StyledLoginContainer>
-        {session.user.email} <br />
+        {session.user.name} <br />
         <button onClick={() => signOut()}>Sign out</button>
       </StyledLoginContainer>
     )

@@ -121,7 +121,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
         <input
           type="radio"
           name="verleihOpt"
-          value={data?.verleihOpt === true}
+          value="true"
           id="true"
           checked={checked}
           onChange={onOptionChange}
@@ -131,9 +131,9 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
         <input
           type="radio"
           name="verleihOpt"
-          value={data?.verleihOpt === false}
+          value="false"
           id="false"
-          checked={checked}
+          checked={!checked}
           onChange={onOptionChange}
         />
         <label htmlFor="false">nein</label>

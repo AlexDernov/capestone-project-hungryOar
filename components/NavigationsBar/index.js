@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import Link from "next/link";
+import {useSession } from "next-auth/react";
 
-export default function NavBar({ session}) {
+
+
+
+
+export default function NavBar() {
+  const { data: session } = useSession(); 
+
   return (
     <StyledNav name="NavBar">
       <NavLink href="/">

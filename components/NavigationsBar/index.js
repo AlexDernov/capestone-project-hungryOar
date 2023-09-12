@@ -53,7 +53,7 @@ export default function NavBar({ admin, session}) {
         </StyledSvg>
         <StyledH4>Favorites </StyledH4>
       </NavLink>
-      <NavLink href="/locations/add" on={session}>
+      <NavLinkHidden href="/locations/add" on={session}>
         {" "}
         <StyledSvg
           width="41"
@@ -72,7 +72,7 @@ export default function NavBar({ admin, session}) {
           />
         </StyledSvg>
         <StyledH4>Add </StyledH4>
-      </NavLink>
+      </NavLinkHidden>
       <NavLink href="/locations">
         {" "}
         <StyledSvg
@@ -153,14 +153,16 @@ const StyledNav = styled.nav`
   bottom: 0;
 `;
 const NavLinkHidden  = styled.nav`
-background-color: var(--primary-color-back);
-width: 100%;
-height: 70px;
-margin-right: 10px;
-display: flex;
-justify-content: space-around;
-position: fixed;
-bottom: 0
+margin: 10px;
+widht: 100%;
+text-decoration: none;
+display:${({ session }) => (session ? "block" : "none")};
+color: var(--primary-color);
+text-shadow: 1px 1px 1px black;
+border-color: black;
+&: hover {
+  font-size: 1.1em;
+}
 `;
 
 const StyledH4 = styled.p`

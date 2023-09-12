@@ -3,8 +3,10 @@ import LocationPreviewCard from "@/components/LocationPreviewCard";
 import Heading from "@/components/Heading";
 import TitleSection from "@/components/TitleSection";
 import Head from "next/head";
+import LogInOutButton from "../LogInOutButton";
 
-export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage}) {
+export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session}) {
+
   return (
     <>
       <Head> 
@@ -15,6 +17,7 @@ export default function LocationsList({ data, onToggleLiked, locationsInfo, favo
       </Head>
       <TitleSection> {favoritePage? <Heading>Favorite Locations</Heading>:
         <Heading>Locations</Heading>}
+        <LogInOutButton session={session}/>
       </TitleSection>
       <StyledUl>
       {data.length == 0 ? <Par>You don&apos;t have any favorite locations yet</Par> :

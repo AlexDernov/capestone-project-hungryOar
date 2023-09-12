@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import NavBar from "../NavigationsBar";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const StyledLayout = styled.div`
   margin: 0;
@@ -14,10 +16,12 @@ const StyledLayout = styled.div`
 `;
 
 export default function Layout({ children }) {
+  const { data: session } = useSession();
+
   return (
-    <StyledLayout>
+    <StyledLayout session={session}>
       {children}
-      <NavBar />
+      <NavBar session={session} />
     </StyledLayout>
   );
 }

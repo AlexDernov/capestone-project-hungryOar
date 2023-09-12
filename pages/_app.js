@@ -4,12 +4,17 @@ import { SWRConfig } from "swr";
 import useSWR from "swr";
 import Layout from "../components/Layout";
 import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
+import { SessionProvider} from "next-auth/react";
 
-export default function App({ Component, pageProps }) {
+
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
+ 
+  
   const [locationsInfo, updateLocationsInfo] = useImmerLocalStorageState(
     "locationsInfo",
     { defaultValue: [] }
   );
+ 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isLoading, error } = useSWR("/api/locations", fetcher);
 
@@ -38,14 +43,18 @@ export default function App({ Component, pageProps }) {
         <title>Capstone Project</title>
       </Head>
       <SWRConfig value={{ fetcher }}>
-        <Layout>
+     <SessionProvider session={session}>
+        <Layout> 
           <Component
             {...pageProps}
             data={data}
             onToggleLiked={handleToggleLiked}
             locationsInfo={locationsInfo}
-          />
+           
+          
+          /> 
         </Layout>
+       </SessionProvider>
       </SWRConfig>
     </>
   );

@@ -2,12 +2,15 @@ import LocationsList from "../components/LocationsList";
 import Head from "next/head.js";
 import useSWR from "swr";
 import { useState } from "react";
+import {useSession } from "next-auth/react";
+import LogInOutButton from "../components/LogInOutButton";
 
 
 export default function FavoriteLocationsPage({
   locationsInfo,
-  onToggleLiked,
+  onToggleLiked
 }) {
+  const { data: session } = useSession() 
   const { data, isLoading, error } = useSWR("/api/locations");
   const [favoritePage, setFavoritePage] = useState(true);
 
@@ -27,13 +30,14 @@ export default function FavoriteLocationsPage({
   return (
     <div>
       <Head>
-        <title>Locations - Favorites</title>
+        <title>Locations - Favorites</title><LogInOutButton session={session}/>
       </Head>
       <LocationsList
         data={favorites}
         onToggleLiked={onToggleLiked}
         locationsInfo={locationsInfo} 
         favoritePage={favoritePage}
+        session={session}
       />
     </div>
   );

@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import Filter from "../Filter";
 
-export default function Map({ locationsInfo, data }) {
+export default function Map({ locationsInfo, data}) {
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: false },
     { type: "Bar", id: "Bar", checked: false },

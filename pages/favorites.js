@@ -8,7 +8,7 @@ import LogInOutButton from "../components/LogInOutButton";
 
 export default function FavoriteLocationsPage({
   locationsInfo,
-  onToggleLiked, session, admin
+  onToggleLiked, session
 }) {
  
   const { data, isLoading, error } = useSWR("/api/locations");
@@ -37,7 +37,7 @@ export default function FavoriteLocationsPage({
         onToggleLiked={onToggleLiked}
         locationsInfo={locationsInfo} 
         favoritePage={favoritePage}
-        session={session} admin={admin}
+        session={session}
       />
     </div>
   );

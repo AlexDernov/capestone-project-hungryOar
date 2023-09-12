@@ -8,7 +8,7 @@ import LogInOutButton from "../components/LogInOutButton";
 /* import {useSession } from "next-auth/react"; */
 
 
-export default function Home({ locationsInfo, session, admin}) {
+export default function Home({ locationsInfo, session}) {
 /*   const { data: session } = useSession() */
   const { data, isLoading, error } = useSWR("/api/locations");
 
@@ -30,7 +30,7 @@ export default function Home({ locationsInfo, session, admin}) {
       <StyledMain>
         <TitleSection>
           <Heading>Hungry Oar</Heading>
-          <LogInOutButton session={session} admin={admin}/>
+          <LogInOutButton session={session}/>
         </TitleSection>
         <StyledP>
           In this application you will find places in Hamburg where you can eat

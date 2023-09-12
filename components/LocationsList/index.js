@@ -5,7 +5,7 @@ import TitleSection from "@/components/TitleSection";
 import Head from "next/head";
 import LogInOutButton from "../LogInOutButton";
 
-export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session, admin}) {
+export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session}) {
   return (
     <>
       <Head> 

@@ -67,7 +67,7 @@ export default function LocationDetails({
             id={data?._id}
           />
         </Heading>
-        <LogInOutButton session={session} admin={admin} />
+        <LogInOutButton session={session} />
       </TitleSection>
       <StyledArticle>
        

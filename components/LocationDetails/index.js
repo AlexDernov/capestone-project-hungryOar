@@ -6,17 +6,28 @@ import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
 import Note from "../Note";
 import FavoriteButton from "../FavoriteButton";
+import LogInOutButton from "../LogInOutButton";
+import EditMode from "../EditMode";
+import { useState } from "react";
 
 export default function LocationDetails({
   data,
   mutate,
   onToggleLiked,
   isLiked,
+  session,
+  admin,
 }) {
+  const [isEditMode, setIsEditMode] = useState(false);
+  function handleOnEditMode() {
+    setIsEditMode(!isEditMode);
+  }
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const noteData = Object.fromEntries(formData);
+
+   
 
     const responseNote = await fetch("/api/notes", {
       method: "POST",
@@ -42,8 +53,9 @@ export default function LocationDetails({
         event.target.reset();
       }
     }
+   
   }
-
+ 
   return (
     <>
       <TitleSection>
@@ -55,10 +67,15 @@ export default function LocationDetails({
             id={data?._id}
           />
         </Heading>
+        <LogInOutButton session={session} admin={admin} />
       </TitleSection>
       <StyledArticle>
-        <NavLink href="/locations"> ← Back</NavLink>
-        <StyledDiv>
+       
+          {/* {admin?  */}
+        {isEditMode===false?<button onClick={handleOnEditMode}>Edit Mode</button> : null}<br/>
+      {isEditMode? <EditMode data={data} handleOnEditMode={handleOnEditMode} mutate={mutate}/>: <>
+      <NavLink href="/locations"> ← Back</NavLink>
+      <StyledDiv>
           <p>{data?.location}</p>
           <p>{data?.zeit}</p>
           <StyledArtSection>
@@ -136,7 +153,7 @@ export default function LocationDetails({
                 mutate={mutate}
               />
             ))}
-        </StyledUl>
+        </StyledUl></> }
       </StyledArticle>
     </>
   );

@@ -1,27 +1,31 @@
 import { signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
 
-export default function LogInOutButton({session}) {
+export default function LogInOutButton({session, admin}) {
+  
     console.log(session)
  
   if (session) {
     return (
-      <StyledLoginContainer>
-        {session.user.name} <br />
-        <button onClick={() => signOut()}>Sign out</button>
+      <StyledLoginContainer>{admin? "Admin":
+        session.user.name}<br />
+        <button onClick={() => signOut()}>Log out</button>
       </StyledLoginContainer>
     )
   }
   return (
-    <>
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
+    <StyledLoginContainer>
+        <br />
+
+      <button onClick={() => signIn()}>Log in</button>
+    </StyledLoginContainer>
   )
 }
 const StyledLoginContainer = styled.div`
   position: fixed;
-  top: 10px;
+  top: 0px;
   right: 5px;
   font-size: 0.8rem;
-  padding: 0.5rem;
+  padding: 0;
+  margin-right:15px 
 `;

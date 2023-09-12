@@ -2,13 +2,36 @@ import LocationDetails from "@/components/LocationDetails";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import {useSession } from "next-auth/react";
 
-export default function LocationDetailsPage({ onToggleLiked, locationsInfo }) {
+export default function LocationDetailsPage({ onToggleLiked, locationsInfo, admin }) {
+  const { data: session } = useSession()
   const router = useRouter();
   const { id } = router.query;
+
   const { data, isLoading, error, mutate } = useSWR(`/api/locations/${id}`);
   if (error) <p>Error!</p>;
   if (!isLoading) <p>Loading...</p>;
+
+ 
+
+ /*  async function handleEditLocation(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const noteData = Object.fromEntries(formData);
+
+    const response = await fetch(`/api/notes/${note?._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(noteData),
+    });
+    if (response.ok) {
+      mutate();
+      setIsEditMode(false);
+    }
+  } */
   return (
     <>
       <Head>
@@ -19,8 +42,10 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo }) {
       </Head>
       <LocationDetails
         data={data}
+        admin={admin}
         mutate={mutate}
         onToggleLiked={() => onToggleLiked(data?._id)}
+        session={session}
         isLiked={locationsInfo.find((locI) => locI.id === data?._id)?.isLiked}
       />
     </>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import NavBar from "../NavigationsBar";
-
+import {useState} from "react";
+import {useSession } from "next-auth/react";
 
 const StyledLayout = styled.div`
   margin: 0;
@@ -16,10 +17,13 @@ const StyledLayout = styled.div`
 
 export default function Layout({ children }) {
 
+  const { data: session } = useSession()
+const isAdmin = session?.user.name==="HungryOar"
+
   return (
-    <StyledLayout>
+    <StyledLayout session={session} admin={isAdmin}>
       {children} 
-      <NavBar />
+      <NavBar admin={isAdmin} session={session}/>
     </StyledLayout>
   );
 }

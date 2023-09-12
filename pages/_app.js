@@ -8,6 +8,7 @@ import { SessionProvider} from "next-auth/react";
 
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
+ 
   
   const [locationsInfo, updateLocationsInfo] = useImmerLocalStorageState(
     "locationsInfo",
@@ -42,13 +43,14 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         <title>Capstone Project</title>
       </Head>
       <SWRConfig value={{ fetcher }}>
-     <SessionProvider logined={session}>
+     <SessionProvider session={session}>
         <Layout> 
           <Component
             {...pageProps}
             data={data}
             onToggleLiked={handleToggleLiked}
             locationsInfo={locationsInfo}
+           
           
           /> 
         </Layout>

@@ -72,7 +72,7 @@ export default function LocationDetails({
       <StyledArticle>
        
           {/* {admin?  */}
-        {isEditMode===false?<button onClick={handleOnEditMode}>Edit Mode</button> : null}<br/>
+        {admin && isEditMode===false?<button onClick={handleOnEditMode}>Edit Mode</button> : null}<br/>
       {isEditMode? <EditMode data={data} handleOnEditMode={handleOnEditMode} mutate={mutate}/>: <>
       <NavLink href="/locations"> ← Back</NavLink>
       <StyledDiv>

@@ -60,7 +60,7 @@ export default function NavBar() {
         </StyledSvg>
         <StyledH4>Favorites </StyledH4>
       </NavLink>
-      <NavLinkHidden href="/locations/add" on={session}>
+      <NavLinkHidden href="/locations/add" session={session}>
         {" "}
         <StyledSvg
           width="41"

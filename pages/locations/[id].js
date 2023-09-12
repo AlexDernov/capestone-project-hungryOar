@@ -13,25 +13,6 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo, admi
   if (error) <p>Error!</p>;
   if (!isLoading) <p>Loading...</p>;
 
- 
-
- /*  async function handleEditLocation(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const noteData = Object.fromEntries(formData);
-
-    const response = await fetch(`/api/notes/${note?._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(noteData),
-    });
-    if (response.ok) {
-      mutate();
-      setIsEditMode(false);
-    }
-  } */
   return (
     <>
       <Head>

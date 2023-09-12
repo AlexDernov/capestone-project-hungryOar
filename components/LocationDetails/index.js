@@ -19,6 +19,7 @@ export default function LocationDetails({
   admin,
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
+  const isAdmin = session?.user.name==="HungryOar";
   function handleOnEditMode() {
     setIsEditMode(!isEditMode);
   }
@@ -71,8 +72,8 @@ export default function LocationDetails({
       </TitleSection>
       <StyledArticle>
        
-          {/* {admin?  */}
-        {admin && isEditMode===false?<button onClick={handleOnEditMode}>Edit Mode</button> : null}<br/>
+        
+        {isEditMode===false && isAdmin ?<button onClick={handleOnEditMode}>Edit Mode</button> : null}<br/>
       {isEditMode? <EditMode data={data} handleOnEditMode={handleOnEditMode} mutate={mutate}/>: <>
       <NavLink href="/locations"> ← Back</NavLink>
       <StyledDiv>

@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import {useSession } from "next-auth/react";
 
-export default function LocationDetailsPage({ onToggleLiked, locationsInfo, admin }) {
-  const { data: session } = useSession()
+export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
+  const { data: session } = useSession();
   const router = useRouter();
   const { id } = router.query;
 
@@ -23,7 +23,6 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo, admi
       </Head>
       <LocationDetails
         data={data}
-        admin={admin}
         mutate={mutate}
         onToggleLiked={() => onToggleLiked(data?._id)}
         session={session}

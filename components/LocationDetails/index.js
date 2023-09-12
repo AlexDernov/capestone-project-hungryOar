@@ -15,8 +15,7 @@ export default function LocationDetails({
   mutate,
   onToggleLiked,
   isLiked,
-  session,
-  admin,
+  session
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const isAdmin = session?.user.name==="HungryOar";

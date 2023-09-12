@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function NavBar({ admin, session}) {
+export default function NavBar({ session}) {
   return (
     <StyledNav name="NavBar">
       <NavLink href="/">

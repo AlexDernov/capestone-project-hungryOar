@@ -1,24 +1,21 @@
-import useSWR from "swr";
-import styled from "styled-components";
-import Link from "next/link";
 import { useState } from "react";
-import Heading from "../../components/Heading";
 import Image from "next/image";
-import TitleSection from "../../components/TitleSection";
-import LogInOutButton from "../../components/LogInOutButton";
 
 export default function EditMode({ data, handleOnEditMode, mutate }) {
-  console.log("Data", data);
   const [menuTypes, setMenuTypes] = useState([
-    { type: "Cafe", id: "Cafe", checked: data?.art.includes("Cafe")},
+    { type: "Cafe", id: "Cafe", checked: data?.art.includes("Cafe") },
     { type: "Bar", id: "Bar", checked: data?.art.includes("Bar") },
-    { type: "Restaurant", id: "Restaurant", checked: data?.art.includes("Restaurant")},
-    { type: "Kuchen", id: "Kuchen", checked: data?.art.includes("Kuchen")},
-    { type: "Eis", id: "Eis", checked: data?.art.includes("Eis")},
+    {
+      type: "Restaurant",
+      id: "Restaurant",
+      checked: data?.art.includes("Restaurant"),
+    },
+    { type: "Kuchen", id: "Kuchen", checked: data?.art.includes("Kuchen") },
+    { type: "Eis", id: "Eis", checked: data?.art.includes("Eis") },
     { type: "Snacks", id: "Snacks", checked: data?.art.includes("Snackes") },
   ]);
   const [checked, setChecked] = useState(data?.verleihOpt === true);
-  function onOptionChange(){
+  function onOptionChange() {
     setChecked(!checked);
   }
 
@@ -47,10 +44,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
       art: menuCheck,
       verleihOpt: checked,
       verleih: locationData.verleih,
-
-     
     };
-    console.log("editLoc", editLocation);
 
     const response = await fetch(`/api/locations/${data?._id}`, {
       method: "PATCH",
@@ -144,7 +138,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
         />
         <label htmlFor="false">nein</label>
         <br />
-        <br/>
+        <br />
         <label htmlFor="verleih">Was kann man ausleihen?:</label>
         <br />
         <textarea
@@ -158,13 +152,8 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <Image
-            src={data?.bild.img}
-            height={62}
-            width={350}
-            alt={data?.name}
-          />
-        <button type="submit" >Save</button>
+        <Image src={data?.bild.img} height={62} width={350} alt={data?.name} />
+        <button type="submit">Save</button>
         <button type="button" onClick={handleOnEditMode}>
           Cancel
         </button>

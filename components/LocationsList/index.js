@@ -6,6 +6,7 @@ import Head from "next/head";
 import LogInOutButton from "../LogInOutButton";
 
 export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session}) {
+
   return (
     <>
       <Head> 

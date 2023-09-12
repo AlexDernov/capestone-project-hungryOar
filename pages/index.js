@@ -5,12 +5,12 @@ import Map from "../components/Map";
 import TitleSection from "../components/TitleSection";
 import useSWR from "swr";
 import LogInOutButton from "../components/LogInOutButton";
-/* import {useSession } from "next-auth/react"; */
+import {useSession } from "next-auth/react";
 
 
-export default function Home({ locationsInfo, session}) {
-/*   const { data: session } = useSession() */
-  const { data, isLoading, error } = useSWR("/api/locations");
+export default function Home({ locationsInfo}) {
+const { data: session } = useSession() 
+const { data, isLoading, error } = useSWR("/api/locations");
 
   if (isLoading) {
     return <h1>Loading...</h1>;

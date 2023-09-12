@@ -2,15 +2,15 @@ import LocationsList from "../components/LocationsList";
 import Head from "next/head.js";
 import useSWR from "swr";
 import { useState } from "react";
-/* import {useSession } from "next-auth/react"; */
+import {useSession } from "next-auth/react";
 import LogInOutButton from "../components/LogInOutButton";
 
 
 export default function FavoriteLocationsPage({
   locationsInfo,
-  onToggleLiked, session
+  onToggleLiked
 }) {
- 
+  const { data: session } = useSession() 
   const { data, isLoading, error } = useSWR("/api/locations");
   const [favoritePage, setFavoritePage] = useState(true);
 

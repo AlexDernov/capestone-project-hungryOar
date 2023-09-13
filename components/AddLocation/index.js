@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
+import styled from "styled-components";
 
-export default function EditMode({ data, handleOnEditMode, mutate }) {
+export default function AddLocation({ data, handleOnEditMode, mutate }) {
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: data?.art.includes("Cafe") },
     { type: "Bar", id: "Bar", checked: data?.art.includes("Bar") },
@@ -14,7 +15,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
     { type: "Eis", id: "Eis", checked: data?.art.includes("Eis") },
     { type: "Snacks", id: "Snacks", checked: data?.art.includes("Snackes") },
   ]);
-  const [checked, setChecked] = useState(data?.verleihOpt === true);
+  const [checked, setChecked] = useState(false);
   function onOptionChange() {
     setChecked(!checked);
   }
@@ -72,6 +73,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           minlengh="3"
           maxlengh="50"
           defaultValue={data?.name}
+          placeholder="z.B. Cafe Canale"
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
@@ -85,6 +87,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           minlengh="3"
           max="40"
           maxlengh="200"
+          placeholder="Str., Hausnummer,..."
           defaultValue={data?.location}
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
@@ -98,24 +101,78 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           required
           minlengh="3"
           maxlengh="50"
+          placeholder="Mo.-Fr: "
           defaultValue={data?.zeit}
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
+
         <legend htmlFor="addresse"> MenuArt: </legend>
-        {menuTypes.map((type) => (
-          <label for={type.type} key={type.id}>
-            {type.type}
-            <input
-              type="checkbox"
-              name="type"
-              value={type.type}
-              id={type.id}
-              onChange={() => handleFilter(type.id)}
-              checked={type.checked}
-            />
-          </label>
-        ))}
+        <StyledArtSection>
+          {menuTypes.map((type) => (
+            <label for={type.type} key={type.id}>
+              {type.type === "Cafe" ? (
+                <Image
+                  key={1}
+                  src="/images/CafeIcon.svg"
+                  width={71}
+                  height={45}
+                  alt="Cafe icon"
+                />
+              ) : type.type === "Restaurant" ? (
+                <Image
+                  key={2}
+                  src="/images/RestaurantIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Restaurant-icon"
+                />
+              ) : type.type === "Bar" ? (
+                <Image
+                  key={3}
+                  src="/images/BarIcon.svg"
+                  width={57}
+                  height={44}
+                  alt="Bar-icon"
+                />
+              ) : type.type === "Kuchen" ? (
+                <Image
+                  key={4}
+                  src="/images/KuchenIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Kuchen-icon"
+                />
+              ) : type.type === "Eis" ? (
+                <Image
+                  key={5}
+                  src="/images/EisIcon.svg"
+                  width={57}
+                  height={45}
+                  alt="Eis-icon"
+                />
+              ) : type.type === "Snacks" ? (
+                <Image
+                  key={6}
+                  src="/images/SnacksIcon.svg"
+                  width={71}
+                  height={44}
+                  alt="Snacks-icon"
+                />
+              ) : (
+                []
+              )}
+              <input
+                type="checkbox"
+                name="type"
+                value={type.type}
+                id={type.id}
+                onChange={() => handleFilter(type.id)}
+                checked={type.checked}
+              />
+            </label>
+          ))}
+        </StyledArtSection>
         <br />
         <legend>Verleih Möglichkeit</legend>
         <input
@@ -148,8 +205,37 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           required
           minlengh="3"
           maxlengh="50"
-          defaultValue={data?.verleih}
+          placeholder="Kajak, SUP,..."
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+        />
+        <br />
+        <br />
+        <legend>Coordinaten:</legend>
+        <label htmlFor="addresse"> </label>
+
+        <textarea
+          type="number"
+          id="latitude"
+          name="latitude"
+          minlengh="8"
+          min="53"
+          max="54"
+          maxlengh="11"
+          placeholder="Breitengrad: z.B. 53.571389"
+          pattern="/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g"
+        />
+        <br />
+
+        <textarea
+          type="number"
+          id="longitude"
+          name="longitude"
+          minlengh="8"
+          min="9"
+          max="11"
+          maxlengh="11"
+          placeholder="Längengrad: z.B. 9.964722"
+          pattern="/^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g"
         />
         <br />
         <Image src={data?.bild.img} height={62} width={350} alt={data?.name} />
@@ -161,3 +247,13 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
     </>
   );
 }
+const StyledArtSection = styled.section`
+  margin: 10px;
+  padding-left: 27px;
+  padding-right: 27px;
+  display: grid;
+  grid-template-columns: 71px 71px 71px;
+  row-gap: 20px;
+  column-gap: 10px;
+  position: center;
+`;

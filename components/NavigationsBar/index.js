@@ -163,7 +163,7 @@ const NavLinkHidden  = styled.nav`
 margin: 10px;
 widht: 100%;
 text-decoration: none;
-display:${({ session }) => (session ? "block" : "none")};
+
 color: var(--primary-color);
 text-shadow: 1px 1px 1px black;
 border-color: black;
@@ -171,7 +171,7 @@ border-color: black;
   font-size: 1.1em;
 }
 `;
-
+/* display:${({ session }) => (session ? "block" : "none")}; */
 const StyledH4 = styled.p`
   font-size: 10px;
   text-shadow: 1px 1px 1px black;

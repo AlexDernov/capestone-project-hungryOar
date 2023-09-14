@@ -12,6 +12,8 @@ export default function Home({ locationsInfo}) {
 const { data: session } = useSession() 
 const { data, isLoading, error } = useSWR("/api/locations");
 
+const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -37,7 +39,7 @@ const { data, isLoading, error } = useSWR("/api/locations");
           and drink without leaving (or almost without leaving) a boat, kayak,
           sap, etc. and get all the information you need about them.
         </StyledP>
-        <Map locationsInfo={locationsInfo} data={data}/>
+        <Map locationsInfo={locationsInfo} data={visibleData}/>
       </StyledMain>
     </>
   );

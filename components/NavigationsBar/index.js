@@ -8,6 +8,7 @@ import {useSession } from "next-auth/react";
 
 export default function NavBar() {
   const { data: session } = useSession(); 
+  const isAdmin = session?.user.name === "HungryOar";
 
   return (
     <StyledNav name="NavBar">
@@ -79,6 +80,15 @@ export default function NavBar() {
           />
         </StyledSvg>
         <StyledH4>Add </StyledH4>
+      </NavLinkHidden>
+      <NavLinkHidden href="/messages" session={session}>
+        {" "}
+        <StyledSvg
+         width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M34.1667 6.83325H6.83341C4.94644 6.83325 3.41675 8.36295 3.41675 10.2499V30.7499C3.41675 32.6369 4.94644 34.1666 6.83341 34.1666H34.1667C36.0537 34.1666 37.5834 32.6369 37.5834 30.7499V10.2499C37.5834 8.36295 36.0537 6.83325 34.1667 6.83325Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M37.5834 11.9583L22.2597 21.6958C21.7323 22.0262 21.1225 22.2014 20.5001 22.2014C19.8777 22.2014 19.2679 22.0262 18.7405 21.6958L3.41675 11.9583" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </StyledSvg>
+        <StyledH4>{isAdmin? "Messages": "Kontakt"} </StyledH4>
       </NavLinkHidden>
       <NavLink href="/locations">
         {" "}

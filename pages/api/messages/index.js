@@ -1,5 +1,5 @@
 import dbConnect from "../../../db/connect";
-import Message from "../../../db/model/Message";
+import Message from "../../../db/model/Messages";
 
 export default async function handler(request, response) {
   await dbConnect();

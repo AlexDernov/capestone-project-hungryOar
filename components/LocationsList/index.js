@@ -7,6 +7,7 @@ import LogInOutButton from "../LogInOutButton";
 
 export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session, newLocationPage}) {
 
+
   return (
     <>
       <Head> 
@@ -21,7 +22,7 @@ export default function LocationsList({ data, onToggleLiked, locationsInfo, favo
       </TitleSection>
       {newLocationPage? <p>These locaions must be verified by admin to be displayed in the main list.</p>: null}
       <StyledUl>
-      {data.length == 0 && favoritePage? <Par>You don&apos;t have any favorite locations yet</Par>: data.length == 0 && newLocationPage? <Par>You don&apos;t have any suggested locations yet</Par> :
+      {data.length == 0 && favoritePage? <Par>You don&apos;t have any favorite locations yet</Par>: 
         data?.map((location) => (
           <LocationPreviewCard
             key={location._id}

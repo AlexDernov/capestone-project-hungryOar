@@ -10,7 +10,7 @@ export default function LocationPreviewCard({
   id,
   onToggleLiked,
   isLiked,
-}) {
+  newLocationPage}) {
   return (
     <>
       <StyledListItem>
@@ -23,11 +23,11 @@ export default function LocationPreviewCard({
               </StyledPDiv>
             </StyledDiv>
           </NavLink>
-          <FavoriteButton
+          {newLocationPage? null: <FavoriteButton
             onToggleLiked={onToggleLiked}
             isLiked={isLiked}
             id={id}
-          />
+          />}
         </Div>
         <NavLink href={`/locations/${id}`}>
           <StyledImgDiv>

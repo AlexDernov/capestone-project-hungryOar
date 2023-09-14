@@ -60,7 +60,7 @@ export default function NavBar() {
         </StyledSvg>
         <StyledH4>Favorites </StyledH4>
       </NavLink>
-      <NavLinkHidden href="/locations/add" session={session}>
+      <NavLinkHidden href="/add" session={session}>
         {" "}
         <StyledSvg
           width="41"
@@ -159,7 +159,7 @@ const StyledNav = styled.nav`
   position: fixed;
   bottom: 0;
 `;
-const NavLinkHidden  = styled.nav`
+const NavLinkHidden  = styled(Link)`
 margin: 10px;
 widht: 100%;
 text-decoration: none;

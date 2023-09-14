@@ -10,6 +10,7 @@ import LogInOutButton from "../LogInOutButton";
 import EditMode from "../EditMode";
 import { useState } from "react";
 
+
 export default function LocationDetails({
   data,
   mutate,
@@ -134,6 +135,7 @@ export default function LocationDetails({
             )}
           </StyledArtSection>
           <p>{data?.verleih}</p>
+         
           <Image
             src={data?.bild.img}
             height={62}

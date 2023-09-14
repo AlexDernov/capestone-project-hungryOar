@@ -5,7 +5,7 @@ import TitleSection from "@/components/TitleSection";
 import Head from "next/head";
 import LogInOutButton from "../LogInOutButton";
 
-export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session}) {
+export default function LocationsList({ data, onToggleLiked, locationsInfo, favoritePage, session, newLocationPage}) {
 
   return (
     <>
@@ -15,12 +15,13 @@ export default function LocationsList({ data, onToggleLiked, locationsInfo, favo
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      <TitleSection> {favoritePage? <Heading>Favorite Locations</Heading>:
+      <TitleSection> {favoritePage? <Heading>Favorite Locations</Heading>: newLocationPage? <Heading>New Locations</Heading> :
         <Heading>Locations</Heading>}
         <LogInOutButton session={session}/>
       </TitleSection>
+      {newLocationPage? <p>These locaions must be verified by admin to be displayed in the main list.</p>: null}
       <StyledUl>
-      {data.length == 0 ? <Par>You don&apos;t have any favorite locations yet</Par> :
+      {data.length == 0 && favoritePage? <Par>You don&apos;t have any favorite locations yet</Par>: data.length == 0 && newLocationPage? <Par>You don&apos;t have any suggested locations yet</Par> :
         data?.map((location) => (
           <LocationPreviewCard
             key={location._id}
@@ -32,6 +33,7 @@ export default function LocationsList({ data, onToggleLiked, locationsInfo, favo
             isLiked={
               locationsInfo.find((locI) => locI.id === location._id)?.isLiked
             }
+            newLocationPage={newLocationPage}
           />
           ))}
       </StyledUl>

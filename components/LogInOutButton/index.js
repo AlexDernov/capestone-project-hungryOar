@@ -17,7 +17,7 @@ export default function LogInOutButton({session}) {
   return (
     <StyledLoginContainer>
         <br />
-
+  
       <button onClick={() => signIn()}>Log in</button>
     </StyledLoginContainer>
   )
@@ -27,6 +27,9 @@ const StyledLoginContainer = styled.div`
   top: 0px;
   right: 5px;
   font-size: 0.8rem;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0px;
   margin-right:15px 
 `;

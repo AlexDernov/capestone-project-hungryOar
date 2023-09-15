@@ -5,7 +5,7 @@ import { useState } from "react";
 import {useSession } from "next-auth/react";
 
 
-export default function newLocationsPage() {
+export default function NewLocationsPage() {
   const { data: session } = useSession() 
   const { data, isLoading, error } = useSWR("/api/locations");
   const [newLocationPage, setNewLocationPage] = useState(true);

@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
 
-export default function messagesPage() {
+export default function MessagesPage() {
   const { data: session } = useSession();
   const { data, isLoading, error, mutate } = useSWR("/api/messages");
   const isAdmin = session?.user.name === "HungryOar";

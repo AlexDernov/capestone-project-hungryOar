@@ -1,38 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">From <strong>HungryOar App</strong></h1>
+<h3 align="center">This app offers an overview of places in Hamburg where you can buy food and drink without or almost without leaving your boat/kayak/sap....
+Besides a simple list of locations and detailed information about each location in the app, you can mark your favourite locations, see the location of all/favourite locations on a map, filter them by boat rental options and/or by what is offered on the menu.
+Registered users can suggest their own locations, upload photos to them or write a message to the administrator.
+The administrator has the ability to read received messages directly in the application and delete read messages, edit existing and proposed locations, move proposed locations to the main list displayed for users.</h3>
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<h2>I used the following technologies:</h2>
+<ul>
+<li>Next.js</li>
+<li>React</li>
+<li>Git</li>
+<li>npm</li>
+<li>Cloudinary</li>
+<li>Styled Components</li>
+<li>Figma</li>
+<li>NextAuth</li>
+<li>Leaflet</li>
+<li>MongoDB</li>
+</ul>

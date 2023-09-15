@@ -12,7 +12,8 @@ const TitleSection = styled.section`
   display: grid;
   grid-column: span 2;
   margin: 0px;
-  padding: 0px;
+  padding-left: 15px;
+  padding-top:10px
 `;
 
 export default TitleSection;

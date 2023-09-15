@@ -35,9 +35,9 @@ const visibleData = data.filter((visibleLocation) => visibleLocation.visible ===
           <LogInOutButton session={session}/>
         </TitleSection>
         <StyledP>
-          In this application you will find places in Hamburg where you can eat
-          and drink without leaving (or almost without leaving) a boat, kayak,
-          sap, etc. and get all the information you need about them.
+        In this app you will find locations in Hamburg where you can eat
+          and drink without leaving (or hardly leaving) your boat, kayak,
+          SAP, etc. and get all the information you need about these places.
         </StyledP>
         <Map locationsInfo={locationsInfo} data={visibleData}/>
       </StyledMain>
@@ -46,14 +46,14 @@ const visibleData = data.filter((visibleLocation) => visibleLocation.visible ===
 }
 
 const StyledP = styled.p`
-  margin-top: 80px;
-  padding: 10px;
-  padding-top: 25px;
+  margin-top: 60px;
+  padding: 15px;
+  padding-top: 15px;
   color: var(--primary-color);
   background-size: cover, contain;
   text-shadow: 3px 3px 6px black;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
 `;
 
 const StyledMain = styled.main`

@@ -33,7 +33,7 @@ const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
   margin: 10px;
-  padding-bottom: 100px
+  padding-bottom: 350px
 `;
 const Input = styled.input`
   padding: 0.5rem;

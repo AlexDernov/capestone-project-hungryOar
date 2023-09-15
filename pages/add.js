@@ -1,18 +1,17 @@
 import AddLocation from "@/components/AddLocation";
 import Head from "next/head";
 import { useState } from "react";
-import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import TitleSection from "../components/TitleSection";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
 import styled from "styled-components";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 export default function AddPage() {
   const { data: session } = useSession();
-const [addMode, setAddMode] = useState(true);
+  const [addMode, setAddMode] = useState(true);
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: false },
     { type: "Bar", id: "Bar", checked: false },
@@ -28,10 +27,10 @@ const [addMode, setAddMode] = useState(true);
   const router = useRouter();
   const [checked, setChecked] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
-  const [imageWidth, setImageWidth] =useState(null);
-  const [imageHeight, setImageHeight] =useState(null);
+  const [imageWidth, setImageWidth] = useState(null);
+  const [imageHeight, setImageHeight] = useState(null);
   const [noRental, setNoRental] = useState(false);
-  const placeholderImage =`https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
+  const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
 
   const menuCheck = menuTypes
     .filter((menuType) => menuType.checked)
@@ -46,12 +45,12 @@ const [addMode, setAddMode] = useState(true);
       )
     );
   }
-  function handleHome(){
+  function handleHome() {
     router.push("/");
   }
 
   function onOptionChange() {
-    setChecked(!checked)
+    setChecked(!checked);
     setNoRental(!noRental);
   }
   async function handleSubmit(event) {
@@ -66,7 +65,11 @@ const [addMode, setAddMode] = useState(true);
       art: menuCheck,
       verleihOpt: checked,
       verleih: locationData.verleih || "-",
-      bild: {img: imageUrl || placeholderImage, width: imageWidth || 900, height: imageHeight || 751,},
+      bild: {
+        img: imageUrl || placeholderImage,
+        width: imageWidth || 900,
+        height: imageHeight || 751,
+      },
       visible: false,
     };
     const response = await fetch("/api/locations", {
@@ -78,53 +81,63 @@ const [addMode, setAddMode] = useState(true);
     });
 
     if (response.ok) {
-      setAddMode(!addMode)
-      console.log(newLocation);
-      
+      setAddMode(!addMode);
     }
   }
-function handleAddMode(){
-  setAddMode(!addMode)
-}
+  function handleAddMode() {
+    setAddMode(!addMode);
+  }
   return (
     <>
       <Head>
-        <title>{addMode? "Add new location": "Your location was added"}</title>
+        <title>
+          {addMode ? "Add new location" : "Your location was added"}
+        </title>
         <meta name="description" content="HungryOarApp" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      {addMode? <>
-      <TitleSection>
-        <Heading>Add new location</Heading>
-        <LogInOutButton session={session} />
-      </TitleSection>
-      <StyledArticle>
-        <AddLocation
-          session={session}
-          onSubmit={handleSubmit}
-          handleFilter={handleFilter}
-          menuTypes={menuTypes}
-          checked={checked}
-          onOptionChange={onOptionChange}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-          noRental={noRental}
-          placeholderImage={placeholderImage}
-          setImageHeight={setImageHeight}
-          setImageWidth={setImageWidth}
-        />
-      </StyledArticle></>: <StyledDiv>
-      <StyledP>
-        The upload was successful! <br />
-        Thank you for helping to improve our App! <br />
-        The data will be checked by admin, after that the suggested location will appear in the main list of locations.
-      </StyledP>
-      <StyledButtonsDiv>
-      <button type="button" onClick={handleHome}>Homepage</button>
-      <button type="button" onClick={handleAddMode}>Add more locations</button>
-      </StyledButtonsDiv>
-      </StyledDiv>}
+      {addMode ? (
+        <>
+          <TitleSection>
+            <Heading>Add new location</Heading>
+            <LogInOutButton session={session} />
+          </TitleSection>
+          <StyledArticle>
+            <AddLocation
+              session={session}
+              onSubmit={handleSubmit}
+              handleFilter={handleFilter}
+              menuTypes={menuTypes}
+              checked={checked}
+              onOptionChange={onOptionChange}
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
+              noRental={noRental}
+              placeholderImage={placeholderImage}
+              setImageHeight={setImageHeight}
+              setImageWidth={setImageWidth}
+            />
+          </StyledArticle>
+        </>
+      ) : (
+        <StyledDiv>
+          <StyledP>
+            The upload was successful! <br />
+            Thank you for helping to improve our App! <br />
+            The data will be checked by admin, after that the suggested location
+            will appear in the main list of locations.
+          </StyledP>
+          <StyledButtonsDiv>
+            <button type="button" onClick={handleHome}>
+              Homepage
+            </button>
+            <button type="button" onClick={handleAddMode}>
+              Add more locations
+            </button>
+          </StyledButtonsDiv>
+        </StyledDiv>
+      )}
     </>
   );
 }
@@ -137,28 +150,23 @@ const StyledArticle = styled.article`
   padding: 10px;
 `;
 const StyledDiv = styled.div`
-display: flex;
-flex-direction: column;
-height: 90vh;
-margin-top: 1px;
-padding: 40px;
-background-color: rgba(255, 255, 255, 0.6)`;
-
-const StyledButtonsDiv =styled.div`
-width: 300px;
-margin: 5px;
-display: flex;
-justify-content: space-around`;
-
-
-const StyledP =styled.p`
-padding-top: 40px;
-margin: 20px;
-font-size: 16px
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  margin-top: 1px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.6);
 `;
 
-const StyledLink = styled(Link)`
-padding:0;
-text-decoration: none;
-color: black; 
-font-size: 16px`;
+const StyledButtonsDiv = styled.div`
+  width: 300px;
+  margin: 5px;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const StyledP = styled.p`
+  padding-top: 40px;
+  margin: 20px;
+  font-size: 16px;
+`;

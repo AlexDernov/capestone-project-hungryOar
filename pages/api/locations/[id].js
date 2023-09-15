@@ -4,7 +4,6 @@ import Location from "../../../db/model/Location";
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
-  console.log(request.query);
   if (request.method === "GET") {
     const location = await Location.findById(id).populate("notes");
 
@@ -14,7 +13,7 @@ export default async function handler(request, response) {
     return response.status(200).json(location);
   }
   if (request.method === "PATCH") {
-    await Location.findByIdAndUpdate(id, {$set:request.body});
+    await Location.findByIdAndUpdate(id, { $set: request.body });
     response.status(200).json({ message: "Update is successful!" });
   }
 }

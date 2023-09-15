@@ -1,7 +1,7 @@
-import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
 import FavoriteButton from "../FavoriteButton";
+import { CldImage } from "next-cloudinary";
 
 export default function LocationPreviewCard({
   name,
@@ -10,7 +10,8 @@ export default function LocationPreviewCard({
   id,
   onToggleLiked,
   isLiked,
-  newLocationPage}) {
+  newLocationPage,
+}) {
   return (
     <>
       <StyledListItem>
@@ -23,18 +24,22 @@ export default function LocationPreviewCard({
               </StyledPDiv>
             </StyledDiv>
           </NavLink>
-          {newLocationPage? null: <FavoriteButton
-            onToggleLiked={onToggleLiked}
-            isLiked={isLiked}
-            id={id}
-          />}
+          {newLocationPage ? null : (
+            <FavoriteButton
+              onToggleLiked={onToggleLiked}
+              isLiked={isLiked}
+              id={id}
+            />
+          )}
         </Div>
         <NavLink href={`/locations/${id}`}>
           <StyledImgDiv>
             <StyledImage
               src={bild.img}
-              width={bild.width}
-              height={bild.height}
+              height={100}
+              width={350}
+              crop="fill"
+              gravity="auto"
               alt={name}
             />
           </StyledImgDiv>
@@ -44,7 +49,7 @@ export default function LocationPreviewCard({
   );
 }
 
-const StyledImage = styled(Image)`
+const StyledImage = styled(CldImage)`
 max-width: 100% 
 height: auto
 mode: thumb
@@ -58,7 +63,7 @@ margin: 10px;
 padding-left: 13px;
 display: grid;
 align-self: center;
-height: 62px
+height: 105px
 `;
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);

@@ -9,9 +9,7 @@ export default async function handler(request, response) {
   } else if (request.method === "POST") {
     try {
       const locationData = request.body;
-      console.log(locationData)
       const dataLocations = await Location.create(locationData);
-      console.log(dataLocations)
       response
         .status(201)
         .json({ status: "Location created", data: dataLocations });

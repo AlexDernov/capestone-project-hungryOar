@@ -188,7 +188,7 @@ const StyledNav = styled.nav`
   background-color: var(--primary-color-back);
   width: 100%;
   height: 79px;
-  margin: 6px;
+  margin: 0;
   padding-top: 5px;
   padding-right: 10px;
   display: flex;

@@ -8,7 +8,7 @@ const TitleSection = styled.section`
   top: 0;
   background-color: var(--primary-color-back);
   width: 100%;
-  height: 1.3rem
+  height: 1.4rem
   display: grid;
   grid-column: span 2;
   margin: 0px;

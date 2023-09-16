@@ -6,14 +6,18 @@ import TitleSection from "../components/TitleSection";
 import useSWR from "swr";
 import LogInOutButton from "../components/LogInOutButton";
 import {useSession } from "next-auth/react";
+import Loading from "../components/Loading";
+
 
 
 export default function Home({ locationsInfo}) {
 const { data: session } = useSession() 
 const { data, isLoading, error } = useSWR("/api/locations");
 
+const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
+
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading/>
   }
   if (error) return <div>failed to load</div>;
   if (!data) {
@@ -33,25 +37,25 @@ const { data, isLoading, error } = useSWR("/api/locations");
           <LogInOutButton session={session}/>
         </TitleSection>
         <StyledP>
-          In this application you will find places in Hamburg where you can eat
-          and drink without leaving (or almost without leaving) a boat, kayak,
-          sap, etc. and get all the information you need about them.
+        In this app you will find locations in Hamburg where you can eat
+          and drink without leaving (or hardly leaving) your boat, kayak,
+          SAP, etc. and get all the information you need about these places.
         </StyledP>
-        <Map locationsInfo={locationsInfo} data={data}/>
+        <Map locationsInfo={locationsInfo} data={visibleData}/>
       </StyledMain>
     </>
   );
 }
 
 const StyledP = styled.p`
-  margin-top: 80px;
-  padding: 10px;
-  padding-top: 25px;
+  margin-top: 60px;
+  padding: 15px;
+  padding-top: 15px;
   color: var(--primary-color);
   background-size: cover, contain;
   text-shadow: 3px 3px 6px black;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const StyledMain = styled.main`

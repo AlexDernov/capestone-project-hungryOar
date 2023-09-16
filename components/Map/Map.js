@@ -119,7 +119,7 @@ export default function Map({ locationsInfo, data}) {
             return (
               <Marker
                 key={location._id}
-                position={location.coords}
+                position={location.coords || null}
                 icon={!isLiked ? locationOnIcon : locationOnIconFav}
               >
                 <NavLink href={`/locations/${location._id}`}>

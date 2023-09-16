@@ -5,6 +5,7 @@ import useSWR from "swr";
 import Layout from "../components/Layout";
 import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
 import { SessionProvider} from "next-auth/react";
+import Loading from "../components/Loading";
 
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
@@ -19,7 +20,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   const { data, isLoading, error } = useSWR("/api/locations", fetcher);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading/>;
   }
   if (error) return <div>failed to load</div>;
   if (!data) {

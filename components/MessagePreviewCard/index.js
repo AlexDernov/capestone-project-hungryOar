@@ -1,70 +1,42 @@
 import styled from "styled-components";
-import Link from "next/link";
-import FavoriteButton from "../FavoriteButton";
-import { CldImage } from "next-cloudinary";
 
-export default function LocationPreviewCard({
+
+export default function MessagePreviewCard( id, mutate,
   name,
-  addresse,
-  bild,
-  id,
-  onToggleLiked,
-  isLiked,
-  newLocationPage,
-}) {
+  text,
+ date
+ ) {
+  async function handleDelete() {
+    const responseMessage = await fetch(`/api/messages/${id}`, {
+      method: "DELETE",
+    });
+    if (!responseMessage.ok) {
+      return <h1>Something gone wrong!</h1>;
+    }
+
+    if (responseMessage.ok) {
+     router.push("/messages")
+    }
+  }
   return (
     <>
       <StyledListItem>
         <Div>
-          <NavLink href={`/locations/${id}`}>
             <StyledDiv>
               <StyledName>{name}</StyledName>
               <StyledPDiv>
-                <StyledAddresse>{addresse}</StyledAddresse>
+                <StyledAddresse>Created at: {new Date(date).toLocaleString()}</StyledAddresse>
+                <StyledAddresse>{text}</StyledAddresse>
               </StyledPDiv>
+              <button type="button" onClick={handleDelete}>Delete</button>
             </StyledDiv>
-          </NavLink>
-          {newLocationPage ? null : (
-            <FavoriteButton
-              onToggleLiked={onToggleLiked}
-              isLiked={isLiked}
-              id={id}
-            />
-          )}
         </Div>
-        <NavLink href={`/locations/${id}`}>
-          <StyledImgDiv>
-            <StyledImage
-              src={bild.img}
-              height={100}
-              width={350}
-              crop="fill"
-              gravity="auto"
-              alt={name}
-            />
-          </StyledImgDiv>
-        </NavLink>
       </StyledListItem>
     </>
   );
 }
 
-const StyledImage = styled(CldImage)`
-max-width: 100% 
-height: auto
-mode: thumb
-padding: 10px;
-margin: 0;
-justify-content: center;
-`;
-const StyledImgDiv = styled.div`
-max-width: 100%
-margin: 10px;
-padding-left: 13px;
-display: grid;
-align-self: center;
-height: 105px
-`;
+
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
@@ -121,9 +93,3 @@ margin: 0;
 width = 30%;
 align-self: flex-end;
 align: right`;
-const NavLink = styled(Link)`
-  text-decoration: none;
-  &: hover {
-    font-size: 1.2em;
-  }
-`;

@@ -9,16 +9,17 @@ import FavoriteButton from "../FavoriteButton";
 import LogInOutButton from "../LogInOutButton";
 import EditMode from "../EditMode";
 import { useState } from "react";
+import { CldImage } from "next-cloudinary";
 
 export default function LocationDetails({
   data,
   mutate,
   onToggleLiked,
   isLiked,
-  session
+  session,
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
-  const isAdmin = session?.user.name==="HungryOar";
+  const isAdmin = session?.user.name === "HungryOar";
   function handleOnEditMode() {
     setIsEditMode(!isEditMode);
   }
@@ -26,8 +27,6 @@ export default function LocationDetails({
     event.preventDefault();
     const formData = new FormData(event.target);
     const noteData = Object.fromEntries(formData);
-
-   
 
     const responseNote = await fetch("/api/notes", {
       method: "POST",
@@ -53,9 +52,8 @@ export default function LocationDetails({
         event.target.reset();
       }
     }
-   
   }
- 
+
   return (
     <>
       <TitleSection>
@@ -70,90 +68,104 @@ export default function LocationDetails({
         <LogInOutButton session={session} />
       </TitleSection>
       <StyledArticle>
-       
-        
-        {isEditMode===false && isAdmin ?<button onClick={handleOnEditMode}>Edit Mode</button> : null}<br/>
-      {isEditMode? <EditMode data={data} handleOnEditMode={handleOnEditMode} mutate={mutate}/>: <>
-      <NavLink href="/locations"> ← Back</NavLink>
-      <StyledDiv>
-          <p>{data?.location}</p>
-          <p>{data?.zeit}</p>
-          <StyledArtSection>
-            {data?.art?.map((artStück) =>
-              artStück === "Cafe" ? (
-                <Image
-                  key={1}
-                  src="/images/CafeIcon.svg"
-                  width={71}
-                  height={45}
-                  alt="Cafe icon"
-                />
-              ) : artStück === "Restaurant" ? (
-                <Image
-                  key={2}
-                  src="/images/RestaurantIcon.svg"
-                  width={71}
-                  height={44}
-                  alt="Restaurant-icon"
-                />
-              ) : artStück === "Bar" ? (
-                <Image
-                  key={3}
-                  src="/images/BarIcon.svg"
-                  width={57}
-                  height={44}
-                  alt="Bar-icon"
-                />
-              ) : artStück === "Kuchen" ? (
-                <Image
-                  key={4}
-                  src="/images/KuchenIcon.svg"
-                  width={71}
-                  height={44}
-                  alt="Kuchen-icon"
-                />
-              ) : artStück === "Eis" ? (
-                <Image
-                  key={5}
-                  src="/images/EisIcon.svg"
-                  width={57}
-                  height={45}
-                  alt="Eis-icon"
-                />
-              ) : artStück === "Snacks" ? (
-                <Image
-                  key={6}
-                  src="/images/SnacksIcon.svg"
-                  width={71}
-                  height={44}
-                  alt="Snacks-icon"
-                />
-              ) : (
-                []
-              )
-            )}
-          </StyledArtSection>
-          <p>{data?.verleih}</p>
-          <Image
-            src={data?.bild.img}
-            height={62}
-            width={350}
-            alt={data?.name}
+        {isEditMode === false && isAdmin ? (
+          <button onClick={handleOnEditMode}>Edit Mode</button>
+        ) : null}
+        <br />
+        {isEditMode ? (
+          <EditMode
+            data={data}
+            bild={data?.bild}
+            handleOnEditMode={handleOnEditMode}
+            mutate={mutate}
           />
-        </StyledDiv>
-        <NotesForm locData={data} onSubmit={handleSubmit} />
-        <StyledUl>
-          <p>Your notes:</p>
-          {data?.notes.length > 0 &&
-            data?.notes?.map((note) => (
-              <Note
-                key={note._id}
-                note={note}
-                locatData={data}
-                mutate={mutate}
+        ) : (
+          <>
+            <NavLink href="/locations"> ← Back</NavLink>
+            <StyledDiv>
+              <p>{data?.location}</p>
+              <p>{data?.zeit}</p>
+              <StyledArtSection>
+                {data?.art?.map((artStück) =>
+                  artStück === "Cafe" ? (
+                    <Image
+                      key={1}
+                      src="/images/CafeIcon.svg"
+                      width={71}
+                      height={45}
+                      alt="Cafe icon"
+                    />
+                  ) : artStück === "Restaurant" ? (
+                    <Image
+                      key={2}
+                      src="/images/RestaurantIcon.svg"
+                      width={71}
+                      height={44}
+                      alt="Restaurant-icon"
+                    />
+                  ) : artStück === "Bar" ? (
+                    <Image
+                      key={3}
+                      src="/images/BarIcon.svg"
+                      width={57}
+                      height={44}
+                      alt="Bar-icon"
+                    />
+                  ) : artStück === "Kuchen" ? (
+                    <Image
+                      key={4}
+                      src="/images/KuchenIcon.svg"
+                      width={71}
+                      height={44}
+                      alt="Kuchen-icon"
+                    />
+                  ) : artStück === "Eis" ? (
+                    <Image
+                      key={5}
+                      src="/images/EisIcon.svg"
+                      width={57}
+                      height={45}
+                      alt="Eis-icon"
+                    />
+                  ) : artStück === "Snacks" ? (
+                    <Image
+                      key={6}
+                      src="/images/SnacksIcon.svg"
+                      width={71}
+                      height={44}
+                      alt="Snacks-icon"
+                    />
+                  ) : (
+                    []
+                  )
+                )}
+              </StyledArtSection>
+              <p>{data?.verleih}</p>
+              <CldImage
+                src={data?.bild.img}
+                height={300}
+                width={350}
+                crop="fill"
+                gravity="auto"
+                alt={data?.name}
               />
-            ))}
-        </StyledUl></> }
+              <br />
+            </StyledDiv>
+            <NotesForm locData={data} onSubmit={handleSubmit} />
+            <StyledUl>
+              <p>Your notes:</p>
+              {data?.notes.length > 0 &&
+                data?.notes?.map((note) => (
+                  <Note
+                    key={note._id}
+                    note={note}
+                    locatData={data}
+                    mutate={mutate}
+                  />
+                ))}
+            </StyledUl>
+          </>
+        )}
       </StyledArticle>
     </>
   );
@@ -161,7 +173,7 @@ export default function LocationDetails({
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
-  margin-top: 80px;
+  margin-top: 110px;
   margin-bottom: 90px;
   height: 100%;
   line-height: 120%;

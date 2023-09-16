@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Image from "next/image";
+import { CldUploadButton, CldImage } from "next-cloudinary";
 
-export default function EditMode({ data, handleOnEditMode, mutate }) {
+export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: data?.art.includes("Cafe") },
     { type: "Bar", id: "Bar", checked: data?.art.includes("Bar") },
@@ -15,6 +15,9 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
     { type: "Snacks", id: "Snacks", checked: data?.art.includes("Snackes") },
   ]);
   const [checked, setChecked] = useState(data?.verleihOpt === true);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageWidth, setImageWidth] = useState(null);
+  const [imageHeight, setImageHeight] = useState(null);
   function onOptionChange() {
     setChecked(!checked);
   }
@@ -43,6 +46,11 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
       zeit: locationData.zeit,
       art: menuCheck,
       verleihOpt: checked,
+      bild: {
+        img: imageUrl || bild?.img,
+        width: imageWidth || bild?.width,
+        height: imageHeight || bild?.height,
+      },
       verleih: locationData.verleih,
     };
 
@@ -57,6 +65,11 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
       mutate();
       handleOnEditMode();
     }
+  }
+  function onUpload(event) {
+    setImageUrl(event.info.secure_url);
+    setImageHeight(event.info.height);
+    setImageWidth(event.info.width);
   }
 
   return (
@@ -133,7 +146,7 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           name="verleihOpt"
           value={data?.verleihOpt === false}
           id="false"
-          checked={checked}
+          checked={!checked}
           onChange={onOptionChange}
         />
         <label htmlFor="false">nein</label>
@@ -152,7 +165,30 @@ export default function EditMode({ data, handleOnEditMode, mutate }) {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <Image src={data?.bild.img} height={62} width={350} alt={data?.name} />
+        <CldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+          </svg>{" "}
+          Bild ändern
+        </CldUploadButton>
+        <br />
+        <br />
+        <CldImage
+          src={imageUrl ? imageUrl : bild?.img}
+          height={300}
+          width={350}
+          crop="fill"
+          gravity="auto"
+          alt={data?.name}
+        />
+        <br />
         <button type="submit">Save</button>
         <button type="button" onClick={handleOnEditMode}>
           Cancel

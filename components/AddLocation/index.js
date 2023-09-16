@@ -17,17 +17,20 @@ export default function AddLocation({
 setImageHeight,
 setImageWidth
 }) {
+  const router = useRouter();
  
 function onUpload(event){
     setImageUrl(event.info.secure_url)
     setImageHeight(event.info.height)
     setImageWidth(event.info.width)
 }
-
+function handleHome() {
+  router.push("/");
+}
   return (
     <>
       <form onSubmit={onSubmit}>
-        <label htmlFor="title"> Location:</label>
+        <label htmlFor="name"> Location:</label>
         <br />
         <textarea
           type="text"
@@ -40,7 +43,7 @@ function onUpload(event){
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="addresse"> Addresse: </label>
+        <label htmlFor="location"> Addresse: </label>
         <br />
         <textarea
           type="text"
@@ -54,7 +57,7 @@ function onUpload(event){
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="title"> Öffnungszeiten:</label>
+        <label htmlFor="zeit"> Öffnungszeiten:</label>
         <br />
         <textarea
           type="text"
@@ -68,10 +71,10 @@ function onUpload(event){
         />
         <br />
 
-        <legend htmlFor="addresse"> MenuArt: </legend>
+        <legend> MenuArt: </legend>
         <StyledArtSection>
           {menuTypes.map((type) => (
-            <label for={type.type} key={type.id}>
+            <label htmlFor={type.type} key={type.id}>
               {type.type === "Cafe" ? (
                 <Image
                   key={1}
@@ -232,7 +235,7 @@ function onUpload(event){
         />
         <br />
         <button type="submit">Save</button>
-        <button type="button">
+        <button type="button" onClick={handleHome}>
           <StyledLink href="/">Cancel</StyledLink>
         </button>
       </form>

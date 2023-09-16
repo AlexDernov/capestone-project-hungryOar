@@ -15,7 +15,6 @@ export default function MessagePreviewCard( id, mutate,
     }
 
     if (responseMessage.ok) {
-        mutate()
      router.push("/messages")
     }
   }

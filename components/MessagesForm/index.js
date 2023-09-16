@@ -5,7 +5,7 @@ export default function MessagesForm({ onSubmit}) {
     <FormContainer onSubmit={onSubmit}>
         <p>Contact us!</p>
       <p>Here you can share your feedback, suggestions and criticism about this app and its content with us.</p>
-      <label htmlFor="title"> Your Name (optional):</label>
+      <label htmlFor="name"> Your Name (optional):</label>
       <Input
         type="text"
         id="name"
@@ -14,7 +14,7 @@ export default function MessagesForm({ onSubmit}) {
         maxlengh="50"
         pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
       />
-      <label htmlFor="note"> Your message: </label>
+      <label htmlFor="text"> Your message: </label>
       <TextArea
         type="text"
         id="text"

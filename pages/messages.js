@@ -7,6 +7,7 @@ import TitleSection from "../components/TitleSection";
 import { useSession } from "next-auth/react";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
+import Loading from "../components/Loading";
 
 export default function MessagesPage() {
   const { data: session } = useSession();
@@ -15,7 +16,7 @@ export default function MessagesPage() {
   const router = useRouter();
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading/>;
   }
   if (error) return <div>failed to load</div>;
   if (!data) {

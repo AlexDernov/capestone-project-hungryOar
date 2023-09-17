@@ -6,6 +6,8 @@ import TitleSection from "../components/TitleSection";
 import useSWR from "swr";
 import LogInOutButton from "../components/LogInOutButton";
 import {useSession } from "next-auth/react";
+import Loading from "../components/Loading";
+
 
 
 export default function Home({ locationsInfo}) {
@@ -15,7 +17,7 @@ const { data, isLoading, error } = useSWR("/api/locations");
 const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading/>
   }
   if (error) return <div>failed to load</div>;
   if (!data) {

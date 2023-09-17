@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 import EditMode from "../EditMode";
+import Image from "next/image";
 
 export default function NewLocationPreviewCard({
   name,
@@ -9,7 +10,6 @@ export default function NewLocationPreviewCard({
   bild,
   id,
   zeit,
-  verleiOpt,
   mutate,
   verleih,
   visible,
@@ -27,11 +27,11 @@ export default function NewLocationPreviewCard({
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(),
+            body: JSON.stringify(approved),
           });
           if (response.ok) {
             mutate();
-            handleOnEditMode(approved);
+            handleOnEditMode();
           }
       }
   return (
@@ -209,4 +209,14 @@ const NavLink = styled(Link)`
   &: hover {
     font-size: 1.2em;
   }
+`;
+const StyledArtSection = styled.section`
+  margin: 10px;
+  padding-left: 27px;
+  padding-right: 27px;
+  display: grid;
+  grid-template-columns: 71px 71px 71px 71px;
+  row-gap: 20px;
+  column-gap: 0;
+  position: center;
 `;

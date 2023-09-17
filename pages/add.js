@@ -143,7 +143,7 @@ export default function AddPage() {
 }
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
-  margin-top: 80px;
+  margin-top: 99px;
   margin-bottom: 90px;
   height: 100%;
   line-height: 120%;

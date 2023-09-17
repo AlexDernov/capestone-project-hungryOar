@@ -53,7 +53,7 @@ const StyledP = styled.p`
   background-size: cover, contain;
   text-shadow: 3px 3px 6px black;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const StyledMain = styled.main`

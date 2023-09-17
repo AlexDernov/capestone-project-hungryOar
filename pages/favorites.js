@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import {useSession } from "next-auth/react";
 import LogInOutButton from "../components/LogInOutButton";
+import styled from "styled-components";
 
 
 export default function FavoriteLocationsPage({
@@ -28,7 +29,7 @@ export default function FavoriteLocationsPage({
     )
   );
   return (
-    <div>
+   <>
       <Head>
         <title>Locations - Favorites</title><LogInOutButton session={session}/>
       </Head>
@@ -39,6 +40,13 @@ export default function FavoriteLocationsPage({
         favoritePage={favoritePage}
         session={session}
       />
-    </div>
+    </>
   );
 }
+
+/* const StyledDiv = styled.div`
+margin:0;
+padding: 0;
+width: 375px;
+height: 667px`;
+ */

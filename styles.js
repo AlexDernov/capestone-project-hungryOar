@@ -25,6 +25,6 @@ export default createGlobalStyle`
   }
   .map {
     width: auto;
-    height: 62vh;
+    height: 53vh;
   }
 `;

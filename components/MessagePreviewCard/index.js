@@ -22,6 +22,7 @@ export default function MessagePreviewCard( id, mutate,
     <>
       <StyledListItem>
         <Div>
+        {data.length===0? <StyledPDiv> <Par>You don&apos;t have any messages yet.</Par></StyledPDiv>:
             <StyledDiv>
               <StyledName>{name}</StyledName>
               <StyledPDiv>
@@ -29,7 +30,7 @@ export default function MessagePreviewCard( id, mutate,
                 <StyledAddresse>{text}</StyledAddresse>
               </StyledPDiv>
               <button type="button" onClick={handleDelete}>Delete</button>
-            </StyledDiv>
+            </StyledDiv>}
         </Div>
       </StyledListItem>
     </>
@@ -93,3 +94,11 @@ margin: 0;
 width = 30%;
 align-self: flex-end;
 align: right`;
+
+const Par = styled.p`
+  height: 90vh;
+  width: auto;
+  padding-top: 30px;
+  padding-left: 10px;
+  color: grey;
+`;

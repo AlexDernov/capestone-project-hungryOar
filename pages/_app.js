@@ -17,7 +17,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   );
  
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading, error } = useSWR("/api/locations", fetcher);
+  const { data, isLoading, error, mutate } = useSWR("/api/locations", fetcher);
 
   if (isLoading) {
     return <Loading/>;

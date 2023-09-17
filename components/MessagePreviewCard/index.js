@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 
-export default function MessagePreviewCard( id, mutate,
+export default function MessagePreviewCard( id, 
   name,
   text,
  date
  ) {
+  console.log("Name in Message", name);
+  console.log("Text in Message", text);
   async function handleDelete() {
     const responseMessage = await fetch(`/api/messages/${id}`, {
       method: "DELETE",

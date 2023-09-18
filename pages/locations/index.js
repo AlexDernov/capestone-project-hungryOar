@@ -3,6 +3,8 @@ import {useSession } from "next-auth/react";
 import Head from "next/head";
 import NewLocationsList from "../../components/NewLocationsList";
 import Loading from "../../components/NewLocationsList";
+import useSWR from "swr";
+import { useState } from "react";
 
 /* export function getServerSideProps(){
   const isAdmin = session?.user.name === "HungryOar";

@@ -1,13 +1,15 @@
 import LocationsList from "../../components/LocationsList";
 import {useSession } from "next-auth/react";
 import Head from "next/head";
-import NewLocationsList from "../../components/LocationsList";
+import NewLocationsList from "../../components/NewLocationsList";
+import Loading from "../../components/NewLocationsList";
 
 /* export function getServerSideProps(){
   const isAdmin = session?.user.name === "HungryOar";
 } */
 
-export default function LocationsListPage({ data, /* isAdmin, */ onToggleLiked, locationsInfo, mutate}) {
+export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo, mutate}) {
+
   const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);
   function handleNewList(){
@@ -15,6 +17,15 @@ setNewList(!newList);
   }
   console.log("Data from locPages", data);
   const { data: session } = useSession()
+  
+  const { data, isLoading, error, mutate } = useSWR("/api/locations");
+  if (isLoading) {
+    return <Loading/>;
+  }
+  if (error) return <div>failed to load</div>;
+  if (!data) {
+    return <h1>Data cannot be loaded.</h1>;
+  }
   const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
   const hiddenData = data.filter((visibleLocation) => visibleLocation.visible === false)
   return <>

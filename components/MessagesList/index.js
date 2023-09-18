@@ -3,7 +3,7 @@ import Head from "next/head";
 import MessagePreviewCard from "../MessagePreviewCard";
 
 export default function MessagesList({ data }) {
-  console.log("Data in MessagesList", data);
+
   return (
     <>
       <Head>

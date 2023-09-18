@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NewLocationPreviewCard from "@/components/LocationPreviewCard";
+import NewLocationPreviewCard from "@/components/NewLocationPreviewCard";
 import Heading from "@/components/Heading";
 import TitleSection from "@/components/TitleSection";
 import LogInOutButton from "../LogInOutButton";

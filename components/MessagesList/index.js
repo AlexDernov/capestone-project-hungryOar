@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Head from "next/head";
 import MessagePreviewCard from "../MessagePreviewCard";
 
-export default function MessagesList({ data, mutate }) {
+export default function MessagesList({ data }) {
   console.log("Data in MessagesList", data);
   return (
     <>
@@ -18,7 +18,7 @@ export default function MessagesList({ data, mutate }) {
         ) : (
           data?.map((message) => (
             <MessagePreviewCard
-            data={data}
+            data={message}
               key={message._id}
               id={message._id}
               name={message.name}

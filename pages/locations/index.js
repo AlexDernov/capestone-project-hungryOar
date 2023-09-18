@@ -8,7 +8,7 @@ import Loading from "../../components/NewLocationsList";
   const isAdmin = session?.user.name === "HungryOar";
 } */
 
-export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo, mutate}) {
+export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo}) {
 
   const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);

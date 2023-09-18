@@ -1,14 +1,19 @@
 import LocationsList from "../../components/LocationsList";
 import {useSession } from "next-auth/react";
 import Head from "next/head";
-import NewLocationsList from "../../components/LocationsList"
+import NewLocationsList from "../../components/LocationsList";
 
-export default function LocationsListPage({ data, onToggleLiked, locationsInfo, mutate}) {
+/* export function getServerSideProps(){
   const isAdmin = session?.user.name === "HungryOar";
-  conct [newList, setNewList] = useState(false);
+} */
+
+export default function LocationsListPage({ data, /* isAdmin, */ onToggleLiked, locationsInfo, mutate}) {
+  const isAdmin = session?.user.name === "HungryOar";
+  const [newList, setNewList] = useState(false);
   function handleNewList(){
 setNewList(!newList);
   }
+  console.log("Data from locPages", data);
   const { data: session } = useSession()
   const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
   const hiddenData = data.filter((visibleLocation) => visibleLocation.visible === false)

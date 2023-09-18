@@ -9,7 +9,7 @@ export default function NewLocationsList({
   session,
   mutate
 }) {
-    
+    console.log("newListData", data);
   return (
     <>
       <TitleSection>

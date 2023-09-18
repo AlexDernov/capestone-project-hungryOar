@@ -20,6 +20,7 @@ export default function NewLocationPreviewCard({
   function handleOnEditMode() {
     setIsEditMode(!isEditMode);
   }
+  console.log("Data from NewLocPreviewCard", data);
   async function handleOnTakeOver() {
     const approved = { visible: true };
     const response = await fetch(`/api/locations/${id}`, {

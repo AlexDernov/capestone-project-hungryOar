@@ -3,6 +3,7 @@ import Head from "next/head";
 import MessagePreviewCard from "../MessagePreviewCard";
 
 export default function MessagesList({ data, mutate }) {
+  console.log("Data in MessagesList", data);
   return (
     <>
       <Head>
@@ -17,6 +18,7 @@ export default function MessagesList({ data, mutate }) {
         ) : (
           data?.map((message) => (
             <MessagePreviewCard
+            data={data}
               key={message._id}
               id={message._id}
               name={message.name}

@@ -14,7 +14,7 @@ export default function MessagesPage() {
   const { data, isLoading, error, mutate } = useSWR("/api/messages");
   const isAdmin = session?.user.name === "HungryOar";
   const router = useRouter();
-
+console.log("Data aus SWR in MessagesPage", data);
   if (isLoading) {
     return <Loading/>;
   }

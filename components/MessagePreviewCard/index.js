@@ -1,12 +1,7 @@
 import styled from "styled-components";
 
-
-export default function MessagePreviewCard( id, 
-  name,
-  text,
- date
- ) {
-  console.log("Name in Message", name);
+export default function MessagePreviewCard(id, name, text, date, data) {
+  console.log("Data in messagePreviewCard", data);
   console.log("Text in Message", text);
   async function handleDelete() {
     const responseMessage = await fetch(`/api/messages/${id}`, {
@@ -17,28 +12,37 @@ export default function MessagePreviewCard( id,
     }
 
     if (responseMessage.ok) {
-     router.push("/messages")
+      router.push("/messages");
     }
   }
   return (
     <>
       <StyledListItem>
         <Div>
-        {data.length===0? <StyledPDiv> <Par>You don&apos;t have any messages yet.</Par></StyledPDiv>:
+          {data.length === 0 ? (
+            <StyledPDiv>
+              {" "}
+              <Par>You don&apos;t have any messages yet.</Par>
+            </StyledPDiv>
+          ) : (
             <StyledDiv>
               <StyledName>{name}</StyledName>
               <StyledPDiv>
-                <StyledAddresse>Created at: {new Date(date).toLocaleString()}</StyledAddresse>
+                <StyledAddresse>
+                  Created at: {new Date(date).toLocaleString()}
+                </StyledAddresse>
                 <StyledAddresse>{text}</StyledAddresse>
               </StyledPDiv>
-              <button type="button" onClick={handleDelete}>Delete</button>
-            </StyledDiv>}
+              <button type="button" onClick={handleDelete}>
+                Delete
+              </button>
+            </StyledDiv>
+          )}
         </Div>
       </StyledListItem>
     </>
   );
 }
-
 
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);

@@ -9,17 +9,16 @@ import Loading from "../../components/NewLocationsList";
 } */
 
 export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo}) {
-
+ const { data: session } = useSession()
   const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);
 
-  function handleNewList(){
-setNewList(!newList);
-  }
  
-  const { data: session } = useSession()
+ 
+ 
   
   const { data, isLoading, error, mutate } = useSWR("/api/locations");
+
   if (isLoading) {
     return <Loading/>;
   }
@@ -31,6 +30,10 @@ setNewList(!newList);
 
   const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
   const hiddenData = data.filter((visibleLocation) => visibleLocation.visible === false)
+
+  function handleNewList(){
+    setNewList(!newList);
+      }
   console.log("Data visible", visibleData);
   console.log("Data hidden", hiddenData);
   return <>

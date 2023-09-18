@@ -12,10 +12,11 @@ export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locati
 
   const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);
+
   function handleNewList(){
 setNewList(!newList);
   }
-  console.log("Data from locPages", data);
+ 
   const { data: session } = useSession()
   
   const { data, isLoading, error, mutate } = useSWR("/api/locations");
@@ -26,8 +27,12 @@ setNewList(!newList);
   if (!data) {
     return <h1>Data cannot be loaded.</h1>;
   }
+  console.log("Data from locPages", data);
+
   const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
   const hiddenData = data.filter((visibleLocation) => visibleLocation.visible === false)
+  console.log("Data visible", visibleData);
+  console.log("Data hidden", hiddenData);
   return <>
   <Head> 
         <title>Locations</title>

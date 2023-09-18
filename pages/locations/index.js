@@ -19,7 +19,7 @@ setNewList(!newList);
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      {isAdmin? <button type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"New Location"} </button> :null}
+      {isAdmin? <button type="button" onClick={handleNewList}>{newList? "New Location":"Veröffentlichte Liste"} </button> :null}
       {newList? <NewLocationsList data={hiddenData} session={session} isAdmin={isAdmin} mutate={mutate}/>:
  <LocationsList data={visibleData} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
  </>

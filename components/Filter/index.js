@@ -24,7 +24,7 @@ export default function Filter({
             checked={rental === "ja"}
             onChange={onOptionChange}
           />
-          <label for="ja">ja</label>
+          <label htmlFor="ja">ja</label>
           <input
             type="radio"
             name="verleih"
@@ -33,7 +33,7 @@ export default function Filter({
             checked={rental === "nein"}
             onChange={onOptionChange}
           />
-          <label for="nein">nein</label>
+          <label htmlFor="nein">nein</label>
           <input
             type="radio"
             name="verleih"
@@ -42,14 +42,14 @@ export default function Filter({
             checked={rental === "egal"}
             onChange={onOptionChange}
           />
-          <label for="egal">egal</label>
+          <label htmlFor="egal">egal</label>
         </fieldset>
         <div>
           <legend>Was gibt`s:</legend>
           {menuTypes.map(
             (type) => (
               (
-                <label for={type.type} key={type.id}>
+                <label htmlFor={type.type} key={type.id}>
                   {type.type}
                   <input
                     type="checkbox"
@@ -78,10 +78,10 @@ export default function Filter({
               d="M32.0834 4.375H2.91675L14.5834 18.1708V27.7083L20.4167 30.625V18.1708L32.0834 4.375Z"
               fill="#839FD1"
               stroke="#040404"
-              stroke-opacity="0.78"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeOpacity="0.78"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </StyledHiddenButton>

@@ -20,23 +20,23 @@ export default function NavBar() {
           <path
             d="M5.125 10.25L15.375 5.125L25.625 10.25L35.875 5.125V30.75L25.625 35.875L15.375 30.75L5.125 35.875V10.25Z"
             stroke="white"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M15.375 5.125V30.75"
             stroke="white"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M25.625 10.25V35.875"
             stroke="white"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </StyledSvg>
         <StyledH4>Map </StyledH4>
@@ -69,44 +69,44 @@ export default function NavBar() {
           <path
             d="M13.6667 10.25H35.875"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M13.6667 20.5H35.875"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M13.6667 30.75H35.875"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M5.125 10.25H5.14137"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M5.125 20.5H5.14137"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M5.125 30.75H5.14137"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </StyledSvg>
         <StyledH4> List</StyledH4>
@@ -124,9 +124,9 @@ export default function NavBar() {
             d="M19.45 1C18.3626 1 17.3198 1.43196 16.5509 2.20086C15.782 2.96976 15.35 4.01261 15.35 5.1V15.35H5.1C4.01261 15.35 2.96976 15.782 2.20086 16.5509C1.43196 17.3198 1 18.3626 1 19.45V23.55C1 25.805 2.845 27.65 5.1 27.65H15.35V37.9C15.35 40.155 17.195 42 19.45 42H23.55C24.6374 42 25.6802 41.568 26.4491 40.7991C27.218 40.0302 27.65 38.9874 27.65 37.9V27.65H37.9C38.9874 27.65 40.0302 27.218 40.7991 26.4491C41.568 25.6802 42 24.6374 42 23.55V19.45C42 18.3626 41.568 17.3198 40.7991 16.5509C40.0302 15.782 38.9874 15.35 37.9 15.35H27.65V5.1C27.65 4.01261 27.218 2.96976 26.4491 2.20086C25.6802 1.43196 24.6374 1 23.55 1H19.45Z"
             fill="white"
             stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </StyledSvg>
         <StyledH4>Add </StyledH4>
@@ -143,16 +143,16 @@ export default function NavBar() {
           <path
             d="M34.1667 6.83325H6.83341C4.94644 6.83325 3.41675 8.36295 3.41675 10.2499V30.7499C3.41675 32.6369 4.94644 34.1666 6.83341 34.1666H34.1667C36.0537 34.1666 37.5834 32.6369 37.5834 30.7499V10.2499C37.5834 8.36295 36.0537 6.83325 34.1667 6.83325Z"
             stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M37.5834 11.9583L22.2597 21.6958C21.7323 22.0262 21.1225 22.2014 20.5001 22.2014C19.8777 22.2014 19.2679 22.0262 18.7405 21.6958L3.41675 11.9583"
             stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </StyledSvg>
         <StyledH4>{isAdmin ? "Messages" : "Contact"} </StyledH4>

@@ -13,20 +13,20 @@ export default function AddLocation({
   imageUrl,
   setImageUrl,
   noRental,
-  placeholderImage,
-setImageHeight,
-setImageWidth
+  setImageHeight,
+  setImageWidth,
 }) {
   const router = useRouter();
- 
-function onUpload(event){
-    setImageUrl(event.info.secure_url)
-    setImageHeight(event.info.height)
-    setImageWidth(event.info.width)
-}
-function handleHome() {
-  router.push("/");
-}
+  const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
+
+  function onUpload(event) {
+    setImageUrl(event.info.secure_url);
+    setImageHeight(event.info.height);
+    setImageWidth(event.info.width);
+  }
+  function handleHome() {
+    router.push("/");
+  }
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -160,19 +160,22 @@ function handleHome() {
         <label htmlFor="false">nein</label>
         <br />
         <br />
-        {noRental? <>
-        <label htmlFor="verleih">Was kann man ausleihen?:</label>
-        <br />
-        <textarea
-          type="text"
-          id="verleih"
-          name="verleih"
-          required
-          minlengh="3"
-          maxlengh="50"
-          placeholder="Kajak, SUP,..."
-          pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
-        /></>:null}
+        {noRental ? (
+          <>
+            <label htmlFor="verleih">Was kann man ausleihen?:</label>
+            <br />
+            <textarea
+              type="text"
+              id="verleih"
+              name="verleih"
+              required
+              minlengh="3"
+              maxlengh="50"
+              placeholder="Kajak, SUP,..."
+              pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+            />
+          </>
+        ) : null}
         <br />
         <br />
         <legend>Coordinaten:</legend>
@@ -203,10 +206,7 @@ function handleHome() {
         />
         <br />
         <br />
-        <CldUploadButton
-          uploadPreset="twyzoxpk"
-          onUpload={onUpload}
-        >
+        <CldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -220,13 +220,9 @@ function handleHome() {
           Bild hinzufügen
         </CldUploadButton>
         <br />
-        <br/>
+        <br />
         <CldImage
-          src={
-            imageUrl
-              ? imageUrl
-              : placeholderImage
-          }
+          src={imageUrl === null ? "https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg" : imageUrl}
           height={200}
           width={350}
           crop="thumb"

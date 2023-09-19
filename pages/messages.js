@@ -25,10 +25,10 @@ export default function MessagesPage() {
   function handleHome() {
     router.push("/");
   }
-  async function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(messageData) {
+   /*  event.preventDefault();
     const formData = new FormData(event.target);
-    const messageData = Object.fromEntries(formData);
+    const messageData = Object.fromEntries(formData); */
 
     const response = await fetch("/api/messages", {
       method: "POST",

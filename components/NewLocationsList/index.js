@@ -7,7 +7,7 @@ import LogInOutButton from "../LogInOutButton";
 export default function NewLocationsList({
   data,
   session,
-  mutate
+  mutate, isAdmin,
 }) {
     console.log("newListData", data);
   return (
@@ -17,7 +17,7 @@ export default function NewLocationsList({
         <LogInOutButton session={session} />
       </TitleSection>
       <StyledUl>
-        {data.length == 0 && favoritePage ? (
+        {data.length == 0 ? (
           <Par>You don&apos;t have any suggested locations yet.</Par>
         ) : (
           data?.map((location) => (
@@ -34,6 +34,8 @@ export default function NewLocationsList({
               visible={location.visible}
               data={location}
               menuType={location.art}
+              session={session}
+              
              
             />
           ))

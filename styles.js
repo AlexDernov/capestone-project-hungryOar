@@ -27,4 +27,8 @@ export default createGlobalStyle`
     width: auto;
     height: 53vh;
   }
+  .detailsPage {
+    width: auto;
+    height: 23vh;
+  }
 `;

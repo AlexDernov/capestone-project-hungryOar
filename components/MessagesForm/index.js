@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
 export default function MessagesForm({ onSubmit}) {
+  function handleSubmit(event){
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const messageData = Object.fromEntries(formData);
+    onSubmit(messageData)
+  }
   return (
-    <FormContainer onSubmit={onSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
         <p>Contact us!</p>
       <p>Here you can share your feedback, suggestions and criticism about this app and its content with us.</p>
       <label htmlFor="name"> Your Name (optional):</label>
@@ -25,7 +31,7 @@ export default function MessagesForm({ onSubmit}) {
         maxlengh="200"
         pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
       />
-      <button type="submit">Save</button>
+      <button type="submit" name="Save">Save</button>
     </FormContainer>
   );
 }

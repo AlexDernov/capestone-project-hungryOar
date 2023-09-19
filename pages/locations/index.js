@@ -5,6 +5,7 @@ import NewLocationsList from "../../components/NewLocationsList";
 import Loading from "../../components/NewLocationsList";
 import useSWR from "swr";
 import { useState } from "react";
+import styled from "styled-components";
 
 /* export function getServerSideProps(){
   const isAdmin = session?.user.name === "HungryOar";
@@ -45,8 +46,10 @@ export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locati
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-      {isAdmin? <button type="button" onClick={handleNewList}>{newList? "New Location":"Veröffentlichte Liste"} </button> :null}
-      {newList? <NewLocationsList data={hiddenData} session={session} isAdmin={isAdmin} mutate={mutate}/>:
+     {/*  {isAdmin?  */}<StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton>{/*  :null} */}
+      {newList? <NewLocationsList data={hiddenData} session={session} isAdmin={isAdmin} mutate={mutate} />:
  <LocationsList data={visibleData} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
  </>
 }
+const StyledButton = styled.button`
+margin-top: 100px`;

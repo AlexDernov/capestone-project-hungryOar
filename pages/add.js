@@ -30,7 +30,8 @@ export default function AddPage() {
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
   const [noRental, setNoRental] = useState(false);
-  const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
+  
+ 
 
   const menuCheck = menuTypes
     .filter((menuType) => menuType.checked)
@@ -71,6 +72,7 @@ export default function AddPage() {
         height: imageHeight || 751,
       },
       visible: false,
+      coords: [locationData.latitude, locationData.longitude],
     };
     const response = await fetch("/api/locations", {
       method: "POST",
@@ -114,7 +116,6 @@ export default function AddPage() {
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
               noRental={noRental}
-              placeholderImage={placeholderImage}
               setImageHeight={setImageHeight}
               setImageWidth={setImageWidth}
             />

@@ -46,7 +46,7 @@ export default function LocationsList({
               bild={location.bild}
               onToggleLiked={() => onToggleLiked(location?._id)}
               isLiked={
-                locationsInfo.find((locI) => locI.id === location._id)?.isLiked
+                locationsInfo?.find((locI) => locI.id === location._id)?.isLiked
               }
               newLocationPage={newLocationPage}
             />

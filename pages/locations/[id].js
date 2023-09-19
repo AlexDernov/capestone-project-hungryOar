@@ -23,6 +23,8 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
       </Head>
       <LocationDetails
         data={data}
+        name={data?.name}
+        id={data?._id}
         mutate={mutate}
         onToggleLiked={() => onToggleLiked(data?._id)}
         session={session}

@@ -10,6 +10,8 @@ import LogInOutButton from "../LogInOutButton";
 import EditMode from "../EditMode";
 import { useState } from "react";
 import { CldImage } from "next-cloudinary";
+import Map from "../Map";
+
 
 export default function LocationDetails({
   data,
@@ -17,11 +19,20 @@ export default function LocationDetails({
   onToggleLiked,
   isLiked,
   session,
+  name, id
 }) {
+ 
   const [isEditMode, setIsEditMode] = useState(false);
   const isAdmin = session?.user.name === "HungryOar";
+  const [detailsPage, setDetailsPage] = useState(false);
+
+
   function handleOnEditMode() {
-    setIsEditMode(!isEditMode);
+    setDetailsPage(!detailsPage);
+  }
+
+  function handleOnDetailsPage(){
+setDetailsPage(!detailsPage);
   }
   async function handleSubmit(event) {
     event.preventDefault();
@@ -38,7 +49,7 @@ export default function LocationDetails({
 
     if (responseNote.ok) {
       const locData = await responseNote.json();
-      const responseLocation = await fetch(`/api/locations/${data?._id}`, {
+      const responseLocation = await fetch(`/api/locations/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +73,8 @@ export default function LocationDetails({
           <FavoriteButton
             onToggleLiked={onToggleLiked}
             isLiked={isLiked}
-            id={data?._id}
+            id={id}
+            name={data?.name}
           />
         </Heading>
         <LogInOutButton session={session} />
@@ -82,6 +94,8 @@ export default function LocationDetails({
         ) : (
           <>
             <NavLink href="/locations"> ← Back</NavLink>
+            <button type="button" onClick={handleOnDetailsPage}>{detailsPage? "Map verstecken" : "Map anzeigen"}</button>
+           {detailsPage && <Map dataOne={data} detailsPage={detailsPage}/>} 
             <StyledDiv>
               <p>{data?.location}</p>
               <p>{data?.zeit}</p>

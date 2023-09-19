@@ -9,6 +9,6 @@ export default async function handler(request, response) {
     return response.status(200).json(messages);
   } else if (request.method === "DELETE") {
     await Message.findByIdAndDelete(id);
-    response.status(200).json({ message: "Note successfully deleted!" });
+    response.status(200).json({ message: "Message successfully deleted!" });
   }
 }

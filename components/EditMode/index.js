@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { CldUploadButton, CldImage } from "next-cloudinary";
 
-export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
+
+export default function EditMode({ data, handleOnEditMode, mutate, bild, session}) {
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: data?.art.includes("Cafe") },
     { type: "Bar", id: "Bar", checked: data?.art.includes("Bar") },
@@ -18,6 +19,7 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
+  const isAdmin = session?.user.name === "HungryOar";
   function onOptionChange() {
     setChecked(!checked);
   }
@@ -52,8 +54,9 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
         height: imageHeight || bild?.height,
       },
       verleih: locationData.verleih,
+      coords:  [locationData.latitude, locationData.longitude],
     };
-
+console.log("handleEditLocation");
     const response = await fetch(`/api/locations/${data?._id}`, {
       method: "PATCH",
       headers: {
@@ -62,6 +65,19 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
       body: JSON.stringify(editLocation),
     });
     if (response.ok) {
+      mutate();
+      handleOnEditMode();
+    }
+  }
+  async function handleDeleteLocation() {
+    const responseLocation = await fetch(`/api/locations/${data?._id}`, {
+      method: "DELETE",
+    });
+    if (!responseLocation.ok) {
+      return <h1>Something gone wrong!</h1>;
+    }
+
+    if (responseLocation.ok) {
       mutate();
       handleOnEditMode();
     }
@@ -75,7 +91,7 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
   return (
     <>
       <form onSubmit={handleEditLocation}>
-        <label htmlFor="title"> Location:</label>
+        <label htmlFor="name"> Location:</label>
         <br />
         <textarea
           type="text"
@@ -88,7 +104,7 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="addresse"> Addresse: </label>
+        <label htmlFor="location"> Addresse: </label>
         <br />
         <textarea
           type="text"
@@ -102,7 +118,7 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="title"> Öffnungszeiten:</label>
+        <label htmlFor="zeit"> Öffnungszeiten:</label>
         <br />
         <textarea
           type="text"
@@ -115,9 +131,9 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <legend htmlFor="addresse"> MenuArt: </legend>
+        <legend> MenuArt: </legend>
         {menuTypes.map((type) => (
-          <label for={type.type} key={type.id}>
+          <label htmlFor={type.type} key={type.id}>
             {type.type}
             <input
               type="checkbox"
@@ -165,6 +181,37 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
+        <br />
+        <legend>Coordinaten:</legend>
+        <label htmlFor="addresse"> </label>
+
+        <textarea
+          type="number"
+          id="latitude"
+          name="latitude"
+          minlengh="8"
+          min="53"
+          max="54"
+          required={isAdmin? true: false}
+          maxlengh="11"
+          placeholder="Breitengrad: z.B. 53.571389"
+          pattern="/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g"
+        />
+        <br />
+
+        <textarea
+          type="number"
+          id="longitude"
+          name="longitude"
+          minlengh="8"
+          min="9"
+          max="11"
+          required={isAdmin? true: false}
+          maxlengh="11"
+          placeholder="Längengrad: z.B. 9.964722"
+          pattern="/^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g"
+        />
+        <br />
         <CldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -193,6 +240,9 @@ export default function EditMode({ data, handleOnEditMode, mutate, bild }) {
         <button type="button" onClick={handleOnEditMode}>
           Cancel
         </button>
+        <button type="button" onClick={handleDeleteLocation}>
+                Delete
+              </button>
       </form>
     </>
   );

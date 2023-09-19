@@ -35,7 +35,7 @@ export default function LocationPreviewCard({
         <NavLink href={`/locations/${id}`}>
           <StyledImgDiv>
             <StyledImage
-              src={bild.img}
+              src={bild?.img}
               height={100}
               width={350}
               crop="fill"

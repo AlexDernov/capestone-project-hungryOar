@@ -15,7 +15,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     "locationsInfo",
     { defaultValue: [] }
   );
- 
+  
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isLoading, error, mutate } = useSWR("/api/locations", fetcher);
 
@@ -51,6 +51,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
             data={data}
             onToggleLiked={handleToggleLiked}
             locationsInfo={locationsInfo}
+           
            
           
           /> 

@@ -27,8 +27,8 @@ export default createGlobalStyle`
     width: auto;
     height: 53vh;
   }
-  .detailsPage {
+  .mapForOne {
     width: auto;
-    height: 23vh;
+    height: 30vh;
   }
 `;

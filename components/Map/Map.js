@@ -86,7 +86,8 @@ export default function Map({ locationsInfo, data, detailsPage, dataOne }) {
     iconSize: [25, 25],
     iconAnchor: [0, 25],
   });
-
+console.log("DataOne", dataOne);
+console.log("Data", data);
   return (
     <>
         {detailsPage? null: 
@@ -121,8 +122,8 @@ export default function Map({ locationsInfo, data, detailsPage, dataOne }) {
             )?.isLiked;
             return (
               <Marker
-                key={detailsPage ? dataOne?._id : location._id}
-                position={detailsPage ? dataOne?.coords : location.coords || null}
+                key={detailsPage ? dataOne?._id : location?._id}
+                position={detailsPage ? dataOne?.coords : location.coords /* || null */}
                 icon={!isLiked ? locationOnIcon : locationOnIconFav}
               >
                 {detailsPage ? (

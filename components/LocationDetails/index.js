@@ -87,7 +87,7 @@ export default function LocationDetails({
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
               </button>
             </Div>
-            {detailsPage && <Map dataOne={data} detailsPage={detailsPage} />}
+            {detailsPage && <StyledMap dataOne={data} detailsPage={detailsPage} /> } 
             <StyledDiv>
               <Options>
                 <H2>Adresse: </H2>
@@ -216,6 +216,9 @@ const NavLink = styled(Link)`
     font-size: 1.2em;
   }
 `;
+const StyledMap = styled(Map)`
+display: ${({ detailsPage }) => (detailsPage ? "block": "none" )};`;
+
 const StyledArtSection = styled.section`
   margin-left: 0px;
   padding-left: 0px;

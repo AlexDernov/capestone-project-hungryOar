@@ -67,131 +67,134 @@ export default function LocationDetails({
   return (
     <>
       <StyledArticle>
-        {/*     {isEditMode === false && isAdmin ? ( */}
-        <ButtonEdit onClick={handleOnEditMode}>Edit Mode</ButtonEdit>
-        {/*   ) : null} */}
+        {isEditMode === false && isAdmin ? (
+          <ButtonEdit onClick={handleOnEditMode}>Edit Mode</ButtonEdit>
+        ) : null}
         <br />
-         {isEditMode ===true ? (
-        <EditMode
-          data={data}
-          bild={data?.bild}
-          handleOnEditMode={handleOnEditMode}
-          mutate={mutate}
-        />
-            ) : ( 
-        <>
-        <Div>
-          <NavLink href="/locations"> ← Back</NavLink>
-          <br/>
-            <button type="button" onClick={handleOnDetailsPage}>{detailsPage? "Map verstecken" : "Map anzeigen"}</button></Div>
-           {detailsPage && <Map dataOne={data} detailsPage={detailsPage}/>} 
-          <StyledDiv>
-            <Options>
-              <H2>Adresse: </H2>
+        {isEditMode === true ? (
+          <EditMode
+            data={data}
+            bild={data?.bild}
+            handleOnEditMode={handleOnEditMode}
+            mutate={mutate}
+          />
+        ) : (
+          <>
+            <Div>
+              <NavLink href="/locations"> ← Back</NavLink>
               <br />
-              <P>{data?.location}</P>
-              <H2>Öffnungszeiten: </H2>
+              <button type="button" onClick={handleOnDetailsPage}>
+                {detailsPage ? "Map verstecken" : "Map anzeigen"}
+              </button>
+            </Div>
+            {detailsPage && <Map dataOne={data} detailsPage={detailsPage} />}
+            <StyledDiv>
+              <Options>
+                <H2>Adresse: </H2>
+                <br />
+                <P>{data?.location}</P>
+                <H2>Öffnungszeiten: </H2>
+                <br />
+                <P>{data?.zeit}</P>
+                <StyledArtSection>
+                  <OptionsP>Was gibt&apos;s:</OptionsP>
+                  {menu?.map((artStück) =>
+                    artStück === "Cafe" ? (
+                      <Image
+                        key={1}
+                        src="/images/CafeIcon.svg"
+                        width={71}
+                        height={45}
+                        alt="Cafe icon"
+                      />
+                    ) : artStück === "Restaurant" ? (
+                      <Image
+                        key={2}
+                        src="/images/RestaurantIcon.svg"
+                        width={71}
+                        height={44}
+                        alt="Restaurant-icon"
+                      />
+                    ) : artStück === "Bar" ? (
+                      <Image
+                        key={3}
+                        src="/images/BarIcon.svg"
+                        width={57}
+                        height={44}
+                        alt="Bar-icon"
+                      />
+                    ) : artStück === "Kuchen" ? (
+                      <Image
+                        key={4}
+                        src="/images/KuchenIcon.svg"
+                        width={71}
+                        height={44}
+                        alt="Kuchen-icon"
+                      />
+                    ) : artStück === "Eis" ? (
+                      <Image
+                        key={5}
+                        src="/images/EisIcon.svg"
+                        width={57}
+                        height={45}
+                        alt="Eis-icon"
+                      />
+                    ) : artStück === "Snacks" ? (
+                      <Image
+                        key={6}
+                        src="/images/SnacksIcon.svg"
+                        width={71}
+                        height={44}
+                        alt="Snacks-icon"
+                      />
+                    ) : (
+                      []
+                    )
+                  )}
+                </StyledArtSection>
+                <H2> Was kann man ausleihen:</H2> <br />
+                <P>
+                  {data?.verleih === "-" || ""
+                    ? "Leider, kein Verleih möglich"
+                    : data?.verleih}
+                </P>
+              </Options>
+              <CldImage
+                src={data?.bild.img}
+                height={300}
+                width={350}
+                crop="fill"
+                gravity="auto"
+                alt={data?.name}
+              />
               <br />
-              <P>{data?.zeit}</P>
-          
-
-            <StyledArtSection>
-              <OptionsP>Was gibt&apos;s:</OptionsP>
-              {menu?.map((artStück) =>
-                artStück === "Cafe" ? (
-                  <Image
-                    key={1}
-                    src="/images/CafeIcon.svg"
-                    width={71}
-                    height={45}
-                    alt="Cafe icon"
+            </StyledDiv>
+            <NotesForm locData={data} onSubmit={handleSubmit} />
+            <StyledUl>
+              <H2>Your notes:</H2>
+              {data?.notes.length > 0 &&
+                data?.notes?.map((note) => (
+                  <Note
+                    key={note._id}
+                    note={note}
+                    locatData={data}
+                    mutate={mutate}
                   />
-                ) : artStück === "Restaurant" ? (
-                  <Image
-                    key={2}
-                    src="/images/RestaurantIcon.svg"
-                    width={71}
-                    height={44}
-                    alt="Restaurant-icon"
-                  />
-                ) : artStück === "Bar" ? (
-                  <Image
-                    key={3}
-                    src="/images/BarIcon.svg"
-                    width={57}
-                    height={44}
-                    alt="Bar-icon"
-                  />
-                ) : artStück === "Kuchen" ? (
-                  <Image
-                    key={4}
-                    src="/images/KuchenIcon.svg"
-                    width={71}
-                    height={44}
-                    alt="Kuchen-icon"
-                  />
-                ) : artStück === "Eis" ? (
-                  <Image
-                    key={5}
-                    src="/images/EisIcon.svg"
-                    width={57}
-                    height={45}
-                    alt="Eis-icon"
-                  />
-                ) : artStück === "Snacks" ? (
-                  <Image
-                    key={6}
-                    src="/images/SnacksIcon.svg"
-                    width={71}
-                    height={44}
-                    alt="Snacks-icon"
-                  />
-                ) : (
-                  []
-                )
-              )}
-            </StyledArtSection>
-           
-              <H2> Was kann man ausleihen:</H2> <br />
-              <P>
-                {data?.verleih === "-" || "" ? "Leider, kein Verleih möglich" : data?.verleih}
-              </P>
-            </Options>
-            <CldImage
-              src={data?.bild.img}
-              height={300}
-              width={350}
-              crop="fill"
-              gravity="auto"
-              alt={data?.name}
-            />
-            <br />
-          </StyledDiv>
-          <NotesForm locData={data} onSubmit={handleSubmit} />
-          <StyledUl>
-            <H2>Your notes:</H2>
-            {data?.notes.length > 0 &&
-              data?.notes?.map((note) => (
-                <Note
-                  key={note._id}
-                  note={note}
-                  locatData={data}
-                  mutate={mutate}
-                />
-              ))}
-          </StyledUl>
-        </>
-        ) } 
+                ))}
+            </StyledUl>
+          </>
+        )}
       </StyledArticle>
     </>
   );
 }
 
-const Div =styled.div`
-display: flex;
-justify-content: space-between;
+const Div = styled.div`
+  display: flex;
+  justify-content: space-between;
 
-width: 359px`;
+  width: 359px;
+`;
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
@@ -221,14 +224,13 @@ const StyledArtSection = styled.section`
   grid-template-columns: 71px 71px 71px 71px;
   row-gap: 20px;
   column-gap: 0;
-  
 `;
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
-  padding:0;
+  padding: 0;
   text-align: center;
 `;
 
@@ -246,7 +248,7 @@ const Options = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin:10px;
+  margin: 10px;
 `;
 
 const OptionsP = styled.p`
@@ -286,7 +288,7 @@ const H2 = styled.p`
   font-weight: bold;
 `;
 const ButtonEdit = styled.button`
-position: fixed;
-right: 20px;
-top : 55px;
+  position: fixed;
+  right: 20px;
+  top: 55px;
 `;

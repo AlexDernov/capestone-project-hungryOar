@@ -27,7 +27,7 @@ export default function LocationDetails({
 
   console.log("Menu", menu);
   function handleOnEditMode() {
-    setDetailsPage(!detailsPage);
+    setIsEditMode(!isEditMode);
   }
 
   function handleOnDetailsPage() {

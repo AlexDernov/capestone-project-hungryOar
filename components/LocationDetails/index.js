@@ -71,7 +71,7 @@ export default function LocationDetails({
           <ButtonEdit onClick={handleOnEditMode}>Edit Mode</ButtonEdit>
         ) : null}
         <br />
-        {isEditMode === true ? (
+        {isEditMode ? (
           <EditMode
             data={data}
             bild={data?.bild}

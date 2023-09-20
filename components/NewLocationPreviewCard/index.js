@@ -76,7 +76,7 @@ export default function NewLocationPreviewCard({
                 </Options>
 
                 <StyledArtSection>
-                  <OptionsP>Was gibt's:</OptionsP>
+                  <OptionsP>Was gibt&apos;s:</OptionsP>
                   {menuType?.map((artStück) =>
                     artStück === "Cafe" ? (
                       <Image

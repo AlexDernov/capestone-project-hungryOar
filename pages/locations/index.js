@@ -47,9 +47,9 @@ export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locati
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
      {/*  {isAdmin?  */}<StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton>{/*  :null} */}
-      {newList? <NewLocationsList data={hiddenData} session={session} isAdmin={isAdmin} mutate={mutate} />:
- <LocationsList data={visibleData} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
+      {newList? <NewLocationsList isAdmin={isAdmin} data={hiddenData} session={session} mutate={mutate} />:
+ <LocationsList data={visibleData} isAdmin={isAdmin} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
  </>
 }
 const StyledButton = styled.button`
-margin-top: 100px`;
+margin-top: 76px`;

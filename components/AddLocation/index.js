@@ -30,7 +30,7 @@ export default function AddLocation({
   return (
     <>
       <form onSubmit={onSubmit}>
-        <label htmlFor="name"> Location:</label>
+        <Label htmlFor="name"> Location:</Label>
         <br />
         <textarea
           type="text"
@@ -43,7 +43,7 @@ export default function AddLocation({
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="location"> Addresse: </label>
+        <Label htmlFor="location"> Addresse: </Label>
         <br />
         <textarea
           type="text"
@@ -57,7 +57,7 @@ export default function AddLocation({
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="zeit"> Öffnungszeiten:</label>
+        <Label htmlFor="zeit"> Öffnungszeiten:</Label>
         <br />
         <textarea
           type="text"
@@ -71,7 +71,7 @@ export default function AddLocation({
         />
         <br />
 
-        <legend> MenuArt: </legend>
+        <Legend> Was gibt&apos;s: </Legend>
         <StyledArtSection>
           {menuTypes.map((type) => (
             <label htmlFor={type.type} key={type.id}>
@@ -137,48 +137,52 @@ export default function AddLocation({
             </label>
           ))}
         </StyledArtSection>
-        <br />
-        <legend>Verleih Möglichkeit</legend>
-        <input
-          type="radio"
-          name="verleihOpt"
-          value="true"
-          id="true"
-          checked={checked}
-          onChange={onOptionChange}
-        />
-        <label htmlFor="true">ja</label>
-        <br />
-        <input
-          type="radio"
-          name="verleihOpt"
-          value="false"
-          id="false"
-          checked={!checked}
-          onChange={onOptionChange}
-        />
-        <label htmlFor="false">nein</label>
-        <br />
-        <br />
-        {noRental ? (
-          <>
-            <label htmlFor="verleih">Was kann man ausleihen?:</label>
-            <br />
-            <textarea
-              type="text"
-              id="verleih"
-              name="verleih"
-              required
-              minlengh="3"
-              maxlengh="50"
-              placeholder="Kajak, SUP,..."
-              pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+
+        <Legend>Verleih Möglichkeit</Legend>
+        <Div>
+          <LabelP htmlFor="true">
+            {" "}
+            <input
+              type="radio"
+              name="verleihOpt"
+              value="true"
+              id="true"
+              checked={checked}
+              onChange={onOptionChange}
             />
-          </>
-        ) : null}
+            ja
+          </LabelP>
+          <br />
+          <LabelP htmlFor="false">
+            {" "}
+            <input
+              type="radio"
+              name="verleihOpt"
+              value="false"
+              id="false"
+              checked={!checked}
+              onChange={onOptionChange}
+            />
+            nein
+          </LabelP>
+        </Div>
         <br />
-        <br />
-        <legend>Coordinaten:</legend>
+        <LabelVerleih htmlFor="verleih" noRental={noRental}>
+          Was kann man ausleihen?:
+          <br />
+          <textarea
+            type="text"
+            id="verleih"
+            name="verleih"
+            required
+            minlengh="3"
+            maxlengh="50"
+            placeholder="Kajak, SUP,..."
+            pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+          />
+        </LabelVerleih>
+
+        <Legend>Coordinaten:</Legend>
 
         <textarea
           type="number"
@@ -222,7 +226,11 @@ export default function AddLocation({
         <br />
         <br />
         <CldImage
-          src={imageUrl === null ? "https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg" : imageUrl}
+          src={
+            imageUrl === null
+              ? "https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg"
+              : imageUrl
+          }
           height={200}
           width={350}
           crop="thumb"
@@ -244,8 +252,17 @@ const StyledLink = styled(Link)`
   color: black;
 `;
 
+const Div = styled.div`
+  width: 120px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 const StyledArtSection = styled.section`
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 0;
   padding-left: 27px;
   padding-right: 27px;
   display: grid;
@@ -253,4 +270,46 @@ const StyledArtSection = styled.section`
   row-gap: 20px;
   column-gap: 10px;
   position: center;
+`;
+const LabelP = styled.p`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  font-style: oblique;
+`;
+const Label = styled.label`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+`;
+const Legend = styled.legend`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0;
+`;
+const LabelVerleih = styled.label`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0px;
+  display: ${({ noRental }) => (noRental ? "block" : "none")};
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0;
 `;

@@ -202,6 +202,7 @@ text-shadow: 2px 2px 4px 0px #fff;
 font-family: Roboto Slab;
 font-size: 18px;
 margin-top:10px;
+font-weight: bold;
 margin-bottom:0;
 padding:0;
 `;

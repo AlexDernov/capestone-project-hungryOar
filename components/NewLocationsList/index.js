@@ -16,7 +16,7 @@ export default function NewLocationsList({
           <Heading>New Locations</Heading>
         <LogInOutButton session={session} />
       </TitleSection>
-      <StyledUl>
+      <StyledUl isAdmin={isAdmin}>
         {data.length == 0 ? (
           <Par>You don&apos;t have any suggested locations yet.</Par>
         ) : (
@@ -46,9 +46,8 @@ export default function NewLocationsList({
 }
 const StyledUl = styled.ul`
   padding: 0;
-  margin-top: 90px;
+  margin-top: ${({ isAdmin }) => (isAdmin ? 10 : 90)}px;
   margin-bottom: 105px;
- 
   display: grid;
   grid-template-columns: 375px;
   gap: 1rem;

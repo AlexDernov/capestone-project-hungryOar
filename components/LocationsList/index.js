@@ -10,7 +10,8 @@ export default function LocationsList({
   locationsInfo,
   favoritePage,
   session,
-  newLocationPage
+  newLocationPage,
+   isAdmin
 }) {
   
  
@@ -33,7 +34,7 @@ export default function LocationsList({
           list.
         </p>
       ) : null} */}
-      <StyledUl>
+      <StyledUl isAdmin={isAdmin}>
         {data.length == 0 && favoritePage ? (
           <Par>You don&apos;t have any favorite locations yet</Par>
         ) : (
@@ -58,7 +59,7 @@ export default function LocationsList({
 }
 const StyledUl = styled.ul`
   padding: 0;
-  margin-top: 90px;
+  margin-top: ${({ isAdmin }) => (isAdmin ? 10 : 90)}px;
   margin-bottom: 105px;
  
   display: grid;

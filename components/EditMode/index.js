@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CldUploadButton, CldImage } from "next-cloudinary";
-
+import Image from "next/image";
 
 export default function EditMode({ data, handleOnEditMode, mutate, bild, session}) {
   const [menuTypes, setMenuTypes] = useState([
@@ -192,6 +192,7 @@ console.log("handleEditLocation");
           minlengh="8"
           min="53"
           max="54"
+          defaultValue={data?.coords[0]}
           required={isAdmin? true: false}
           maxlengh="11"
           placeholder="Breitengrad: z.B. 53.571389"
@@ -208,6 +209,7 @@ console.log("handleEditLocation");
           max="11"
           required={isAdmin? true: false}
           maxlengh="11"
+          defaultValue={data?.coords[1]}
           placeholder="Längengrad: z.B. 9.964722"
           pattern="/^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g"
         />

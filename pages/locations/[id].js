@@ -3,6 +3,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import {useSession } from "next-auth/react";
+import FavoriteButton from "@/components/FavoriteButton";
+import LogInOutButton from "@/components/LogInOutButton";
+import TitleSection from "@/components/TitleSection";
+import Heading from "@/components/Heading";
 
 export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
   const { data: session } = useSession();
@@ -21,6 +25,18 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
+      <TitleSection>
+        <Heading>
+          {data?.name}
+          <FavoriteButton
+            onToggleLiked={onToggleLiked}
+            isLiked={locationsInfo.find((locI) => locI.id === data?._id)?.isLiked}
+            id={data?.id}
+            name={data?.name}
+          />
+        </Heading>
+        <LogInOutButton session={session} />
+      </TitleSection>
       <LocationDetails
         data={data}
         name={data?.name}

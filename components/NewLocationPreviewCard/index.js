@@ -13,7 +13,6 @@ export default function NewLocationPreviewCard({
   zeit,
   mutate,
   verleih,
-  visible,
   data,
   menuType,
   session,
@@ -23,7 +22,7 @@ export default function NewLocationPreviewCard({
     setIsEditMode(!isEditMode);
   }
   console.log("Data from NewLocPreviewCard", data);
-  
+
   async function handleOnTakeOver() {
     const approved = { visible: true };
     const response = await fetch(`/api/locations/${id}`, {
@@ -156,55 +155,39 @@ export default function NewLocationPreviewCard({
   );
 }
 
-/* const StyledImage = styled(CldImage)`
-max-width: 100% 
-height: auto
-mode: thumb
-padding: 10px;
-margin: 0;
-justify-content: center;
-`;
-const StyledImgDiv = styled.div`
-max-width: 100%
-margin: 10px;
-padding-left: 13px;
-display: grid;
-align-self: center;
-height: 105px
-`; */
 const OptionsP = styled.p`
-margin-top: 10px;
-margin-bottom:0;
-padding:0;
-color: #040404;
-text-align: left;
-text-shadow: 2px 2px 4px 0px #fff;
-
-font-family: Roboto Slab;
-  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 0;
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-weight: bold;
+  font-family: Roboto Slab;
+  font-size: 18px;
   grid-row: 1 / span3;
   grid-column: 1 / span2;
 `;
 const P = styled.p`
-color: #040404;
-text-align: left;
-text-shadow: 2px 2px 4px 0px #fff;
-font-family: Roboto Slab;
-font-size: 18px;
-margin-top:0;
-padding:0;
-font-style: oblique;
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0;
+  padding: 0;
+  font-style: oblique;
 `;
 const H2 = styled.p`
-color: #040404;
-text-align: left;
-text-shadow: 2px 2px 4px 0px #fff;
-font-family: Roboto Slab;
-font-size: 18px;
-margin-top:10px;
-font-weight: bold;
-margin-bottom:0;
-padding:0;
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0;
 `;
 
 const Options = styled.div`

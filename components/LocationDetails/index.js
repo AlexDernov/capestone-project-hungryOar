@@ -66,22 +66,10 @@ export default function LocationDetails({
 
   return (
     <>
-      <TitleSection>
-        <Heading>
-          {data?.name}
-          <FavoriteButton
-            onToggleLiked={onToggleLiked}
-            isLiked={isLiked}
-            id={id}
-            name={data?.name}
-          />
-        </Heading>
-        <LogInOutButton session={session} />
-      </TitleSection>
       <StyledArticle>
-            {isEditMode === false && isAdmin ? (
-        <button onClick={handleOnEditMode}>Edit Mode</button>
-          ) : null}
+        {/*     {isEditMode === false && isAdmin ? ( */}
+        <ButtonEdit onClick={handleOnEditMode}>Edit Mode</ButtonEdit>
+        {/*   ) : null} */}
         <br />
          {isEditMode ===true ? (
         <EditMode
@@ -92,9 +80,11 @@ export default function LocationDetails({
         />
             ) : ( 
         <>
+        <Div>
           <NavLink href="/locations"> ← Back</NavLink>
-          {/*   <button type="button" onClick={handleOnDetailsPage}>{detailsPage? "Map verstecken" : "Map anzeigen"}</button>
-           {detailsPage && <Map dataOne={data} detailsPage={detailsPage}/>}  */}
+          <br/>
+            <button type="button" onClick={handleOnDetailsPage}>{detailsPage? "Map verstecken" : "Map anzeigen"}</button></Div>
+           {detailsPage && <Map dataOne={data} detailsPage={detailsPage}/>} 
           <StyledDiv>
             <Options>
               <H2>Adresse: </H2>
@@ -197,10 +187,17 @@ export default function LocationDetails({
   );
 }
 
+const Div =styled.div`
+display: flex;
+justify-content: space-between;
+
+width: 359px`;
+
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
   margin-top: 110px;
   margin-bottom: 90px;
+  position: relativ;
   height: 100%;
   line-height: 120%;
   padding: 10px;
@@ -287,4 +284,9 @@ const H2 = styled.p`
   margin-bottom: 0;
   padding: 0;
   font-weight: bold;
+`;
+const ButtonEdit = styled.button`
+position: fixed;
+right: 20px;
+top : 55px;
 `;

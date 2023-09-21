@@ -68,9 +68,7 @@ export default function LocationDetails({
   return (
     <>
       <StyledArticle>
-        {isEditMode === false && isAdmin ? (
-          <ButtonEdit onClick={handleOnEditMode}>Edit Mode</ButtonEdit>
-        ) : null}
+       
         <br />
         {isEditMode ? (
           <EditMode
@@ -84,6 +82,9 @@ export default function LocationDetails({
             <NavLink href="/locations"> ← Back</NavLink>
             <br /> <br />
             <Div>
+            {isEditMode === false && isAdmin ? (
+          <StyledColorButtonKl onClick={handleOnEditMode}>Edit Mode</StyledColorButtonKl>
+        ) : null}
               <StyledColorButton type="button" onClick={handleOnDetailsPage}>
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
               </StyledColorButton>
@@ -230,6 +231,7 @@ const DivForm = styled.div`
 
 const Div = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 90vw;
 `;
@@ -342,8 +344,4 @@ const H2 = styled.p`
   padding: 0;
   font-weight: bold;
 `;
-const ButtonEdit = styled(StyledColorButtonKl)`
-position: fixed;
-right: 20px;
-top: 105px; 
-`;
+

@@ -29,18 +29,17 @@ const P = styled.p`
   text-shadow: 2px 2px 4px 0px #fff;
   font-family: Roboto Slab;
   font-size: 16px;
-  margin-top: 0;
+  margin: 0;
   padding: 0;
   font-style: oblique;
 `;
 const StyledLoginContainer = styled.div`
   position: fixed;
-  top: 2px;
+  top: 5px;
   right: 5px;
   font-size: 0.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 5px;
   margin-right: 15px;
 `;

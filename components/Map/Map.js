@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import Filter from "../Filter";
 
-export default function Map({ locationsInfo, data, detailsPage, dataOne }) {
+export default function Map({ locationsInfo, data, detailsPage }) {
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: false },
     { type: "Bar", id: "Bar", checked: false },
@@ -29,17 +29,21 @@ export default function Map({ locationsInfo, data, detailsPage, dataOne }) {
   const menuCheck = menuTypes
     .filter((menuType) => menuType.checked)
     .map((menuTypeChecked) => menuTypeChecked.type);
-
+   
+   let filterdData = data;
+    if(data.length > 1){
   const filterOfRental = data?.filter((loc) =>
+  
     rental === "ja"
       ? loc.verleihOpt === true
       : rental === "nein"
       ? loc.verleihOpt === false
       : true
   );
-  const filterdData = filterOfRental?.filter((location) =>
+   filterdData = filterOfRental?.filter((location) =>
     menuCheck.every((menu) => location.art.includes(menu))
-  );
+  );}
+  
 
   function handleFilter(id) {
     setMenuTypes(
@@ -86,8 +90,7 @@ export default function Map({ locationsInfo, data, detailsPage, dataOne }) {
     iconSize: [25, 25],
     iconAnchor: [0, 25],
   });
-console.log("DataOne", dataOne);
-console.log("Data", data);
+
   return (
     <>
         {detailsPage? null: 
@@ -114,37 +117,26 @@ console.log("Data", data);
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright"> OpenStreetMap
           </a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-
+   />
           {filterdData?.map((location) => {
-            const isLiked = locationsInfo.find(
+            const isLiked = locationsInfo?.find(
               (locI) => locI.id === location._id
             )?.isLiked;
             return (
               <Marker
-                key={detailsPage ? dataOne?._id : location?._id}
-                position={detailsPage ? dataOne?.coords : location.coords /* || null */}
+                key={location?._id}
+                position={location?.coords || null}
                 icon={!isLiked ? locationOnIcon : locationOnIconFav}
               >
-                {detailsPage ? (
-                  <>
-                    {" "}
-                    <Popup>
-                      <PopHead>
-                        <strong>{dataOne?.name}</strong>
-                      </PopHead>
-                    </Popup>
-                  </>
-                ) : (
                   <NavLink href={`/locations/${location._id}`}>
                     <Popup>
                       <PopHead>
-                        <strong>{location.name}</strong>
+                        <strong>{location?.name}</strong>
                       </PopHead>
                       <PopLink>Click für mehr Infos</PopLink>
                     </Popup>
                   </NavLink>
-                )}
+           )
               </Marker>
             );
           })}

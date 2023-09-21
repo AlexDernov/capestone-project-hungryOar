@@ -87,7 +87,7 @@ export default function LocationDetails({
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
               </button>
             </Div>
-            {detailsPage && <StyledMap dataOne={data} detailsPage={detailsPage} /> } 
+            {detailsPage && <StyledMap data={[data]} detailsPage={detailsPage} /> } 
             <StyledDiv>
               <Options>
                 <H2>Adresse: </H2>
@@ -201,7 +201,7 @@ const StyledArticle = styled.article`
   margin-top: 110px;
   margin-bottom: 90px;
   position: relativ;
-  height: 100%;
+  height: auto;
   line-height: 120%;
   padding: 10px;
 `;

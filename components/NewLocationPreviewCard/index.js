@@ -4,6 +4,10 @@ import { CldImage } from "next-cloudinary";
 import EditMode from "../EditMode";
 import Image from "next/image";
 import { useState } from "react";
+import {
+  StyledColorButtonTakeOver,
+  StyledColorButtonKl,
+} from "../StyledColorButton";
 
 export default function NewLocationPreviewCard({
   name,
@@ -15,7 +19,7 @@ export default function NewLocationPreviewCard({
   verleih,
   data,
   menuType,
-  session,
+  session, noRental, setNoRental
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
   function handleOnEditMode() {
@@ -42,10 +46,15 @@ export default function NewLocationPreviewCard({
       <StyledListItem>
         {isEditMode === false ? (
           <>
-            <button onClick={handleOnEditMode}>Edit Mode</button>
-            <button onClick={handleOnTakeOver}>
-              Übernehmen in die Hauptliste
-            </button>
+            <DivButton>
+              <StyledColorButtonKl onClick={handleOnEditMode}>
+                Edit Mode
+              </StyledColorButtonKl>
+            
+              <StyledColorButtonTakeOver onClick={handleOnTakeOver}>
+                Übernehmen in die Hauptliste
+              </StyledColorButtonTakeOver>
+            </DivButton>
           </>
         ) : null}
         <br />
@@ -56,6 +65,7 @@ export default function NewLocationPreviewCard({
             handleOnEditMode={handleOnEditMode}
             mutate={mutate}
             session={session}
+            noRental={noRental} setNoRental={setNoRental}
           />
         ) : (
           <>
@@ -134,7 +144,7 @@ export default function NewLocationPreviewCard({
                 <Options>
                   <H2> Was kann man ausleihen:</H2> <br />
                   <P>
-                    {verleih === "-" ? "Leider, kein Verleih möglich" : verleih}
+                    {data?.verleih === "" ? "Leider, kein Verleih möglich" : data?.verleih}
                   </P>
                 </Options>
                 <CldImage
@@ -154,7 +164,14 @@ export default function NewLocationPreviewCard({
     </>
   );
 }
-
+const DivButton = styled.div`
+padding-top: 10px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const OptionsP = styled.p`
   margin-top: 10px;
   margin-bottom: 0;

@@ -1,16 +1,20 @@
 import styled from "styled-components";
+import { StyledColorButton } from "../StyledColorButton";
 
-export default function MessagesForm({ onSubmit}) {
-  function handleSubmit(event){
+export default function MessagesForm({ onSubmit }) {
+  function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const messageData = Object.fromEntries(formData);
-    onSubmit(messageData)
+    onSubmit(messageData);
   }
   return (
     <FormContainer onSubmit={handleSubmit}>
-        <p>Contact us!</p>
-      <p>Here you can share your feedback, suggestions and criticism about this app and its content with us.</p>
+      <p>Contact us!</p>
+      <p>
+        Here you can share your feedback, suggestions and criticism about this
+        app and its content with us.
+      </p>
       <label htmlFor="name"> Your Name (optional):</label>
       <Input
         type="text"
@@ -31,7 +35,11 @@ export default function MessagesForm({ onSubmit}) {
         maxlengh="200"
         pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
       />
-      <button type="submit" name="Save">Save</button>
+      <DivButton>
+        <StyledColorButton type="submit" name="Save">
+          Save
+        </StyledColorButton>
+      </DivButton>
     </FormContainer>
   );
 }
@@ -39,7 +47,14 @@ const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
   margin: 10px;
-  padding-bottom: 350px
+  padding-bottom: 350px;
+`;
+const DivButton = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+ align-items: center;
 `;
 const Input = styled.input`
   padding: 0.5rem;

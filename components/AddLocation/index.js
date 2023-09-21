@@ -3,6 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { CldUploadButton, CldImage } from "next-cloudinary";
+import { StyledColorButtonKl } from "../StyledColorButton";
 
 export default function AddLocation({
   onSubmit,
@@ -17,7 +18,7 @@ export default function AddLocation({
   setImageWidth,
 }) {
   const router = useRouter();
-  const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
+const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
 
   function onUpload(event) {
     setImageUrl(event.info.secure_url);
@@ -32,7 +33,7 @@ export default function AddLocation({
       <form onSubmit={onSubmit}>
         <Label htmlFor="name"> Location:</Label>
         <br />
-        <textarea
+        <Input
           type="text"
           id="name"
           name="name"
@@ -45,7 +46,7 @@ export default function AddLocation({
         <br />
         <Label htmlFor="location"> Addresse: </Label>
         <br />
-        <textarea
+        <Input
           type="text"
           id="location"
           name="location"
@@ -59,7 +60,7 @@ export default function AddLocation({
         <br />
         <Label htmlFor="zeit"> Öffnungszeiten:</Label>
         <br />
-        <textarea
+        <TextArea
           type="text"
           id="zeit"
           name="zeit"
@@ -170,12 +171,13 @@ export default function AddLocation({
         <LabelVerleih htmlFor="verleih" noRental={noRental}>
           Was kann man ausleihen?:
           <br />
-          <textarea
+          <TextArea
             type="text"
             id="verleih"
             name="verleih"
-            required
+            required={!noRental? true: false}
             minlengh="3"
+            defaultValue={""}
             maxlengh="50"
             placeholder="Kajak, SUP,..."
             pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
@@ -184,7 +186,7 @@ export default function AddLocation({
 
         <Legend>Coordinaten:</Legend>
 
-        <textarea
+        <Input
           type="number"
           id="latitude"
           name="latitude"
@@ -197,7 +199,7 @@ export default function AddLocation({
         />
         <br />
 
-        <textarea
+        <Input
           type="number"
           id="longitude"
           name="longitude"
@@ -210,7 +212,8 @@ export default function AddLocation({
         />
         <br />
         <br />
-        <CldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
+        <DivButton>
+        <StyledCldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -222,7 +225,8 @@ export default function AddLocation({
             <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
           </svg>{" "}
           Bild hinzufügen
-        </CldUploadButton>
+        </StyledCldUploadButton>
+        </DivButton>
         <br />
         <br />
         <CldImage
@@ -238,14 +242,42 @@ export default function AddLocation({
           alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
         />
         <br />
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleHome}>
-          <StyledLink href="/">Cancel</StyledLink>
-        </button>
+        <DivButton>
+          <StyledColorButtonKl type="submit">Save</StyledColorButtonKl>
+          <StyledColorButtonKl type="button" onClick={handleHome}>
+            <StyledLink href="/">Cancel</StyledLink>
+          </StyledColorButtonKl>
+        </DivButton>
       </form>
     </>
   );
 }
+
+const StyledCldUploadButton = styled(CldUploadButton)`
+width: 250px;
+height: 27px;
+flex-shrink: 0;
+border: none;
+margin-bottom:5px;
+border-radius: 20px;
+background: linear-gradient(90deg, rgba(216, 11, 250, 0.31) 18.56%, rgba(4, 178, 252, 0.34) 104.43%);
+filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+color: #000;
+text-align: center;
+font-family: Roboto Slab;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 3.25px;
+&: hover {
+    background: linear-gradient(90deg, rgba(216, 11, 250, 0.50) 18.56%, rgba(4, 178, 252, 0.50) 104.43%);
+filter: drop-shadow(4px 4px 7px rgba(0, 0, 0, 0.41));
+width: 255px;
+height: 32px;
+margin-bottom:0;
+};
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -259,7 +291,14 @@ const Div = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-
+const DivButton = styled.div`
+  width: 360px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin-left:0;
+  justify-content: space-around;
+`;
 const StyledArtSection = styled.section`
   margin-top: 10px;
   margin-bottom: 0;
@@ -308,8 +347,24 @@ const LabelVerleih = styled.label`
   font-family: Roboto Slab;
   font-size: 18px;
   margin-top: 0px;
-  display: ${({ noRental }) => (noRental ? "block" : "none")};
+  display: ${({ noRental }) => (!noRental ? "block" : "none")};
   font-weight: bold;
   margin-bottom: 0;
   padding: 0;
+`;
+const TextArea = styled.textarea`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  width: 360px;
+  overflow: scroll;
+`;
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  width: 360px;
+  border-radius: 0.5rem;
+  overflow: scroll;
 `;

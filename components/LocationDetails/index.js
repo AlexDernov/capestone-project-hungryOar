@@ -11,6 +11,7 @@ import EditMode from "../EditMode";
 import { useState } from "react";
 import { CldImage } from "next-cloudinary";
 import Map from "../Map";
+import { StyledColorButton } from "../StyledColorButton";
 
 export default function LocationDetails({
   data,
@@ -80,14 +81,22 @@ export default function LocationDetails({
           />
         ) : (
           <>
+            <NavLink href="/locations"> ← Back</NavLink>
+            <br /> <br />
             <Div>
-              <NavLink href="/locations"> ← Back</NavLink>
-              <br />
-              <button type="button" onClick={handleOnDetailsPage}>
+              <StyledColorButton type="button" onClick={handleOnDetailsPage}>
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
-              </button>
+              </StyledColorButton>
             </Div>
-            {detailsPage && <StyledMap data={[data]} detailsPage={detailsPage} /> } 
+            <br />
+            <br />
+            {detailsPage && (
+              <StyledMap
+                data={[data]}
+                detailsPage={detailsPage}
+                isLiked={isLiked}
+              />
+            )}
             <StyledDiv>
               <Options>
                 <H2>Adresse: </H2>
@@ -152,6 +161,7 @@ export default function LocationDetails({
                     )
                   )}
                 </StyledArtSection>
+                <br />
                 <H2> Was kann man ausleihen:</H2> <br />
                 <P>
                   {data?.verleih === "-" || ""
@@ -168,62 +178,99 @@ export default function LocationDetails({
                 alt={data?.name}
               />
               <br />
+
+              <DivForm>
+                <NotesForm locData={data} onSubmit={handleSubmit} />
+
+                <StyledUl>
+                  <H2>Your notes:</H2>
+                  {data?.notes.length > 0 ? (
+                    data?.notes?.map((note) => (
+                      <Note
+                        key={note._id}
+                        note={note}
+                        locatData={data}
+                        mutate={mutate}
+                      />
+                    ))
+                  ) : (
+                    <StyledListItem>
+                      <P>You don&apos;t have any notes yet</P>
+                    </StyledListItem>
+                  )}
+                </StyledUl>
+              </DivForm>
             </StyledDiv>
-            <NotesForm locData={data} onSubmit={handleSubmit} />
-            <StyledUl>
-              <H2>Your notes:</H2>
-              {data?.notes.length > 0 &&
-                data?.notes?.map((note) => (
-                  <Note
-                    key={note._id}
-                    note={note}
-                    locatData={data}
-                    mutate={mutate}
-                  />
-                ))}
-            </StyledUl>
           </>
         )}
       </StyledArticle>
     </>
   );
 }
+const StyledListItem = styled.li`
+  background-color: rgba(255, 255, 255, 0.6);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 15px;
+  margin-left: 0;
+  margin-right: 5px;
+  margin-top: 10px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const DivForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Div = styled.div`
   display: flex;
-  justify-content: space-between;
-
-  width: 359px;
+  justify-content: center;
+  width: 90vw;
 `;
-
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
-  margin-top: 110px;
-  margin-bottom: 90px;
+  padding-top: 110px;
   position: relativ;
   height: auto;
+  width: 90%
   line-height: 120%;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 90px;
 `;
 const NavLink = styled(Link)`
   margin-bottom: 20px;
   margin-left: 0;
   text-decoration: none;
   color: var(--primary-color);
-  text-shadow: 4px 4px 4px black;
+  text-shadow: 6px 2px 6px black;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 3.25px;
   height: 4px;
   &: hover {
     font-size: 1.2em;
   }
 `;
 const StyledMap = styled(Map)`
-display: ${({ detailsPage }) => (detailsPage ? "block": "none" )};`;
+  display: ${({ detailsPage }) => (detailsPage ? "block" : "none")};
+`;
 
 const StyledArtSection = styled.section`
   margin-left: 0px;
   padding-left: 0px;
   padding-right: 27px;
   display: grid;
+
   grid-template-columns: 71px 71px 71px 71px;
   row-gap: 20px;
   column-gap: 0;
@@ -241,17 +288,22 @@ const StyledUl = styled.ul`
   padding: 0;
   margin-top: 20px;
   margin-bottom: 5px;
-  margin-left: 5px;
-  display: grid;
-  grid-template-columns: 375px;
-  gap: 1rem;
-  list-style-type: none;
-`;
-const Options = styled.div`
+  margin-left: 0px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+`;
+/* display: grid;
+grid-template-columns: 365px;
+gap: 1rem; */
+const Options = styled.div`
+  display: flex;
+  width: 360px;
+  flex-direction: column;
   align-content: center;
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 const OptionsP = styled.p`

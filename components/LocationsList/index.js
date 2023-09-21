@@ -4,6 +4,7 @@ import Heading from "@/components/Heading";
 import TitleSection from "@/components/TitleSection";
 import LogInOutButton from "../LogInOutButton";
 
+
 export default function LocationsList({
   data,
   onToggleLiked,
@@ -34,6 +35,7 @@ export default function LocationsList({
           list.
         </p>
       ) : null} */}
+      <DivList>
       <StyledUl isAdmin={isAdmin}>
         {data.length == 0 && favoritePage ? (
           <Par>You don&apos;t have any favorite locations yet</Par>
@@ -54,9 +56,19 @@ export default function LocationsList({
           ))
         )}
       </StyledUl>
+      </DivList>
     </>
   );
 }
+const DivList = styled.div`
+margin:0;
+display: flex;
+width: 90vw;
+flex-direction: column;
+width: 360px;
+justify-content: center;
+`;
+
 const StyledUl = styled.ul`
   padding: 0;
   margin-top: ${({ isAdmin }) => (isAdmin ? 10 : 90)}px;

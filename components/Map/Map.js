@@ -108,7 +108,7 @@ export default function Map({ locationsInfo, data, detailsPage }) {
       <div id="map">
         <StyledMapContainer
           className={detailsPage? "mapForOne": "map"}
-          center={[53.577067, 10.007241]}
+          center={filterdData.lenght === 1? [Number(filterdData[0]?.coords(0)), Number(filterdData[0]?.coords(1))]:[53.577067, 10.007241]}
           zoom={12}
           scrollWheelZoom={true}
         >
@@ -133,7 +133,8 @@ export default function Map({ locationsInfo, data, detailsPage }) {
                       <PopHead>
                         <strong>{location?.name}</strong>
                       </PopHead>
-                      <PopLink>Click für mehr Infos</PopLink>
+                      {detailsPage? null:
+                      <PopLink>Click für mehr Infos</PopLink>}
                     </Popup>
                   </NavLink>
            )

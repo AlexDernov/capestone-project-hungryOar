@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import NotesForm from "../NotesForm";
 import { useRouter } from "next/router";
+import { StyledColorButtonKl } from "../StyledColorButton";
 
 export default function Note({ note, locatData, mutate }) {
   const router = useRouter();
@@ -54,7 +55,7 @@ export default function Note({ note, locatData, mutate }) {
 
   return (
     <StyledListItem>
-      <p>{note.title}</p>{" "}
+      <p>{note.title}</p>
       <p>Created at: {new Date(note.createdAt).toLocaleString()}</p>
       <p>{note.text}</p>
       <div>
@@ -67,37 +68,52 @@ export default function Note({ note, locatData, mutate }) {
           />
         )}
       </div>
-      {!isEditMode ? (
-        <button
-          type="button"
-          onClick={() => {
-            setIsEditMode(!isEditMode);
-          }}
-        >
-          Edit
-        </button>
-      ) : null}
-      {!isEditMode ? (
-        <button type="button" onClick={handleDeleteNote}>
-          Delete
-        </button>
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            setIsEditMode(!isEditMode);
-          }}
-        >
-          Cancel
-        </button>
-      )}
+      <DivButton>
+        {!isEditMode ? (
+          <StyledColorButtonKl
+            type="button"
+            onClick={() => {
+              setIsEditMode(!isEditMode);
+            }}
+          >
+            Edit
+          </StyledColorButtonKl>
+        ) : null}
+        {!isEditMode ? (
+          <StyledColorButtonKl type="button" onClick={handleDeleteNote}>
+            Delete
+          </StyledColorButtonKl>
+        ) : (
+          <StyledColorButtonKl
+            type="button"
+            onClick={() => {
+              setIsEditMode(!isEditMode);
+            }}
+          >
+            Cancel
+          </StyledColorButtonKl>
+        )}
+      </DivButton>
     </StyledListItem>
   );
 }
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left:0;
+  margin-right: 5px;
+  margin-top: 10px;
+  width: 360px;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
+`;
+const DivButton = styled.div`
+  width: 360px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin-left: 0;
+  justify-content: space-around;
 `;

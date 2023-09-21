@@ -33,6 +33,7 @@ export default function FavoriteLocationsPage({
       <Head>
         <title>Locations - Favorites</title><LogInOutButton session={session}/>
       </Head>
+      <DivPage>
       <LocationsList
         data={favorites}
         onToggleLiked={onToggleLiked}
@@ -40,13 +41,11 @@ export default function FavoriteLocationsPage({
         favoritePage={favoritePage}
         session={session}
       />
+      </DivPage>
     </>
   );
 }
-
-/* const StyledDiv = styled.div`
-margin:0;
-padding: 0;
-width: 375px;
-height: 667px`;
- */
+const DivPage = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;`;

@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
 import Loading from "../components/Loading";
+import styled from "styled-components";
 
 export default function MessagesPage() {
   const { data: session } = useSession();
@@ -16,7 +17,7 @@ export default function MessagesPage() {
   const router = useRouter();
 
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
   if (error) return <div>failed to load</div>;
   if (!data) {
@@ -26,7 +27,7 @@ export default function MessagesPage() {
     router.push("/");
   }
   async function handleSubmit(messageData) {
-   /*  event.preventDefault();
+    /*  event.preventDefault();
     const formData = new FormData(event.target);
     const messageData = Object.fromEntries(formData); */
 
@@ -62,11 +63,19 @@ export default function MessagesPage() {
         )}
         <LogInOutButton session={session} />
       </TitleSection>
-      {isAdmin ? (
-        <MessagesList data={data} mutate={mutate} />
-      ) : (
-        <MessagesForm onSubmit={handleSubmit} />
-      )}
+      <DivPage>
+        {isAdmin ? (
+          <MessagesList data={data} mutate={mutate} />
+        ) : (
+          <MessagesForm onSubmit={handleSubmit} />
+        )}
+      </DivPage>
     </div>
   );
 }
+const DivPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

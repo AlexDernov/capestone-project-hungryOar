@@ -7,7 +7,7 @@ import LogInOutButton from "../LogInOutButton";
 export default function NewLocationsList({
   data,
   session,
-  mutate, isAdmin,
+  mutate, isAdmin, noRental, setNoRental
 }) {
     console.log("newListData", data);
   return (
@@ -35,6 +35,7 @@ export default function NewLocationsList({
               data={location}
               menuType={location.art}
               session={session}
+              noRental={noRental} setNoRental={setNoRental}
               
              
             />

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledColorButton } from "../StyledColorButton";
 
 export default function NotesForm({ text, onSubmit, title, isEditMode }) {
   return (
@@ -27,13 +28,22 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
         maxlengh="200"
         pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
       />
-      <button type="submit">Save</button>
+      <Div>
+      <DivButton>
+      <StyledColorButton  type="submit">Save</StyledColorButton>
+      </DivButton>
+      </Div>
     </FormContainer>
   );
 }
+const Div = styled.div`
+ 
+
+`;
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
+  width: 100%;
 `;
 const Input = styled.input`
   padding: 0.5rem;
@@ -72,4 +82,12 @@ const Label = styled.label`
   font-weight: bold;
   margin-bottom: 0;
   padding: 0;
+`;
+const DivButton = styled.div`
+  width: 360px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin-left: 0;
+  justify-content: space-around;
 `;

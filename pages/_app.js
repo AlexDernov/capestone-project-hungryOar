@@ -1,6 +1,7 @@
 import GlobalStyle from "@/styles";
 import Head from "next/head";
 import { SWRConfig } from "swr";
+import { useState } from "react";
 import useSWR from "swr";
 import Layout from "../components/Layout";
 import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
@@ -15,7 +16,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     "locationsInfo",
     { defaultValue: [] }
   );
-  
+  const [noRental, setNoRental] = useState(false);
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isLoading, error, mutate } = useSWR("/api/locations", fetcher);
 
@@ -51,6 +52,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
             data={data}
             onToggleLiked={handleToggleLiked}
             locationsInfo={locationsInfo}
+            noRental={noRental} setNoRental={setNoRental}
            
            
           

@@ -6,12 +6,13 @@ import Loading from "../../components/NewLocationsList";
 import useSWR from "swr";
 import { useState } from "react";
 import styled from "styled-components";
+import {StyledColorButton} from "../../components/StyledColorButton";
 
 /* export function getServerSideProps(){
   const isAdmin = session?.user.name === "HungryOar";
 } */
 
-export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo}) {
+export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo, noRental, setNoRental}) {
  const { data: session } = useSession()
   const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);
@@ -46,10 +47,27 @@ export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locati
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
-     {/*  {isAdmin?  */}<StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton>{/*  :null} */}
-      {newList? <NewLocationsList isAdmin={isAdmin} data={hiddenData} session={session} mutate={mutate} />:
+      <DivPage>
+     {/*  {isAdmin?  */}<DivButton><StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton></DivButton>{/*  :null} */}
+      {newList? <NewLocationsList isAdmin={isAdmin} data={hiddenData} session={session} mutate={mutate}  noRental={noRental} setNoRental={setNoRental}/>:
  <LocationsList data={visibleData} isAdmin={isAdmin} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
+ </DivPage>
  </>
 }
-const StyledButton = styled.button`
+const StyledButton = styled(StyledColorButton)`
 margin-top: 76px`;
+
+const DivPage = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;`;
+
+const DivButton = styled.div`
+  width: 360px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left:0;
+  justify-content: space-around;
+`;

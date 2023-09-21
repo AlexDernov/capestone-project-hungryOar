@@ -1,5 +1,6 @@
 import { signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
+import {StyledLogIn} from "../StyledColorButton";
 
 export default function LogInOutButton({ session }) {
   const isAdmin = session?.user.name === "HungryOar";
@@ -9,7 +10,7 @@ export default function LogInOutButton({ session }) {
       <StyledLoginContainer>
         {isAdmin ? "Admin" : session.user.name}
         <br />
-        <button onClick={() => signOut()}>Log out</button>
+        <StyledLogIn onClick={() => signOut()}>Log out</StyledLogIn>
       </StyledLoginContainer>
     );
   }
@@ -17,7 +18,7 @@ export default function LogInOutButton({ session }) {
     <StyledLoginContainer>
       <br />
 
-      <button onClick={() => signIn()}>Log in</button>
+      <StyledLogIn onClick={() => signIn()}>Log in</StyledLogIn>
     </StyledLoginContainer>
   );
 }

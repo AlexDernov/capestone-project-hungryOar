@@ -149,7 +149,7 @@ export default function EditMode({
             pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
           />
           <br />
-          <Legend> MenuArt: </Legend>
+          <Legend> Was gibt&apos;s: </Legend>
           <MenuDiv>
             {menuTypes.map((type) => (
               <LabelKl htmlFor={type.type} key={type.id}>
@@ -307,7 +307,7 @@ export default function EditMode({
           <CldImage
             src={imageUrl ? imageUrl : bild?.img}
             height={300}
-            width={350}
+            width={360}
             crop="fill"
             gravity="auto"
             alt={data?.name}
@@ -378,18 +378,19 @@ const DivButton = styled.div`
   justify-content: space-around;
 `;
 const Input = styled.input`
-  padding: 0.5rem;
+  padding: 0.5 rem;
   font-size: inherit;
   border: 1px solid grey;
   border-radius: 0.5rem;
-  width: 360px;
+  width: 345px;
+  height: 40px;
   overflow: scroll;
 `;
 const TextArea = styled.textarea`
   padding: 0.5rem;
   font-size: inherit;
   border: 1px solid grey;
-  width: 360px;
+  width: 345px;
   border-radius: 0.5rem;
   overflow: scroll;
 `;
@@ -397,7 +398,7 @@ const TextAreaRental = styled.textarea`
   padding: 0.5rem;
   font-size: inherit;
   border: 1px solid grey;
-  width: 360px;
+  width: 345px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 0.5rem;

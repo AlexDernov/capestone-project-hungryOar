@@ -18,7 +18,7 @@ export default function AddLocation({
   setImageWidth,
 }) {
   const router = useRouter();
-const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
+
 
   function onUpload(event) {
     setImageUrl(event.info.secure_url);
@@ -75,7 +75,7 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
         <Legend> Was gibt&apos;s: </Legend>
         <StyledArtSection>
           {menuTypes.map((type) => (
-            <label htmlFor={type.type} key={type.id}>
+            <LabelKl htmlFor={type.type} key={type.id}>
               {type.type === "Cafe" ? (
                 <Image
                   key={1}
@@ -135,13 +135,13 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
                 onChange={() => handleFilter(type.id)}
                 checked={type.checked}
               />
-            </label>
+            </LabelKl>
           ))}
         </StyledArtSection>
 
         <Legend>Verleih Möglichkeit</Legend>
         <Div>
-          <LabelP htmlFor="true">
+          <LabelKl htmlFor="true">
             {" "}
             <input
               type="radio"
@@ -152,9 +152,9 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
               onChange={onOptionChange}
             />
             ja
-          </LabelP>
+          </LabelKl>
           <br />
-          <LabelP htmlFor="false">
+          <LabelKl htmlFor="false">
             {" "}
             <input
               type="radio"
@@ -165,7 +165,7 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
               onChange={onOptionChange}
             />
             nein
-          </LabelP>
+          </LabelKl>
         </Div>
         <br />
         <LabelVerleih htmlFor="verleih" noRental={noRental}>
@@ -198,7 +198,7 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
           pattern="/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g"
         />
         <br />
-
+<br/>
         <Input
           type="number"
           id="longitude"
@@ -210,7 +210,6 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
           placeholder="Längengrad: z.B. 9.964722"
           pattern="/^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g"
         />
-        <br />
         <br />
         <DivButton>
         <StyledCldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
@@ -228,7 +227,7 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
         </StyledCldUploadButton>
         </DivButton>
         <br />
-        <br />
+       
         <CldImage
           src={
             imageUrl === null
@@ -236,7 +235,7 @@ const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v169
               : imageUrl
           }
           height={200}
-          width={350}
+          width={360}
           crop="thumb"
           gravity="auto"
           alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
@@ -285,11 +284,13 @@ const StyledLink = styled(Link)`
 `;
 
 const Div = styled.div`
-  width: 120px;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+margin-top: 20px;
+margin-left: 15px;
+margin-bottom: o;
+width: 150px;
+height: auto;
+display: flex;
+justify-content: space-between;
 `;
 const DivButton = styled.div`
   width: 360px;
@@ -297,29 +298,17 @@ const DivButton = styled.div`
   display: flex;
   flex-direction: row;
   margin-left:0;
+  margin-top: 10px;
   justify-content: space-around;
 `;
 const StyledArtSection = styled.section`
-  margin-top: 10px;
-  margin-bottom: 0;
-  padding-left: 27px;
-  padding-right: 27px;
-  display: grid;
-  grid-template-columns: 71px 71px 71px;
-  row-gap: 20px;
-  column-gap: 10px;
-  position: center;
+margin-top: 0;
+display: grid;
+grid-template-columns: 100px 100px 110px;
+row-gap: 15px;
+column-gap: 15px;
 `;
-const LabelP = styled.p`
-  color: #040404;
-  text-align: left;
-  text-shadow: 2px 2px 4px 0px #fff;
-  font-family: Roboto Slab;
-  font-size: 18px;
-  margin: 0;
-  padding: 0;
-  font-style: oblique;
-`;
+
 const Label = styled.label`
   color: #040404;
   text-align: left;
@@ -328,6 +317,17 @@ const Label = styled.label`
   font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
+  margin-bottom: 20px;
+`;
+const LabelKl = styled.p`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0;
+  padding: 0;
+  font-style: oblique;
 `;
 const Legend = styled.legend`
   color: #040404;
@@ -337,7 +337,7 @@ const Legend = styled.legend`
   font-size: 18px;
   margin-top: 10px;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   padding: 0;
 `;
 const LabelVerleih = styled.label`

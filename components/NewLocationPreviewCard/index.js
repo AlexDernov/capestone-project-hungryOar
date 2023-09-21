@@ -246,9 +246,10 @@ const Div = styled.div`
 const StyledName = styled.h2`
   color: #373636;
   text-align: left;
-  text-shadow: 2px 2px 4px 0px #fff;
   font-family: Roboto Slab;
-  font-size: 24px;
+  font-size: 28px;
+  color: #040404;
+  text-shadow: 4px 4px 4px opx black;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -261,7 +262,7 @@ const StyledAddresse = styled.p`
   color: #040404;
   text-shadow: 1px 1px 2px 0px #fff;
   font-family: Roboto Slab;
-  font-size: 11px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

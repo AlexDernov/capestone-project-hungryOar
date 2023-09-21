@@ -7,8 +7,8 @@ export default function LogInOutButton({ session }) {
 
   if (session) {
     return (
-      <StyledLoginContainer>
-        {isAdmin ? "Admin" : session.user.name}
+      <StyledLoginContainer><P>
+        {isAdmin ? "Admin" : session.user.name}</P>
         <br />
         <StyledLogIn onClick={() => signOut()}>Log out</StyledLogIn>
       </StyledLoginContainer>
@@ -16,12 +16,23 @@ export default function LogInOutButton({ session }) {
   }
   return (
     <StyledLoginContainer>
-      <br />
+      <br /><P></P>
 
       <StyledLogIn onClick={() => signIn()}>Log in</StyledLogIn>
     </StyledLoginContainer>
   );
 }
+
+const P = styled.p`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 16px;
+  margin-top: 0;
+  padding: 0;
+  font-style: oblique;
+`;
 const StyledLoginContainer = styled.div`
   position: fixed;
   top: 2px;

@@ -85,9 +85,9 @@ export default function LocationDetails({
             {isEditMode === false && isAdmin ? (
           <StyledColorButtonKl onClick={handleOnEditMode}>Edit Mode</StyledColorButtonKl>
         ) : null}<br/>
-              <StyledColorButton type="button" onClick={handleOnDetailsPage}>
+              <NewStyledColorButton type="button" onClick={handleOnDetailsPage}>
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
-              </StyledColorButton>
+              </NewStyledColorButton>
             </DivButton>
             <br />
             {detailsPage && (
@@ -228,6 +228,8 @@ const DivForm = styled.div`
   align-items: center;
 `;
 
+const NewStyledColorButton = styled(StyledColorButton)`
+margin-top: 5px;`;
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
@@ -241,7 +243,7 @@ const StyledArticle = styled.article`
   padding-bottom: 90px;
 `;
 const NavLink = styled(Link)`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-left: 0;
   text-decoration: none;
   color: var(--primary-color);

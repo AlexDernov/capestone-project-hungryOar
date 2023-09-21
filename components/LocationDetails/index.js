@@ -11,7 +11,7 @@ import EditMode from "../EditMode";
 import { useState } from "react";
 import { CldImage } from "next-cloudinary";
 import Map from "../Map";
-import { StyledColorButton } from "../StyledColorButton";
+import { StyledColorButton, StyledColorButtonKl } from "../StyledColorButton";
 
 export default function LocationDetails({
   data,
@@ -342,8 +342,8 @@ const H2 = styled.p`
   padding: 0;
   font-weight: bold;
 `;
-const ButtonEdit = styled.button`
-  position: fixed;
-  right: 20px;
-  top: 55px;
+const ButtonEdit = styled(StyledColorButtonKl)`
+position: fixed;
+right: 20px;
+top: 105px; 
 `;

@@ -118,6 +118,7 @@ export default function AddPage({noRental, setNoRental}) {
                 noRental={noRental}
                 setImageHeight={setImageHeight}
                 setImageWidth={setImageWidth}
+                placeholderImage={placeholderImage}
               />
             </StyledArticle>
           </DivPage>

@@ -70,7 +70,7 @@ export default function EditMode({
       verleih: locationData.verleih,
       coords: [locationData.latitude, locationData.longitude],
     };
-    console.log("handleEditLocation");
+    console.log("Data End", data);
     const response = await fetch(`/api/locations/${data?._id}`, {
       method: "PATCH",
       headers: {
@@ -305,9 +305,9 @@ export default function EditMode({
           </DivButton>
           <br />
           <CldImage
-            src={imageUrl ? imageUrl : bild?.img}
+            src={imageUrl ? imageUrl : data?.bild.img}
             height={300}
-            width={360}
+            width={350}
             crop="fill"
             gravity="auto"
             alt={data?.name}

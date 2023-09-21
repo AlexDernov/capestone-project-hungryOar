@@ -25,7 +25,7 @@ export default function NewLocationPreviewCard({
   function handleOnEditMode() {
     setIsEditMode(!isEditMode);
   }
-  console.log("Data from NewLocPreviewCard", data);
+  console.log("Bild", bild);
 
   async function handleOnTakeOver() {
     const approved = { visible: true };
@@ -61,7 +61,7 @@ export default function NewLocationPreviewCard({
         {isEditMode ? (
           <EditMode
             data={data}
-            bild={bild}
+            bild={data?.bild}
             handleOnEditMode={handleOnEditMode}
             mutate={mutate}
             session={session}

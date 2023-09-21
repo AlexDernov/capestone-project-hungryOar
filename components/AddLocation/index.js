@@ -15,6 +15,7 @@ export default function AddLocation({
   setImageUrl,
   noRental,
   setImageHeight,
+  placeholderImage,
   setImageWidth,
 }) {
   const router = useRouter();
@@ -230,12 +231,11 @@ export default function AddLocation({
        
         <CldImage
           src={
-            imageUrl === null
-              ? "https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg"
-              : imageUrl
+            imageUrl
+              ? imageUrl: "https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.webp"
           }
           height={200}
-          width={360}
+          width={350}
           crop="thumb"
           gravity="auto"
           alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}

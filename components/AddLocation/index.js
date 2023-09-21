@@ -228,18 +228,22 @@ export default function AddLocation({
         </StyledCldUploadButton>
         </DivButton>
         <br />
-       
+    {/*    {imageUrl?  */}
         <CldImage
-          src={
-            imageUrl
-              ? imageUrl: "https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.webp"
-          }
+          src={imageUrl}
           height={200}
           width={350}
           crop="thumb"
           gravity="auto"
           alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
-        />
+        />{/* :<CldImage
+        src={`https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.webp`}
+        height={200}
+        width={350}
+        crop="thumb"
+        gravity="auto"
+        alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
+      />} */}
         <br />
         <DivButton>
           <StyledColorButtonKl type="submit">Save</StyledColorButtonKl>

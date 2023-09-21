@@ -304,7 +304,7 @@ export default function EditMode({
             </StyledCldUploadButton>
           </DivButton>
           <br />
-          <CldImage
+          <StyledCldImage
             src={imageUrl ? imageUrl : data?.bild.img}
             height={300}
             width={350}
@@ -325,6 +325,9 @@ export default function EditMode({
     </>
   );
 }
+const StyledCldImage =styled(CldImage)`
+padding-right:5px;`;
+
 const MenuDiv = styled.div`
   margin-top: 0;
   display: grid;

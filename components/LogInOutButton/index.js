@@ -9,14 +9,14 @@ export default function LogInOutButton({ session }) {
     return (
       <StyledLoginContainer><P>
         {isAdmin ? "Admin" : session.user.name}</P>
-        <br />
+     
         <StyledLogIn onClick={() => signOut()}>Log out</StyledLogIn>
       </StyledLoginContainer>
     );
   }
   return (
     <StyledLoginContainer>
-      <br /><P></P>
+     <P></P>
 
       <StyledLogIn onClick={() => signIn()}>Log in</StyledLogIn>
     </StyledLoginContainer>

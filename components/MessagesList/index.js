@@ -37,7 +37,7 @@ const StyledUl = styled.ul`
   margin-bottom: 105px;
   margin-left: 10px;
   display: grid;
-  grid-template-columns: 375px;
+  grid-template-columns: 360px;
   gap: 1rem;
   list-style-type: none;
 `;

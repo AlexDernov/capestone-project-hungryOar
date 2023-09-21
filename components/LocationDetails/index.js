@@ -81,14 +81,14 @@ export default function LocationDetails({
           <>
             <NavLink href="/locations"> ← Back</NavLink>
             <br /> <br />
-            <Div>
+            <DivButton>
             {isEditMode === false && isAdmin ? (
           <StyledColorButtonKl onClick={handleOnEditMode}>Edit Mode</StyledColorButtonKl>
         ) : null}
               <StyledColorButton type="button" onClick={handleOnDetailsPage}>
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
               </StyledColorButton>
-            </Div>
+            </DivButton>
             <br />
             <br />
             {detailsPage && (
@@ -229,12 +229,7 @@ const DivForm = styled.div`
   align-items: center;
 `;
 
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 90vw;
-`;
+
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
   padding-top: 110px;
@@ -345,3 +340,11 @@ const H2 = styled.p`
   font-weight: bold;
 `;
 
+const DivButton = styled.div`
+padding-top: 10px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

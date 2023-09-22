@@ -16,16 +16,16 @@ export default function NewLocationPreviewCard({
   id,
   zeit,
   mutate,
-  verleih,
   data,
   menuType,
-  session, noRental, setNoRental
+  session,
+  noRental,
+  setNoRental,
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
   function handleOnEditMode() {
     setIsEditMode(!isEditMode);
   }
-  console.log("Bild", bild);
 
   async function handleOnTakeOver() {
     const approved = { visible: true };
@@ -50,7 +50,7 @@ export default function NewLocationPreviewCard({
               <StyledColorButtonKl onClick={handleOnEditMode}>
                 Edit Mode
               </StyledColorButtonKl>
-            
+
               <StyledColorButtonTakeOver onClick={handleOnTakeOver}>
                 Übernehmen in die Hauptliste
               </StyledColorButtonTakeOver>
@@ -65,7 +65,8 @@ export default function NewLocationPreviewCard({
             handleOnEditMode={handleOnEditMode}
             mutate={mutate}
             session={session}
-            noRental={noRental} setNoRental={setNoRental}
+            noRental={noRental}
+            setNoRental={setNoRental}
           />
         ) : (
           <>
@@ -144,7 +145,9 @@ export default function NewLocationPreviewCard({
                 <Options>
                   <H2> Was kann man ausleihen:</H2> <br />
                   <P>
-                    {data?.verleih === "" ? "Leider, kein Verleih möglich" : data?.verleih}
+                    {data?.verleih === ""
+                      ? "Leider, kein Verleih möglich"
+                      : data?.verleih}
                   </P>
                 </Options>
                 <CldImage
@@ -165,7 +168,7 @@ export default function NewLocationPreviewCard({
   );
 }
 const DivButton = styled.div`
-padding-top: 10px;
+  padding-top: 10px;
   width: 100%;
   height: auto;
   display: flex;

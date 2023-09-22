@@ -163,14 +163,13 @@ export default function NavBar() {
 }
 
 const NavLink = styled(Link)`
- 
   widht: 100%;
   text-decoration: none;
   color: var(--primary-color);
   text-shadow: 1px 1px 1px black;
   border-color: black;
   &: hover {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
 `;
 const NavLinkList = styled(Link)`
@@ -199,7 +198,7 @@ const StyledNav = styled.nav`
 const NavLinkHidden = styled(Link)`
   widht: 100%;
   text-decoration: none;
- 
+ display:${({ session }) => (session ? "block" : "none")};
   color: var(--primary-color);
   text-shadow: 1px 1px 1px black;
   border-color: black;
@@ -207,7 +206,7 @@ const NavLinkHidden = styled(Link)`
     font-size: 1.1em;
   }
 `;
-/* display:${({ session }) => (session ? "block" : "none")}; */
+
 const StyledH4 = styled.p`
   font-size: 10px;
   text-shadow: 1px 1px 1px black;
@@ -225,4 +224,4 @@ const StyledSvg = styled.svg`
     height: 45px;
   }
 `;
-/* display: ${({on})=> (on ? "block" : "none")}; */
+

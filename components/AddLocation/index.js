@@ -15,11 +15,9 @@ export default function AddLocation({
   setImageUrl,
   noRental,
   setImageHeight,
-  placeholderImage,
   setImageWidth,
 }) {
   const router = useRouter();
-
 
   function onUpload(event) {
     setImageUrl(event.info.secure_url);
@@ -31,7 +29,7 @@ export default function AddLocation({
   }
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <StyledForm onSubmit={onSubmit}>
         <Label htmlFor="name"> Location:</Label>
         <br />
         <Input
@@ -72,7 +70,6 @@ export default function AddLocation({
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-
         <Legend> Was gibt&apos;s: </Legend>
         <StyledArtSection>
           {menuTypes.map((type) => (
@@ -139,7 +136,6 @@ export default function AddLocation({
             </LabelKl>
           ))}
         </StyledArtSection>
-
         <Legend>Verleih Möglichkeit</Legend>
         <Div>
           <LabelKl htmlFor="true">
@@ -172,11 +168,11 @@ export default function AddLocation({
         <LabelVerleih htmlFor="verleih" noRental={noRental}>
           Was kann man ausleihen?:
           <br />
-          <TextArea
+          <TextAreaRental
             type="text"
             id="verleih"
             name="verleih"
-            required={!noRental? true: false}
+            required={!noRental ? true : false}
             minlengh="3"
             defaultValue={""}
             maxlengh="50"
@@ -184,9 +180,7 @@ export default function AddLocation({
             pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
           />
         </LabelVerleih>
-
         <Legend>Coordinaten:</Legend>
-
         <Input
           type="number"
           id="latitude"
@@ -199,7 +193,6 @@ export default function AddLocation({
           pattern="/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g"
         />
         <br />
-<br/>
         <Input
           type="number"
           id="longitude"
@@ -213,37 +206,29 @@ export default function AddLocation({
         />
         <br />
         <DivButton>
-        <StyledCldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
-          </svg>{" "}
-          Bild hinzufügen
-        </StyledCldUploadButton>
+          <StyledCldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+              <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+            </svg>{" "}
+            Bild hinzufügen
+          </StyledCldUploadButton>
         </DivButton>
         <br />
-    {/*    {imageUrl?  */}
-        <CldImage
+        <StyledCldImage
           src={imageUrl}
           height={200}
           width={350}
           crop="thumb"
           gravity="auto"
           alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
-        />{/* :<CldImage
-        src={`https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.webp`}
-        height={200}
-        width={350}
-        crop="thumb"
-        gravity="auto"
-        alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
-      />} */}
+        />
         <br />
         <DivButton>
           <StyledColorButtonKl type="submit">Save</StyledColorButtonKl>
@@ -251,66 +236,91 @@ export default function AddLocation({
             <StyledLink href="/">Cancel</StyledLink>
           </StyledColorButtonKl>
         </DivButton>
-      </form>
+      </StyledForm>
     </>
   );
 }
-
-const StyledCldUploadButton = styled(CldUploadButton)`
-width: 250px;
-height: 27px;
-flex-shrink: 0;
-border: none;
-margin-bottom:5px;
-border-radius: 20px;
-background: linear-gradient(90deg, rgba(216, 11, 250, 0.31) 18.56%, rgba(4, 178, 252, 0.34) 104.43%);
-filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
-color: #000;
-text-align: center;
-font-family: Roboto Slab;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-letter-spacing: 3.25px;
-&: hover {
-    background: linear-gradient(90deg, rgba(216, 11, 250, 0.50) 18.56%, rgba(4, 178, 252, 0.50) 104.43%);
-filter: drop-shadow(4px 4px 7px rgba(0, 0, 0, 0.41));
-width: 255px;
-height: 32px;
-margin-bottom:0;
-};
+const StyledCldImage = styled(CldImage)`
+  padding-right: 5px;
 `;
 
+const StyledCldUploadButton = styled(CldUploadButton)`
+  width: 250px;
+  height: 27px;
+  flex-shrink: 0;
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(216, 11, 250, 0.31) 18.56%,
+    rgba(4, 178, 252, 0.34) 104.43%
+  );
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+  color: #000;
+  text-align: center;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 3.25px;
+  &: hover {
+    background: linear-gradient(
+      90deg,
+      rgba(216, 11, 250, 0.5) 18.56%,
+      rgba(4, 178, 252, 0.5) 104.43%
+    );
+    filter: drop-shadow(4px 4px 7px rgba(0, 0, 0, 0.41));
+    width: 255px;
+    height: 32px;
+    margin-bottom: 0;
+  }
+`;
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5px;
+  width: 355px;
+`;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
 `;
-
+const TextAreaRental = styled.textarea`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  width: 345px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 0.5rem;
+  overflow: scroll;
+`;
 const Div = styled.div`
-margin-top: 20px;
-margin-left: 15px;
-margin-bottom: o;
-width: 150px;
-height: auto;
-display: flex;
-justify-content: space-between;
+  margin-top: 0;
+  margin-left: 15px;
+  margin-bottom: 0;
+  width: 150px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
 `;
 const DivButton = styled.div`
   width: 360px;
   height: auto;
   display: flex;
   flex-direction: row;
-  margin-left:0;
-  margin-top: 10px;
+  margin-left: 0;
   justify-content: space-around;
 `;
 const StyledArtSection = styled.section`
-margin-top: 0;
-display: grid;
-grid-template-columns: 100px 100px 110px;
-row-gap: 15px;
-column-gap: 15px;
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: 100px 100px 110px;
+  row-gap: 15px;
+  column-gap: 15px;
 `;
 
 const Label = styled.label`
@@ -320,8 +330,9 @@ const Label = styled.label`
   font-family: Roboto Slab;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 0;
 `;
 const LabelKl = styled.p`
   color: #040404;
@@ -339,7 +350,7 @@ const Legend = styled.legend`
   text-shadow: 2px 2px 4px 0px #fff;
   font-family: Roboto Slab;
   font-size: 18px;
-  margin-top: 10px;
+  margin-top: 0;
   font-weight: bold;
   margin-bottom: 20px;
   padding: 0;
@@ -361,14 +372,15 @@ const TextArea = styled.textarea`
   font-size: inherit;
   border: 1px solid grey;
   border-radius: 0.5rem;
-  width: 360px;
+  width: 345px;
   overflow: scroll;
 `;
 const Input = styled.input`
   padding: 0.5rem;
   font-size: inherit;
   border: 1px solid grey;
-  width: 360px;
+  width: 345px;
+  height: 40px;
   border-radius: 0.5rem;
   overflow: scroll;
 `;

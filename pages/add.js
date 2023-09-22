@@ -2,14 +2,13 @@ import AddLocation from "@/components/AddLocation";
 import Head from "next/head";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import TitleSection from "../components/TitleSection";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-export default function AddPage({noRental, setNoRental}) {
+export default function AddPage({ noRental, setNoRental }) {
   const { data: session } = useSession();
   const [addMode, setAddMode] = useState(true);
   const [menuTypes, setMenuTypes] = useState([
@@ -27,10 +26,11 @@ export default function AddPage({noRental, setNoRental}) {
   const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
   const router = useRouter();
   const [checked, setChecked] = useState(false);
-  const [imageUrl, setImageUrl] = useState(`https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`);
+  const [imageUrl, setImageUrl] = useState(
+    `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`
+  );
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
- 
 
   const menuCheck = menuTypes
     .filter((menuType) => menuType.checked)

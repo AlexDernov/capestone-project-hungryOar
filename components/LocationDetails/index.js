@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import Link from "next/link";
-import Heading from "../Heading";
 import Image from "next/image";
-import TitleSection from "../TitleSection";
 import NotesForm from "../NotesForm";
 import Note from "../Note";
-import FavoriteButton from "../FavoriteButton";
-import LogInOutButton from "../LogInOutButton";
 import EditMode from "../EditMode";
 import { useState } from "react";
 import { CldImage } from "next-cloudinary";
@@ -16,17 +12,16 @@ import { StyledColorButton, StyledColorButtonKl } from "../StyledColorButton";
 export default function LocationDetails({
   data,
   mutate,
-  onToggleLiked,
   isLiked,
   session,
   id,
   menu,
+  locationsInfo,
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const isAdmin = session?.user.name === "HungryOar";
   const [detailsPage, setDetailsPage] = useState(false);
 
-  console.log("Menu", menu);
   function handleOnEditMode() {
     setIsEditMode(!isEditMode);
   }
@@ -68,8 +63,6 @@ export default function LocationDetails({
   return (
     <>
       <StyledArticle>
-       
-        <br />
         {isEditMode ? (
           <EditMode
             data={data}
@@ -80,11 +73,13 @@ export default function LocationDetails({
         ) : (
           <>
             <NavLink href="/locations"> ← Back</NavLink>
-            
             <DivButton>
-            {isEditMode === false && isAdmin ? (
-          <StyledColorButtonKl onClick={handleOnEditMode}>Edit Mode</StyledColorButtonKl>
-        ) : null}<br/>
+              {isEditMode === false && isAdmin ? (
+                <StyledColorButtonKl onClick={handleOnEditMode}>
+                  Edit Mode
+                </StyledColorButtonKl>
+              ) : null}
+              <br />
               <NewStyledColorButton type="button" onClick={handleOnDetailsPage}>
                 {detailsPage ? "Map verstecken" : "Map anzeigen"}
               </NewStyledColorButton>
@@ -95,6 +90,7 @@ export default function LocationDetails({
                 data={[data]}
                 detailsPage={detailsPage}
                 isLiked={isLiked}
+                locationsInfo={locationsInfo}
               />
             )}
             <StyledDiv>
@@ -105,6 +101,7 @@ export default function LocationDetails({
                 <H2>Öffnungszeiten: </H2>
                 <br />
                 <P>{data?.zeit}</P>
+                <Div>
                 <StyledArtSection>
                   <OptionsP>Was gibt&apos;s:</OptionsP>
                   {menu?.map((artStück) =>
@@ -161,6 +158,7 @@ export default function LocationDetails({
                     )
                   )}
                 </StyledArtSection>
+                </Div>
                 <br />
                 <H2> Was kann man ausleihen:</H2> <br />
                 <P>
@@ -178,10 +176,8 @@ export default function LocationDetails({
                 alt={data?.name}
               />
               <br />
-
               <DivForm>
                 <NotesForm locData={data} onSubmit={handleSubmit} />
-
                 <StyledUl>
                   <H2>Your notes:</H2>
                   {data?.notes.length > 0 ? (
@@ -211,7 +207,6 @@ const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 15px;
   margin-left: 0;
   margin-right: 5px;
   margin-top: 10px;
@@ -223,28 +218,32 @@ const StyledListItem = styled.li`
 const DivForm = styled.div`
   display: flex;
   flex-direction: column;
-  width: 360px;
+  width: 350px;
   justify-content: center;
   align-items: center;
 `;
 
 const NewStyledColorButton = styled(StyledColorButton)`
-margin-top: 5px;`;
+  margin-top: 5px;
+`;
 
 const StyledArticle = styled.article`
   background-color: rgba(255, 255, 255, 0.6);
-  padding-top: 110px;
   position: relativ;
   height: auto;
-  width: 90%
+  width: 80%
   line-height: 120%;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 90px;
+  margin-top: 88px;
+  padding-top: 50px;
+  margin-bottom: 90px;
 `;
+const Div = styled.div`
+display: flex;
+justify-content: center`;
+
 const NavLink = styled(Link)`
-  margin-bottom: 5px;
-  margin-left: 0;
+  margin-bottom: 0;
+  margin-left: 20px;
   text-decoration: none;
   color: var(--primary-color);
   text-shadow: 6px 2px 6px black;
@@ -264,11 +263,7 @@ const StyledMap = styled(Map)`
 `;
 
 const StyledArtSection = styled.section`
-  margin-left: 0px;
-  padding-left: 0px;
-  padding-right: 27px;
   display: grid;
-
   grid-template-columns: 71px 71px 71px 71px;
   row-gap: 20px;
   column-gap: 0;
@@ -284,35 +279,33 @@ const StyledDiv = styled.div`
 
 const StyledUl = styled.ul`
   padding: 0;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  margin-left: 0px;
+  margin: 20px 0 20px 0;
+  
   display: flex;
   flex-direction: column;
+  width: 345px;
   justify-content: center;
   list-style-type: none;
 `;
-/* display: grid;
-grid-template-columns: 365px;
-gap: 1rem; */
+
 const Options = styled.div`
   display: flex;
-  width: 360px;
+  width: 345px;
   flex-direction: column;
   align-content: center;
+  padding-left:5px;
+  padding-right:10px;
   margin-left: 10px;
   margin-right: 10px;
 `;
 
 const OptionsP = styled.p`
-  margin-top: 10px;
-  margin-bottom: 0;
+  margin: 10px 0 0 15px;
   padding: 0;
   color: #040404;
   font-weight: bold;
   text-align: left;
   text-shadow: 2px 2px 4px 0px #fff;
-
   font-family: Roboto Slab;
   font-size: 18px;
   grid-row: 1 / span3;
@@ -342,7 +335,7 @@ const H2 = styled.p`
 `;
 
 const DivButton = styled.div`
-padding-top: 10px;
+  padding-top: 10px;
   width: 100%;
   height: auto;
   display: flex;

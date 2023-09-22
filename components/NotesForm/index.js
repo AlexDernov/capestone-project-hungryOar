@@ -28,18 +28,15 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
         maxlengh="200"
         pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
       />
-      <Div>
       <DivButton>
       <StyledColorButton  type="submit">Save</StyledColorButton>
       </DivButton>
-      </Div>
     </FormContainer>
   );
 }
-const Div = styled.div`
- 
 
-`;
+
+
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
@@ -49,13 +46,20 @@ const Input = styled.input`
   padding: 0.5rem;
   font-size: inherit;
   border: 1px solid grey;
+  font-family: Roboto Slab;
+  font-size: 18px;
   border-radius: 0.5rem;
+  width:330px;
   overflow: scroll;
 `;
 const TextArea = styled.textarea`
   padding: 0.5rem;
   font-size: inherit;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  font-style: oblique;
   border: 1px solid grey;
+  width:330px;
   border-radius: 0.5rem;
   overflow: scroll;
 `;
@@ -84,7 +88,7 @@ const Label = styled.label`
   padding: 0;
 `;
 const DivButton = styled.div`
-  width: 360px;
+  width: 330px;
   height: auto;
   display: flex;
   flex-direction: row;

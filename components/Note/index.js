@@ -55,9 +55,9 @@ export default function Note({ note, locatData, mutate }) {
 
   return (
     <StyledListItem>
-      <p>{note.title}</p>
-      <p>Created at: {new Date(note.createdAt).toLocaleString()}</p>
-      <p>{note.text}</p>
+      <H2>{note.title}</H2>
+      <StyledDate>Von: {new Date(note.createdAt).toLocaleString()}</StyledDate>
+      <P>{note.text}</P>
       <div>
         {isEditMode && (
           <NotesForm
@@ -70,33 +70,37 @@ export default function Note({ note, locatData, mutate }) {
       </div>
       <DivButton>
         {!isEditMode ? (
-          <StyledColorButtonKl
+          <StyledStyledColorButtonKl
             type="button"
             onClick={() => {
               setIsEditMode(!isEditMode);
             }}
           >
             Edit
-          </StyledColorButtonKl>
+          </StyledStyledColorButtonKl>
         ) : null}
         {!isEditMode ? (
-          <StyledColorButtonKl type="button" onClick={handleDeleteNote}>
+          <StyledStyledColorButtonKl type="button" onClick={handleDeleteNote}>
             Delete
-          </StyledColorButtonKl>
+          </StyledStyledColorButtonKl>
         ) : (
-          <StyledColorButtonKl
+          <StyledStyledColorButtonKl
             type="button"
             onClick={() => {
               setIsEditMode(!isEditMode);
             }}
           >
             Cancel
-          </StyledColorButtonKl>
+          </StyledStyledColorButtonKl>
         )}
       </DivButton>
     </StyledListItem>
   );
 }
+const StyledStyledColorButtonKl =styled(StyledColorButtonKl)`
+margin-bottom:10px;
+margin-top:5px;
+`;
 const StyledListItem = styled.li`
   background-color: rgba(255, 255, 255, 0.6);
   padding-left: 10px;
@@ -104,16 +108,53 @@ const StyledListItem = styled.li`
   margin-left:0;
   margin-right: 5px;
   margin-top: 10px;
-  width: 360px;
+  width: 345px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 `;
 const DivButton = styled.div`
-  width: 360px;
+  width: 330px;
   height: auto;
   display: flex;
   flex-direction: row;
   margin-left: 0;
   justify-content: space-around;
+`;
+const P = styled.p`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0;
+  padding: 0;
+  font-style: oblique;
+`;
+const H2 = styled.p`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 10px;
+  
+  margin-bottom: 0;
+  padding: 0;
+`;
+const StyledDate = styled.p`
+  margin: 0;
+  padding: 10px 10px 10px 0;
+  color: #040404;
+  text-align: right 10px;
+  text-shadow: 1px 1px 2px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 2.2px;
+  position: relativ;
+  right: 0;
+  top: 10px;
 `;

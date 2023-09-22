@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import NavBar from "../NavigationsBar";
-import { useState } from "react";
 import { useSession } from "next-auth/react";
 
 const StyledLayout = styled.div`

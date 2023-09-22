@@ -27,10 +27,6 @@ export default function MessagesPage() {
     router.push("/");
   }
   async function handleSubmit(messageData) {
-    /*  event.preventDefault();
-    const formData = new FormData(event.target);
-    const messageData = Object.fromEntries(formData); */
-
     const response = await fetch("/api/messages", {
       method: "POST",
       headers: {
@@ -74,8 +70,11 @@ export default function MessagesPage() {
   );
 }
 const DivPage = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 365px;
+  height: auto;
 `;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 export default function Filter({
   rental,
@@ -7,9 +6,8 @@ export default function Filter({
   handleFilter,
   menuTypes,
   hidden,
-  handleOnClick
+  handleOnClick,
 }) {
-  
   return (
     <Div>
       <StyledFilter hidden={hidden}>
@@ -46,23 +44,19 @@ export default function Filter({
         </fieldset>
         <div>
           <legend>Was gibt`s:</legend>
-          {menuTypes.map(
-            (type) => (
-              (
-                <label htmlFor={type.type} key={type.id}>
-                  {type.type}
-                  <input
-                    type="checkbox"
-                    name="MenuType"
-                    value={type.type}
-                    id={type.id}
-                    onChange={() => handleFilter(type.id)}
-                    checked={type.checked}
-                  />
-                </label>
-              )
-            )
-          )}
+          {menuTypes.map((type) => (
+            <label htmlFor={type.type} key={type.id}>
+              {type.type}
+              <input
+                type="checkbox"
+                name="MenuType"
+                value={type.type}
+                id={type.id}
+                onChange={() => handleFilter(type.id)}
+                checked={type.checked}
+              />
+            </label>
+          ))}
         </div>
       </StyledFilter>
       <StyledDiv>

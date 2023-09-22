@@ -29,21 +29,20 @@ export default function Map({ locationsInfo, data, detailsPage }) {
   const menuCheck = menuTypes
     .filter((menuType) => menuType.checked)
     .map((menuTypeChecked) => menuTypeChecked.type);
-   
-   let filterdData = data;
-    if(data.length > 1){
-  const filterOfRental = data?.filter((loc) =>
-  
-    rental === "ja"
-      ? loc.verleihOpt === true
-      : rental === "nein"
-      ? loc.verleihOpt === false
-      : true
-  );
-   filterdData = filterOfRental?.filter((location) =>
-    menuCheck.every((menu) => location.art.includes(menu))
-  );}
-  
+
+  let filterdData = data;
+  if (data.length > 1) {
+    const filterOfRental = data?.filter((loc) =>
+      rental === "ja"
+        ? loc.verleihOpt === true
+        : rental === "nein"
+        ? loc.verleihOpt === false
+        : true
+    );
+    filterdData = filterOfRental?.filter((location) =>
+      menuCheck.every((menu) => location.art.includes(menu))
+    );
+  }
 
   function handleFilter(id) {
     setMenuTypes(
@@ -93,22 +92,29 @@ export default function Map({ locationsInfo, data, detailsPage }) {
 
   return (
     <>
-        {detailsPage? null: 
-      <Filter
-        onOptionChange={onOptionChange}
-        handleFilter={handleFilter}
-        hidden={hidden}
-        setHidden={setHidden}
-        handleOnClick={handleOnClick}
-        menuTypes={menuTypes}
-        rental={rental}
-        setRental={setRental}
-      />
-        } 
+      {detailsPage ? null : (
+        <Filter
+          onOptionChange={onOptionChange}
+          handleFilter={handleFilter}
+          hidden={hidden}
+          setHidden={setHidden}
+          handleOnClick={handleOnClick}
+          menuTypes={menuTypes}
+          rental={rental}
+          setRental={setRental}
+        />
+      )}
       <div id="map">
         <StyledMapContainer
-          className={detailsPage? "mapForOne": "map"}
-          center={filterdData.lenght === 1? [Number(filterdData[0]?.coords(0)), Number(filterdData[0]?.coords(1))]:[53.577067, 10.007241]}
+          className={detailsPage ? "mapForOne" : "map"}
+          center={
+            filterdData.lenght === 1
+              ? [
+                  Number(filterdData[0]?.coords(0)),
+                  Number(filterdData[0]?.coords(1)),
+                ]
+              : [53.577067, 10.007241]
+          }
           zoom={12}
           scrollWheelZoom={true}
         >
@@ -117,7 +123,7 @@ export default function Map({ locationsInfo, data, detailsPage }) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright"> OpenStreetMap
           </a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-   />
+          />
           {filterdData?.map((location) => {
             const isLiked = locationsInfo?.find(
               (locI) => locI.id === location._id
@@ -128,16 +134,17 @@ export default function Map({ locationsInfo, data, detailsPage }) {
                 position={location?.coords || null}
                 icon={!isLiked ? locationOnIcon : locationOnIconFav}
               >
-                  <NavLink href={`/locations/${location._id}`}>
-                    <Popup>
-                      <PopHead>
-                        <strong>{location?.name}</strong>
-                      </PopHead>
-                      {detailsPage? null:
-                      <PopLink>Click für mehr Infos</PopLink>}
-                    </Popup>
-                  </NavLink>
-           )
+                <NavLink href={`/locations/${location._id}`}>
+                  <Popup>
+                    <PopHead>
+                      <strong>{location?.name}</strong>
+                    </PopHead>
+                    {detailsPage ? null : (
+                      <PopLink>Click für mehr Infos</PopLink>
+                    )}
+                  </Popup>
+                </NavLink>
+                )
               </Marker>
             );
           })}

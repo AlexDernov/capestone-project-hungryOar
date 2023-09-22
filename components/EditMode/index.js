@@ -70,7 +70,6 @@ export default function EditMode({
       verleih: locationData.verleih,
       coords: [locationData.latitude, locationData.longitude],
     };
-    console.log("Data End", data);
     const response = await fetch(`/api/locations/${data?._id}`, {
       method: "PATCH",
       headers: {
@@ -215,7 +214,6 @@ export default function EditMode({
               </LabelKl>
             ))}
           </MenuDiv>
-
           <Legend>Verleih Möglichkeit</Legend>
           <CheckDiv>
             <LabelKl htmlFor="true">
@@ -243,7 +241,6 @@ export default function EditMode({
             </LabelKl>
           </CheckDiv>
           <br />
-
           <LabelRental htmlFor="verleih" noRental={noRental}>
             Was kann man ausleihen?:
             <br />
@@ -251,7 +248,7 @@ export default function EditMode({
               type="text"
               id="verleih"
               name="verleih"
-              required={!noRental?true: false}
+              required={!noRental ? true : false}
               minlengh="3"
               maxlengh="50"
               defaultValue={data?.verleih}
@@ -273,7 +270,6 @@ export default function EditMode({
             pattern="/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g"
           />
           <br />
-
           <Input
             type="number"
             id="longitude"
@@ -315,7 +311,6 @@ export default function EditMode({
           <br />
           <DivButton>
             <StyledColorButtonKl type="submit">Save</StyledColorButtonKl>
-
             <StyledColorButtonKl type="button" onClick={handleDeleteLocation}>
               Delete
             </StyledColorButtonKl>
@@ -325,8 +320,9 @@ export default function EditMode({
     </>
   );
 }
-const StyledCldImage =styled(CldImage)`
-padding-right:5px;`;
+const StyledCldImage = styled(CldImage)`
+  padding-right: 5px;
+`;
 
 const MenuDiv = styled.div`
   margin-top: 0;
@@ -339,7 +335,7 @@ const MenuDiv = styled.div`
 const CheckDiv = styled.div`
   margin-top: 0;
   margin-left: 15px;
-  margin-bottom: o;
+  margin-bottom: 0;
   width: 150px;
   height: auto;
   display: flex;

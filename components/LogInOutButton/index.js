@@ -16,7 +16,7 @@ export default function LogInOutButton({ session }) {
   }
   return (
     <StyledLoginContainer>
-     <P></P>
+    <br/>
 
       <StyledLogIn onClick={() => signIn()}>Log in</StyledLogIn>
     </StyledLoginContainer>
@@ -28,9 +28,9 @@ const P = styled.p`
   text-align: left;
   text-shadow: 2px 2px 4px 0px #fff;
   font-family: Roboto Slab;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
-  padding: 0;
+  padding-botto: 10px;
   font-style: oblique;
 `;
 const StyledLoginContainer = styled.div`

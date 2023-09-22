@@ -8,19 +8,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import {StyledColorButton} from "../../components/StyledColorButton";
 
-/* export function getServerSideProps(){
-  const isAdmin = session?.user.name === "HungryOar";
-} */
 
-export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locationsInfo, noRental, setNoRental}) {
+export default function LocationsListPage({  onToggleLiked, locationsInfo, noRental, setNoRental}) {
  const { data: session } = useSession()
   const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);
-
- 
- 
- 
-  
   const { data, isLoading, error, mutate } = useSWR("/api/locations");
 
   if (isLoading) {
@@ -48,7 +40,7 @@ export default function LocationsListPage({ /* isAdmin, */ onToggleLiked, locati
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
       <DivPage>
-     {/*  {isAdmin?  */}<DivButton><StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton></DivButton>{/*  :null} */}
+     <DivButton><StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton></DivButton>
       {newList? <NewLocationsList isAdmin={isAdmin} data={hiddenData} session={session} mutate={mutate}  noRental={noRental} setNoRental={setNoRental}/>:
  <LocationsList data={visibleData} isAdmin={isAdmin} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
  </DivPage>

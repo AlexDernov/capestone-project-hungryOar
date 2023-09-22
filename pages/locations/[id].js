@@ -31,7 +31,7 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
           <FavoriteButton
             onToggleLiked={onToggleLiked}
             isLiked={locationsInfo.find((locI) => locI.id === data?._id)?.isLiked}
-            id={data?.id}
+            id={data?._id}
             name={data?.name}
           />
         </Heading>
@@ -46,6 +46,7 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
         onToggleLiked={() => onToggleLiked(data?._id)}
         session={session}
         isLiked={locationsInfo.find((locI) => locI.id === data?._id)?.isLiked}
+        locationsInfo={locationsInfo}
       />
     </>
   );

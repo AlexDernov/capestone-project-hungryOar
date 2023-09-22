@@ -3,8 +3,9 @@ import { StyledColorButtonKl } from "../StyledColorButton";
 import { useRouter } from "next/router";
 
 export default function MessagePreviewCard({ id, name, text, date, data }) {
+  const router = useRouter();
   async function handleDelete() {
-    const router = useRouter();
+    
     const responseMessage = await fetch(`/api/messages/${id}`, {
       method: "DELETE",
     });

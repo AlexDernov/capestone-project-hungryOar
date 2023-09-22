@@ -2,10 +2,9 @@ import styled from "styled-components";
 import { StyledColorButtonKl } from "../StyledColorButton";
 import { useRouter } from "next/router";
 
-export default function MessagePreviewCard({ id, name, text, date, data }) {
+export default function MessagePreviewCard({ id, name, text, date, data, mutate }) {
   const router = useRouter();
   async function handleDelete() {
-    
     const responseMessage = await fetch(`/api/messages/${id}`, {
       method: "DELETE",
     });
@@ -14,6 +13,7 @@ export default function MessagePreviewCard({ id, name, text, date, data }) {
     }
 
     if (responseMessage.ok) {
+      mutate()
       router.push("/messages");
     }
   }

@@ -172,7 +172,7 @@ export default function AddLocation({
             type="text"
             id="verleih"
             name="verleih"
-            required={!noRental ? true : false}
+            required={noRental === true ? true : false}
             minlengh="3"
             defaultValue={""}
             maxlengh="50"
@@ -362,7 +362,7 @@ const LabelVerleih = styled.label`
   font-family: Roboto Slab;
   font-size: 18px;
   margin-top: 0px;
-  display: ${({ noRental }) => (!noRental ? "block" : "none")};
+  display: ${({ noRental }) => (noRental === true ? "block" : "none")};
   font-weight: bold;
   margin-bottom: 0;
   padding: 0;

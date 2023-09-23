@@ -40,7 +40,8 @@ export default function LocationsListPage({  onToggleLiked, locationsInfo, noRen
         <link rel="icon" href="/caffe-oar-icon.ico" />
       </Head>
       <DivPage>
-     <DivButton><StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton></DivButton>
+        {isAdmin?
+     <DivButton><StyledButton type="button" onClick={handleNewList}>{newList? "Veröffentlichte Liste":"Suggested Locations"} </StyledButton></DivButton>: null}
       {newList? <NewLocationsList isAdmin={isAdmin} data={hiddenData} session={session} mutate={mutate}  noRental={noRental} setNoRental={setNoRental}/>:
  <LocationsList data={visibleData} isAdmin={isAdmin} onToggleLiked={onToggleLiked} locationsInfo={locationsInfo} session={session}/>}
  </DivPage>

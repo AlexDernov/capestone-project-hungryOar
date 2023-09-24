@@ -3,6 +3,7 @@ import { CldUploadButton, CldImage } from "next-cloudinary";
 import Image from "next/image";
 import styled from "styled-components";
 import { StyledColorButton, StyledColorButtonKl } from "../StyledColorButton";
+import { useRouter } from "next/router";
 
 export default function EditMode({
   data,
@@ -13,6 +14,7 @@ export default function EditMode({
   noRental,
   setNoRental,
 }) {
+  const router = useRouter();
   const [menuTypes, setMenuTypes] = useState([
     { type: "Cafe", id: "Cafe", checked: data?.art.includes("Cafe") },
     { type: "Bar", id: "Bar", checked: data?.art.includes("Bar") },
@@ -93,6 +95,7 @@ export default function EditMode({
     if (responseLocation.ok) {
       mutate();
       handleOnEditMode();
+      router.push("/locations");
     }
   }
   function onUpload(event) {

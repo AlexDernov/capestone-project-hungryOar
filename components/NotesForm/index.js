@@ -14,7 +14,7 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
         required
         minlengh="3"
         maxlengh="50"
-        pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+        pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
       />
       <Label htmlFor="note"> Note: </Label>
       <TextArea
@@ -26,7 +26,7 @@ export default function NotesForm({ text, onSubmit, title, isEditMode }) {
         minlengh="3"
         max="160"
         maxlengh="200"
-        pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+        pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
       />
       <DivButton>
       <StyledColorButton  type="submit">Save</StyledColorButton>

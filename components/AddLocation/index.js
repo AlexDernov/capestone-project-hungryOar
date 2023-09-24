@@ -54,7 +54,7 @@ export default function AddLocation({
           max="40"
           maxlengh="200"
           placeholder="Str., Hausnummer,..."
-          pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+          pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
         />
         <br />
         <Label htmlFor="zeit"> Öffnungszeiten:</Label>
@@ -67,7 +67,7 @@ export default function AddLocation({
           minlengh="3"
           maxlengh="50"
           placeholder="Mo.-Fr: "
-          pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+          pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
         />
         <br />
         <Legend> Was gibt&apos;s: </Legend>
@@ -177,7 +177,7 @@ export default function AddLocation({
             defaultValue={""}
             maxlengh="50"
             placeholder="Kajak, SUP,..."
-            pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+            pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
           />
         </LabelVerleih>
         <Legend>Coordinaten:</Legend>

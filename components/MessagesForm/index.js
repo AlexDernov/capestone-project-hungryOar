@@ -21,7 +21,7 @@ export default function MessagesForm({ onSubmit }) {
         name="name"
         minlengh="3"
         maxlengh="50"
-        pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+        pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
       />
       <Label htmlFor="text"> Your message: </Label>
       <TextArea
@@ -32,7 +32,7 @@ export default function MessagesForm({ onSubmit }) {
         minlengh="3"
         max="60"
         maxlengh="600"
-        pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+        pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
       />
       <DivButton>
         <StyledColorButton type="submit" name="Save">

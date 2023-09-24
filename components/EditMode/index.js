@@ -121,7 +121,7 @@ export default function EditMode({
             minlengh="3"
             maxlengh="50"
             defaultValue={data?.name}
-            pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+            pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
           />
           <br />
           <Label htmlFor="location"> Addresse: </Label>
@@ -135,7 +135,7 @@ export default function EditMode({
             max="40"
             maxlengh="200"
             defaultValue={data?.location}
-            pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+            pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
           />
           <br />
           <Label htmlFor="zeit"> Öffnungszeiten:</Label>
@@ -148,7 +148,7 @@ export default function EditMode({
             minlengh="3"
             maxlengh="50"
             defaultValue={data?.zeit}
-            pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+            pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
           />
           <br />
           <Legend> Was gibt&apos;s: </Legend>
@@ -255,7 +255,7 @@ export default function EditMode({
               minlengh="3"
               maxlengh="50"
               defaultValue={data?.verleih}
-              pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+              pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
             />
           </LabelRental>
           <Legend>Coordinaten:</Legend>

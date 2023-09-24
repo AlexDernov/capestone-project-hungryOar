@@ -261,6 +261,7 @@ export default function EditMode({
           <Legend>Coordinaten:</Legend>
           <Input
             type="number"
+            value="float"
             id="latitude"
             name="latitude"
             minlengh="8"
@@ -278,6 +279,7 @@ export default function EditMode({
             id="longitude"
             name="longitude"
             minlengh="8"
+            value="float"
             min="9"
             max="11"
             required={isAdmin ? true : false}

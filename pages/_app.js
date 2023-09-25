@@ -1,26 +1,28 @@
 import GlobalStyle from "@/styles";
 import Head from "next/head";
 import { SWRConfig } from "swr";
+import { useState } from "react";
 import useSWR from "swr";
 import Layout from "../components/Layout";
 import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
-import { SessionProvider} from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import Loading from "../components/Loading";
 
-
-export default function App({ Component, pageProps: { session, ...pageProps } }) {
- 
-  
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const [locationsInfo, updateLocationsInfo] = useImmerLocalStorageState(
     "locationsInfo",
     { defaultValue: [] }
   );
- 
+
+  const [noRental, setNoRental] = useState(false);
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading, error } = useSWR("/api/locations", fetcher);
+  const { data, isLoading, error, mutate } = useSWR("/api/locations", fetcher);
 
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
   if (error) return <div>failed to load</div>;
   if (!data) {
@@ -39,23 +41,22 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return (
     <>
       <GlobalStyle />
-
       <Head>
         <title>Capstone Project</title>
       </Head>
       <SWRConfig value={{ fetcher }}>
-     <SessionProvider session={session}>
-        <Layout> 
-          <Component
-            {...pageProps}
-            data={data}
-            onToggleLiked={handleToggleLiked}
-            locationsInfo={locationsInfo}
-           
-          
-          /> 
-        </Layout>
-       </SessionProvider>
+        <SessionProvider session={session}>
+          <Layout>
+            <Component
+              {...pageProps}
+              data={data}
+              onToggleLiked={handleToggleLiked}
+              locationsInfo={locationsInfo}
+              noRental={noRental}
+              setNoRental={setNoRental}
+            />
+          </Layout>
+        </SessionProvider>
       </SWRConfig>
     </>
   );

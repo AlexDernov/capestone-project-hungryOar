@@ -2,14 +2,13 @@ import AddLocation from "@/components/AddLocation";
 import Head from "next/head";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import TitleSection from "../components/TitleSection";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-export default function AddPage() {
+export default function AddPage({ noRental, setNoRental }) {
   const { data: session } = useSession();
   const [addMode, setAddMode] = useState(true);
   const [menuTypes, setMenuTypes] = useState([
@@ -24,13 +23,14 @@ export default function AddPage() {
     { type: "Eis", id: "Eis", checked: false },
     { type: "Snacks", id: "Snacks", checked: false },
   ]);
+  const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
   const router = useRouter();
   const [checked, setChecked] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(
+    `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`
+  );
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
-  const [noRental, setNoRental] = useState(false);
-  const placeholderImage = `https://res.cloudinary.com/demaz2nqa/image/upload/v1690563536/HungryOar/cafe-on-the-water-vessela-kolibarova_clqmbu.jpg`;
 
   const menuCheck = menuTypes
     .filter((menuType) => menuType.checked)
@@ -64,13 +64,14 @@ export default function AddPage() {
       zeit: locationData.zeit,
       art: menuCheck,
       verleihOpt: checked,
-      verleih: locationData.verleih || "-",
+      verleih: locationData.verleih || "",
       bild: {
         img: imageUrl || placeholderImage,
         width: imageWidth || 900,
         height: imageHeight || 751,
       },
       visible: false,
+      coords: [locationData.latitude, locationData.longitude],
     };
     const response = await fetch("/api/locations", {
       method: "POST",
@@ -103,40 +104,44 @@ export default function AddPage() {
             <Heading>Add new location</Heading>
             <LogInOutButton session={session} />
           </TitleSection>
-          <StyledArticle>
-            <AddLocation
-              session={session}
-              onSubmit={handleSubmit}
-              handleFilter={handleFilter}
-              menuTypes={menuTypes}
-              checked={checked}
-              onOptionChange={onOptionChange}
-              imageUrl={imageUrl}
-              setImageUrl={setImageUrl}
-              noRental={noRental}
-              placeholderImage={placeholderImage}
-              setImageHeight={setImageHeight}
-              setImageWidth={setImageWidth}
-            />
-          </StyledArticle>
+          <DivPage>
+            <StyledArticle>
+              <AddLocation
+                session={session}
+                onSubmit={handleSubmit}
+                handleFilter={handleFilter}
+                menuTypes={menuTypes}
+                checked={checked}
+                onOptionChange={onOptionChange}
+                imageUrl={imageUrl}
+                setImageUrl={setImageUrl}
+                noRental={noRental}
+                setImageHeight={setImageHeight}
+                setImageWidth={setImageWidth}
+                placeholderImage={placeholderImage}
+              />
+            </StyledArticle>
+          </DivPage>
         </>
       ) : (
-        <StyledDiv>
-          <StyledP>
-            The upload was successful! <br />
-            Thank you for helping to improve our App! <br />
-            The data will be checked by admin, after that the suggested location
-            will appear in the main list of locations.
-          </StyledP>
-          <StyledButtonsDiv>
-            <button type="button" onClick={handleHome}>
-              Homepage
-            </button>
-            <button type="button" onClick={handleAddMode}>
-              Add more locations
-            </button>
-          </StyledButtonsDiv>
-        </StyledDiv>
+        <DivPage>
+          <StyledDiv>
+            <StyledP>
+              The upload was successful! <br />
+              Thank you for helping to improve our App! <br />
+              The data will be checked by admin, after that the suggested
+              location will appear in the main list of locations.
+            </StyledP>
+            <StyledButtonsDiv>
+              <button type="button" onClick={handleHome}>
+                Homepage
+              </button>
+              <button type="button" onClick={handleAddMode}>
+                Add more locations
+              </button>
+            </StyledButtonsDiv>
+          </StyledDiv>
+        </DivPage>
       )}
     </>
   );
@@ -169,4 +174,9 @@ const StyledP = styled.p`
   padding-top: 40px;
   margin: 20px;
   font-size: 16px;
+`;
+const DivPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

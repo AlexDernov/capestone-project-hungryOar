@@ -11,6 +11,7 @@ export default function LocationsList({
   favoritePage,
   session,
   newLocationPage,
+  isAdmin,
 }) {
   return (
     <>
@@ -18,49 +19,53 @@ export default function LocationsList({
         {" "}
         {favoritePage ? (
           <Heading>Favorite Locations</Heading>
-        ) : newLocationPage ? (
-          <Heading>New Locations</Heading>
         ) : (
           <Heading>Locations</Heading>
         )}
         <LogInOutButton session={session} />
       </TitleSection>
-      {newLocationPage ? (
-        <p>
-          These locaions must be verified by admin to be displayed in the main
-          list.
-        </p>
-      ) : null}
-      <StyledUl>
-        {data.length == 0 && favoritePage ? (
-          <Par>You don&apos;t have any favorite locations yet</Par>
-        ) : (
-          data?.map((location) => (
-            <LocationPreviewCard
-              key={location._id}
-              id={location._id}
-              name={location.name}
-              addresse={location.location}
-              bild={location.bild}
-              onToggleLiked={() => onToggleLiked(location?._id)}
-              isLiked={
-                locationsInfo.find((locI) => locI.id === location._id)?.isLiked
-              }
-              newLocationPage={newLocationPage}
-            />
-          ))
-        )}
-      </StyledUl>
+      <DivList>
+        <StyledUl isAdmin={isAdmin}>
+          {data.length == 0 && favoritePage ? (
+            <Par>You don&apos;t have any favorite locations yet</Par>
+          ) : (
+            data?.map((location) => (
+              <LocationPreviewCard
+                key={location._id}
+                id={location._id}
+                name={location.name}
+                addresse={location.location}
+                bild={location.bild}
+                onToggleLiked={() => onToggleLiked(location?._id)}
+                isLiked={
+                  locationsInfo?.find((locI) => locI.id === location._id)
+                    ?.isLiked
+                }
+                newLocationPage={newLocationPage}
+              />
+            ))
+          )}
+        </StyledUl>
+      </DivList>
     </>
   );
 }
+const DivList = styled.div`
+  margin: 0;
+  display: flex;
+  width: 90vw;
+  flex-direction: column;
+  width: 360px;
+  justify-content: center;
+`;
+
 const StyledUl = styled.ul`
   padding: 0;
-  margin-top: 90px;
+  margin-top: ${({ isAdmin }) => (isAdmin ? 10 : 90)}px;
   margin-bottom: 105px;
- 
+
   display: grid;
-  grid-template-columns: 375px;
+  grid-template-columns: 360px;
   gap: 1rem;
   list-style-type: none;
 `;

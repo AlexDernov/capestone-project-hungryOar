@@ -35,7 +35,7 @@ export default function LocationPreviewCard({
         <NavLink href={`/locations/${id}`}>
           <StyledImgDiv>
             <StyledImage
-              src={bild.img}
+              src={bild?.img}
               height={100}
               width={350}
               crop="fill"
@@ -50,17 +50,18 @@ export default function LocationPreviewCard({
 }
 
 const StyledImage = styled(CldImage)`
-max-width: 100% 
+max-width: 90% 
 height: auto
 mode: thumb
-padding: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
 margin: 0;
 justify-content: center;
 `;
 const StyledImgDiv = styled.div`
 max-width: 100%
 margin: 10px;
-padding-left: 13px;
+padding-left: 5px;
 display: grid;
 align-self: center;
 height: 105px

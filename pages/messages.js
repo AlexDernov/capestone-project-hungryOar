@@ -7,6 +7,8 @@ import TitleSection from "../components/TitleSection";
 import { useSession } from "next-auth/react";
 import Heading from "../components/Heading";
 import LogInOutButton from "../components/LogInOutButton";
+import Loading from "../components/Loading";
+import styled from "styled-components";
 
 export default function MessagesPage() {
   const { data: session } = useSession();
@@ -15,7 +17,7 @@ export default function MessagesPage() {
   const router = useRouter();
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
   if (error) return <div>failed to load</div>;
   if (!data) {
@@ -24,11 +26,7 @@ export default function MessagesPage() {
   function handleHome() {
     router.push("/");
   }
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const messageData = Object.fromEntries(formData);
-
+  async function handleSubmit(messageData) {
     const response = await fetch("/api/messages", {
       method: "POST",
       headers: {
@@ -61,11 +59,22 @@ export default function MessagesPage() {
         )}
         <LogInOutButton session={session} />
       </TitleSection>
-      {isAdmin ? (
-        <MessagesList data={data} mutate={mutate} />
-      ) : (
-        <MessagesForm onSubmit={handleSubmit} />
-      )}
+      <DivPage>
+        {isAdmin ? (
+          <MessagesList data={data} mutate={mutate} />
+        ) : (
+          <MessagesForm onSubmit={handleSubmit} />
+        )}
+      </DivPage>
     </div>
   );
 }
+const DivPage = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 365px;
+  height: auto;
+`;

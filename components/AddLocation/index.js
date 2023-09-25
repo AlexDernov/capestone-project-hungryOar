@@ -3,6 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { CldUploadButton, CldImage } from "next-cloudinary";
+import { StyledColorButtonKl } from "../StyledColorButton";
 
 export default function AddLocation({
   onSubmit,
@@ -13,26 +14,25 @@ export default function AddLocation({
   imageUrl,
   setImageUrl,
   noRental,
-  placeholderImage,
-setImageHeight,
-setImageWidth
+  setImageHeight,
+  setImageWidth,
 }) {
   const router = useRouter();
- 
-function onUpload(event){
-    setImageUrl(event.info.secure_url)
-    setImageHeight(event.info.height)
-    setImageWidth(event.info.width)
-}
-function handleHome() {
-  router.push("/");
-}
+
+  function onUpload(event) {
+    setImageUrl(event.info.secure_url);
+    setImageHeight(event.info.height);
+    setImageWidth(event.info.width);
+  }
+  function handleHome() {
+    router.push("/");
+  }
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name"> Location:</label>
+      <StyledForm onSubmit={onSubmit}>
+        <Label htmlFor="name"> Location:</Label>
         <br />
-        <textarea
+        <Input
           type="text"
           id="name"
           name="name"
@@ -43,9 +43,9 @@ function handleHome() {
           pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="location"> Addresse: </label>
+        <Label htmlFor="location"> Addresse: </Label>
         <br />
-        <textarea
+        <Input
           type="text"
           id="location"
           name="location"
@@ -54,12 +54,12 @@ function handleHome() {
           max="40"
           maxlengh="200"
           placeholder="Str., Hausnummer,..."
-          pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+          pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
         />
         <br />
-        <label htmlFor="zeit"> Öffnungszeiten:</label>
+        <Label htmlFor="zeit"> Öffnungszeiten:</Label>
         <br />
-        <textarea
+        <TextArea
           type="text"
           id="zeit"
           name="zeit"
@@ -67,14 +67,13 @@ function handleHome() {
           minlengh="3"
           maxlengh="50"
           placeholder="Mo.-Fr: "
-          pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
+          pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
         />
         <br />
-
-        <legend> MenuArt: </legend>
+        <Legend> Was gibt&apos;s: </Legend>
         <StyledArtSection>
           {menuTypes.map((type) => (
-            <label htmlFor={type.type} key={type.id}>
+            <LabelKl htmlFor={type.type} key={type.id}>
               {type.type === "Cafe" ? (
                 <Image
                   key={1}
@@ -134,54 +133,60 @@ function handleHome() {
                 onChange={() => handleFilter(type.id)}
                 checked={type.checked}
               />
-            </label>
+            </LabelKl>
           ))}
         </StyledArtSection>
+        <Legend>Verleih Möglichkeit</Legend>
+        <Div>
+          <LabelKl htmlFor="true">
+            {" "}
+            <input
+              type="radio"
+              name="verleihOpt"
+              value="true"
+              id="true"
+              checked={checked}
+              onChange={onOptionChange}
+            />
+            ja
+          </LabelKl>
+          <br />
+          <LabelKl htmlFor="false">
+            {" "}
+            <input
+              type="radio"
+              name="verleihOpt"
+              value="false"
+              id="false"
+              checked={!checked}
+              onChange={onOptionChange}
+            />
+            nein
+          </LabelKl>
+        </Div>
         <br />
-        <legend>Verleih Möglichkeit</legend>
-        <input
-          type="radio"
-          name="verleihOpt"
-          value="true"
-          id="true"
-          checked={checked}
-          onChange={onOptionChange}
-        />
-        <label htmlFor="true">ja</label>
-        <br />
-        <input
-          type="radio"
-          name="verleihOpt"
-          value="false"
-          id="false"
-          checked={!checked}
-          onChange={onOptionChange}
-        />
-        <label htmlFor="false">nein</label>
-        <br />
-        <br />
-        {noRental? <>
-        <label htmlFor="verleih">Was kann man ausleihen?:</label>
-        <br />
-        <textarea
-          type="text"
-          id="verleih"
-          name="verleih"
-          required
-          minlengh="3"
-          maxlengh="50"
-          placeholder="Kajak, SUP,..."
-          pattern="[0-9A-Za-zА-Яа-яЁё?\s]+"
-        /></>:null}
-        <br />
-        <br />
-        <legend>Coordinaten:</legend>
-
-        <textarea
+        <LabelVerleih htmlFor="verleih" noRental={noRental}>
+          Was kann man ausleihen?:
+          <br />
+          <TextAreaRental
+            type="text"
+            id="verleih"
+            name="verleih"
+            required={noRental === true ? true : false}
+            minlengh="3"
+            defaultValue={""}
+            maxlengh="50"
+            placeholder="Kajak, SUP,..."
+            pattern="[0-9A-Za-zß-üА-Яа-яЁё?\s]+"
+          />
+        </LabelVerleih>
+        <Legend>Coordinaten:</Legend>
+        <Input
           type="number"
           id="latitude"
           name="latitude"
           minlengh="8"
+          step="any"
           min="53"
           max="54"
           maxlengh="11"
@@ -189,11 +194,11 @@ function handleHome() {
           pattern="/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g"
         />
         <br />
-
-        <textarea
+        <Input
           type="number"
           id="longitude"
           name="longitude"
+          step="any"
           minlengh="8"
           min="9"
           max="11"
@@ -202,31 +207,24 @@ function handleHome() {
           pattern="/^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g"
         />
         <br />
+        <DivButton>
+          <StyledCldUploadButton uploadPreset="twyzoxpk" onUpload={onUpload}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+              <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+            </svg>{" "}
+            Bild hinzufügen
+          </StyledCldUploadButton>
+        </DivButton>
         <br />
-        <CldUploadButton
-          uploadPreset="twyzoxpk"
-          onUpload={onUpload}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-            <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
-          </svg>{" "}
-          Bild hinzufügen
-        </CldUploadButton>
-        <br />
-        <br/>
-        <CldImage
-          src={
-            imageUrl
-              ? imageUrl
-              : placeholderImage
-          }
+        <StyledCldImage
+          src={imageUrl}
           height={200}
           width={350}
           crop="thumb"
@@ -234,27 +232,157 @@ function handleHome() {
           alt={imageUrl ? "Bildvorschau" : "Platzhalterbild"}
         />
         <br />
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleHome}>
-          <StyledLink href="/">Cancel</StyledLink>
-        </button>
-      </form>
+        <DivButton>
+          <StyledColorButtonKl type="submit">Save</StyledColorButtonKl>
+          <StyledColorButtonKl type="button" onClick={handleHome}>
+            <StyledLink href="/">Cancel</StyledLink>
+          </StyledColorButtonKl>
+        </DivButton>
+      </StyledForm>
     </>
   );
 }
+const StyledCldImage = styled(CldImage)`
+  padding-right: 5px;
+`;
 
+const StyledCldUploadButton = styled(CldUploadButton)`
+  width: 250px;
+  height: 27px;
+  flex-shrink: 0;
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(216, 11, 250, 0.31) 18.56%,
+    rgba(4, 178, 252, 0.34) 104.43%
+  );
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+  color: #000;
+  text-align: center;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 3.25px;
+  &: hover {
+    background: linear-gradient(
+      90deg,
+      rgba(216, 11, 250, 0.5) 18.56%,
+      rgba(4, 178, 252, 0.5) 104.43%
+    );
+    filter: drop-shadow(4px 4px 7px rgba(0, 0, 0, 0.41));
+    width: 255px;
+    height: 32px;
+    margin-bottom: 0;
+  }
+`;
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5px;
+  width: 355px;
+`;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
 `;
-
+const TextAreaRental = styled.textarea`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  width: 345px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 0.5rem;
+  overflow: scroll;
+`;
+const Div = styled.div`
+  margin-top: 0;
+  margin-left: 15px;
+  margin-bottom: 0;
+  width: 150px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+`;
+const DivButton = styled.div`
+  width: 360px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin-left: 0;
+  justify-content: space-around;
+`;
 const StyledArtSection = styled.section`
-  margin: 10px;
-  padding-left: 27px;
-  padding-right: 27px;
+  margin-top: 0;
   display: grid;
-  grid-template-columns: 71px 71px 71px;
-  row-gap: 20px;
-  column-gap: 10px;
-  position: center;
+  grid-template-columns: 100px 100px 110px;
+  row-gap: 15px;
+  column-gap: 15px;
+`;
+
+const Label = styled.label`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 0;
+`;
+const LabelKl = styled.p`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0;
+  padding: 0;
+  font-style: oblique;
+`;
+const Legend = styled.legend`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 0;
+`;
+const LabelVerleih = styled.label`
+  color: #040404;
+  text-align: left;
+  text-shadow: 2px 2px 4px 0px #fff;
+  font-family: Roboto Slab;
+  font-size: 18px;
+  margin-top: 0px;
+  display: ${({ noRental }) => (noRental === true ? "block" : "none")};
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0;
+`;
+const TextArea = styled.textarea`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  width: 345px;
+  overflow: scroll;
+`;
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid grey;
+  width: 345px;
+  height: 40px;
+  border-radius: 0.5rem;
+  overflow: scroll;
 `;

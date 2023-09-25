@@ -10,6 +10,7 @@ const TitleSection = styled.section`
   width: 100%;
   height: 1.4rem
   display: grid;
+  z-index: 10;
   grid-column: span 2;
   margin: 0px;
   padding-left: 15px;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Loading() {
   return (
     <StyledDiv>
-      <Image src="/images/anima.gif" width="150" height="150" alt="loading" />
+      <Image src="/images/anima.gif" width="150" height="150" alt="loading" priority/>
     </StyledDiv>
   );
 }

@@ -1,12 +1,13 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function FavoriteButton({ isLiked, onToggleLiked, id }) {
+export default function FavoriteButton({ isLiked, onToggleLiked, id, name }) {
   return (
     <Button
       aria-label="FavoriteButton"
       onClick={() => onToggleLiked(id)}
       isLiked={isLiked}
+      name={name}
     >
       <Image
         src={!isLiked ? "/images/heart.svg" : "/images/heartLiked.svg"}

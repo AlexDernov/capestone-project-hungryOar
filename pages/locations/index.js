@@ -22,7 +22,6 @@ export default function LocationsListPage({  onToggleLiked, locationsInfo, noRen
   if (!data) {
     return <h1>Data cannot be loaded.</h1>;
   }
-  console.log("Data from locPages", data);
 
   const visibleData = data.filter((visibleLocation) => visibleLocation.visible === true)
   const hiddenData = data.filter((visibleLocation) => visibleLocation.visible === false)
@@ -30,8 +29,6 @@ export default function LocationsListPage({  onToggleLiked, locationsInfo, noRen
   function handleNewList(){
     setNewList(!newList);
       }
-  console.log("Data visible", visibleData);
-  console.log("Data hidden", hiddenData);
   return <>
   <Head> 
         <title>Locations</title>

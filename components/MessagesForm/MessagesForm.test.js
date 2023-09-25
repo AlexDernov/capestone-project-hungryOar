@@ -6,7 +6,6 @@ import userEvent from "@testing-library/user-event";
 test("calls the onAddMovie handler function with inputs on submit", async () => {
     const user = userEvent.setup();
     const handleOnSubmit = jest.fn();
-    console.log("handleOnSubmit", jest.fn());
     render(<MessagesForm onSubmit={handleOnSubmit} />);
     const nameInput = screen.getByLabelText("Your Name (optional):");
     const textInput = screen.getByLabelText("Your message:");

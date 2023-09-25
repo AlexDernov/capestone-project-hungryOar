@@ -9,7 +9,6 @@ export default function NewLocationsList({
   session,
   mutate, isAdmin, noRental, setNoRental
 }) {
-    console.log("newListData", data);
   return (
     <>
       <TitleSection>

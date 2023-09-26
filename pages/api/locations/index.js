@@ -7,10 +7,11 @@ export default async function handler(request, response) {
   await dbConnect();
   const session = await getServerSession(request, response, authOptions);
   if (session) {
-    if (request.method === "GET") {
+  /*   if (request.method === "GET") {
       const locations = await Location.find();
       return response.status(200).json(locations);
-    } else if (request.method === "POST") {
+
+    } else  */if (request.method === "POST") {
       try {
         const locationData = request.body;
         const dataLocations = await Location.create(locationData);

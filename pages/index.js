@@ -7,14 +7,36 @@ import useSWR from "swr";
 import LogInOutButton from "../components/LogInOutButton";
 import { useSession } from "next-auth/react";
 import Loading from "../components/Loading";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 
-export default function Home({ locationsInfo }) {
+/* export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions)
+const isAdmin = session?.user.name === "HungryOar";
+
+  return {
+    props: {
+      isAdmin,
+    },
+/*   }
+} */
+
+/*
+export async function getServerSideProps( context ) {
+
+  const session = await getServerSession( context?.req, context?.res,  authOptions);
+  const isAdmin = session?.user.name === "HungryOar";
+ 
+  return { props: { isAdmin } };
+} */
+ 
+export default function Home({ locationsInfo/* , isAdmin  */}) {
   const { data: session } = useSession();
+  const isAdmin = session?.user.name === "HungryOar";
   const { data, isLoading, error } = useSWR("/api/locations");
   const visibleData = data.filter(
     (visibleLocation) => visibleLocation.visible === true
   );
-
   if (isLoading) {
     return <Loading />;
   }
@@ -33,7 +55,7 @@ export default function Home({ locationsInfo }) {
       <StyledMain>
         <TitleSection>
           <Heading>Hungry Oar</Heading>
-          <LogInOutButton session={session} />
+          <LogInOutButton session={session} isAdmin={isAdmin} />
         </TitleSection>
         <StyledP>
           In this app you will find locations in Hamburg where you can eat and

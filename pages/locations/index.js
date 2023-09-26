@@ -8,10 +8,19 @@ import { useState } from "react";
 import styled from "styled-components";
 import {StyledColorButton} from "../../components/StyledColorButton";
 
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.request, context.response, authOptions)
+const isAdmin = session?.user.name === "HungryOar";
 
-export default function LocationsListPage({  onToggleLiked, locationsInfo, noRental, setNoRental}) {
+  return {
+    props: {
+      isAdmin,
+    },
+  }
+}
+export default function LocationsListPage({  onToggleLiked, locationsInfo, noRental, setNoRental, isAdmin}) {
  const { data: session } = useSession()
-  const isAdmin = session?.user.name === "HungryOar";
+  
   const [newList, setNewList] = useState(false);
   const { data, isLoading, error, mutate } = useSWR("/api/locations");
 

@@ -1,5 +1,6 @@
 import dbConnect from "../../../db/connect";
 import Note from "../../../db/model/Note";
+import { getServerSession } from "next-auth/next";
 
 export default async function handler(request, response) {
   await dbConnect();

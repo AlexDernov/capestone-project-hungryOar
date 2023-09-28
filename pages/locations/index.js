@@ -7,8 +7,10 @@ import useSWR from "swr";
 import { useState } from "react";
 import styled from "styled-components";
 import {StyledColorButton} from "../../components/StyledColorButton";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 
-export async function getServerSideProps(context) {
+/* export async function getServerSideProps(context) {
   const session = await getServerSession(context.request, context.response, authOptions)
 const isAdmin = session?.user.name === "HungryOar";
 
@@ -17,10 +19,10 @@ const isAdmin = session?.user.name === "HungryOar";
       isAdmin,
     },
   }
-}
-export default function LocationsListPage({  onToggleLiked, locationsInfo, noRental, setNoRental, isAdmin}) {
+} */
+export default function LocationsListPage({  onToggleLiked, locationsInfo, noRental, setNoRental, /* isAdmin */}) {
  const { data: session } = useSession()
-  
+ const isAdmin = session?.user.name === "HungryOar";
   const [newList, setNewList] = useState(false);
   const { data, isLoading, error, mutate } = useSWR("/api/locations");
 

@@ -8,8 +8,10 @@ import LogInOutButton from "@/components/LogInOutButton";
 import TitleSection from "@/components/TitleSection";
 import Heading from "@/components/Heading";
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
 
+/* 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.request, context.response, authOptions)
 const isAdmin = session?.user.name === "HungryOar";
@@ -19,9 +21,10 @@ const isAdmin = session?.user.name === "HungryOar";
       isAdmin,
     },
   }
-}
-export default function LocationDetailsPage({ onToggleLiked, locationsInfo, isAdmin}) {
+} */
+export default function LocationDetailsPage({ onToggleLiked, locationsInfo,/*  isAdmin} */}) {
   const { data: session } = useSession();
+  const isAdmin = session?.user.name === "HungryOar";
   const router = useRouter();
   const { id } = router.query;
 

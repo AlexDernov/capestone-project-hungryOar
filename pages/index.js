@@ -30,7 +30,7 @@ export async function getServerSideProps( context ) {
   return { props: { isAdmin } };
 } */
  
-export default function Home({ locationsInfo/* , isAdmin  */}) {
+export default function Home({ locationsInfo /* , isAdmin  */}) {
   const { data: session } = useSession();
   const isAdmin = session?.user.name === "HungryOar";
   const { data, isLoading, error } = useSWR("/api/locations");

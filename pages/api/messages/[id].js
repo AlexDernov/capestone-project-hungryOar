@@ -1,6 +1,7 @@
 import dbConnect from "../../../db/connect";
 import Message from "../../../db/model/Messages";
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
 export default async function handler(request, response) {
   await dbConnect();

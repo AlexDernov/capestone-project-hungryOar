@@ -21,14 +21,14 @@ const isAdmin = session?.user.name === "HungryOar";
 /*   }
 } */
 
-/*
+
 export async function getServerSideProps( context ) {
 
   const session = await getServerSession( context?.req, context?.res,  authOptions);
   const isAdmin = session?.user.name === "HungryOar";
  
   return { props: { isAdmin } };
-} */
+}
  
 export default function Home({ locationsInfo /* , isAdmin  */}) {
   const { data: session } = useSession();

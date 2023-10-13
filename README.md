@@ -1,4 +1,4 @@
-<h1 align="center">From <strong>HungryOar App</strong></h1>
+<h1 align="center"> <strong>HungryOar App</strong></h1>
 <h3 align="center">This app offers an overview of places in Hamburg where you can buy food and drink without or almost without leaving your boat/kayak/sap....
 Besides a simple list of locations and detailed information about each location in the app, you can mark your favourite locations, see the location of all/favourite locations on a map, filter them by boat rental options and/or by what is offered on the menu.
 Registered users can suggest their own locations, upload photos to them or write a message to the administrator.

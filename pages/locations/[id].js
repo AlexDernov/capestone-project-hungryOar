@@ -7,9 +7,24 @@ import FavoriteButton from "@/components/FavoriteButton";
 import LogInOutButton from "@/components/LogInOutButton";
 import TitleSection from "@/components/TitleSection";
 import Heading from "@/components/Heading";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
-export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
+
+/* 
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.request, context.response, authOptions)
+const isAdmin = session?.user.name === "HungryOar";
+
+  return {
+    props: {
+      isAdmin,
+    },
+  }
+} */
+export default function LocationDetailsPage({ onToggleLiked, locationsInfo,/*  isAdmin} */}) {
   const { data: session } = useSession();
+  const isAdmin = session?.user.name === "HungryOar";
   const router = useRouter();
   const { id } = router.query;
 
@@ -33,9 +48,10 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
             isLiked={locationsInfo.find((locI) => locI.id === data?._id)?.isLiked}
             id={data?._id}
             name={data?.name}
+           
           />
         </Heading>
-        <LogInOutButton session={session} />
+        <LogInOutButton session={session}  isAdmin={isAdmin}/>
       </TitleSection>
       <LocationDetails
         data={data}
@@ -44,9 +60,9 @@ export default function LocationDetailsPage({ onToggleLiked, locationsInfo}) {
         id={data?._id}
         mutate={mutate}
         onToggleLiked={() => onToggleLiked(data?._id)}
-        session={session}
         isLiked={locationsInfo.find((locI) => locI.id === data?._id)?.isLiked}
         locationsInfo={locationsInfo}
+        isAdmin={isAdmin}
       />
     </>
   );

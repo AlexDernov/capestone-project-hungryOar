@@ -13,13 +13,13 @@ export default function LocationDetails({
   data,
   mutate,
   isLiked,
-  session,
   id,
   menu,
   locationsInfo,
+  isAdmin
 }) {
   const [isEditMode, setIsEditMode] = useState(false);
-  const isAdmin = session?.user.name === "HungryOar";
+/*   const isAdmin = session?.user.name === "HungryOar"; */
   const [detailsPage, setDetailsPage] = useState(false);
 
   function handleOnEditMode() {
@@ -69,6 +69,7 @@ export default function LocationDetails({
             bild={data?.bild}
             handleOnEditMode={handleOnEditMode}
             mutate={mutate}
+            isAdmin={isAdmin}
           />
         ) : (
           <>

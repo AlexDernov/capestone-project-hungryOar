@@ -10,9 +10,8 @@ export default function EditMode({
   handleOnEditMode,
   mutate,
   bild,
-  session,
   noRental,
-  setNoRental,
+  setNoRental, isAdmin,
 }) {
   const router = useRouter();
   const [menuTypes, setMenuTypes] = useState([
@@ -31,7 +30,7 @@ export default function EditMode({
   const [imageUrl, setImageUrl] = useState(null);
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
-  const isAdmin = session?.user.name === "HungryOar";
+ /*  const isAdmin = session?.user.name === "HungryOar"; */
   function onOptionChange() {
     setChecked(!checked);
   }

@@ -2,8 +2,8 @@ import { signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
 import {StyledLogIn} from "../StyledColorButton";
 
-export default function LogInOutButton({ session }) {
-  const isAdmin = session?.user.name === "HungryOar";
+export default function LogInOutButton({ session, isAdmin }) {
+ /*  const isAdmin = session?.user.name === "HungryOar"; */
 
   if (session) {
     return (
